@@ -1,0 +1,89 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
+import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/password_recovery.dart';
+import 'package:flutter_application_1/view/password_recovery/email_verification.dart';
+import 'package:flutter_application_1/widgets/app_bar.dart';
+import 'package:flutter_application_1/widgets/button.dart';
+import 'package:flutter_application_1/widgets/circle_avatar.dart';
+import 'package:flutter_application_1/widgets/email_text_field.dart';
+import 'package:provider/provider.dart';
+
+class Forgot_password extends StatelessWidget {
+  const Forgot_password({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color_constant.primaryColor,
+      appBar: app_bar(title: "Forgot password", context: context),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: circle_avatar(
+                    content: "assets/lock.png", context: context)),
+          ),
+          Center(
+            child: Text(
+              "Please Enter Your Email Address",
+              style: Text_style_constant.H2_white,
+            ),
+          ),
+          Center(
+            child: Text(
+              "To Receive A verification Code",
+              style: Text_style_constant.H2_white,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  "Email Address",
+                  style: Text_style_constant.content_style,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Email_text_field(context: context),
+          ),
+          Spacer(),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: InkWell(
+                  onTap: () async {
+                    bool success =
+                        await Provider.of<Password_recovery_provider>(context,
+                                listen: false)
+                            .send_otp(
+                                email: Provider.of<email_provider>(context,
+                                        listen: false)
+                                    .email_controller
+                                    .text);
+                    if (success) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Email_verification_page(
+                              email_id: Provider.of<email_provider>(context,
+                                      listen: false)
+                                  .email_controller
+                                  .text,
+                            ),
+                          ));
+                    } else {
+                      print("something happens");
+                    }
+                  },
+                  child: Button(text: "Send", context: context))),
+        ],
+      ),
+    );
+  }
+}
