@@ -51,9 +51,15 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                   radius: 65,
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundImage: NetworkImage(
-                      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
-                    ),
+                    backgroundImage: Provider.of<Profile_provider>(context,
+                                    listen: false)
+                                .imageUrl !=
+                            null
+                        ? NetworkImage(
+                            "${Provider.of<Profile_provider>(context, listen: false).image}",
+                          )
+                        : NetworkImage(
+                            "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),
                   ),
                 ),
               ),

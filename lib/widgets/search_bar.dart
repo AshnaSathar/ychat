@@ -92,7 +92,19 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                                   context: context,
                                   data_to_display: "Added to your friend list");
 
-                              setState(() {});
+                              setState(() {
+                                Provider.of<Friendship_provider>(context,
+                                        listen: false)
+                                    .get_friends(
+                                        user_id: Provider.of<Login_provider>(
+                                                context,
+                                                listen: false)
+                                            .user_id,
+                                        token: Provider.of<Login_provider>(
+                                                context,
+                                                listen: false)
+                                            .token);
+                              });
                             } else {
                               show_bottom_sheet(
                                   context: context,

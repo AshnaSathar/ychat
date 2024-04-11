@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 
 class Profile_provider extends ChangeNotifier {
   var user_id;
@@ -15,6 +14,7 @@ class Profile_provider extends ChangeNotifier {
   var image;
 
   Future get_details({required id, required reference_id}) async {
+    print("profile_provider");
     try {
       var url =
           Uri.parse("http://127.0.0.1:8000/api/users/$id/get-profile-details");

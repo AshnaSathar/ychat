@@ -37,4 +37,39 @@ class File_provider extends ChangeNotifier {
       print('Error uploading profile picture: $e');
     }
   }
+
+  Future cover_images({
+    required int userId,
+    required String token,
+    required String imagePath,
+  }) async {
+    final url = Uri.parse(
+        'http://127.0.0.1:8000/api/users/$userId/update-profile-picture');
+    var request = http.MultipartRequest('POST', url);
+
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'profile_picture',
+        imagePath,
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+
+    request.headers['Authorization'] = 'Bearer $token';
+
+    try {
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        print('Profile picture uploaded successfully');
+        return true;
+      } else {
+        print('Failed to upload profile picture: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Error uploading profile picture: $e');
+    }
+  }
 }
