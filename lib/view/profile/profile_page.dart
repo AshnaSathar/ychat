@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
@@ -10,6 +8,7 @@ import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friends_list.dart';
+import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +47,10 @@ class _Profile_pageState extends State<Profile_page> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<Friendship_provider>(context, listen: false).get_friends(
+    //   user_id: Provider.of<Login_provider>(context, listen: false).user_id,
+    //   token: Provider.of<Login_provider>(context, listen: false).token,
+    // );
     friendsList =
         Provider.of<Friendship_provider>(context).friendsModel?.friends ?? [];
 
@@ -118,34 +121,65 @@ class _Profile_pageState extends State<Profile_page> {
                         children: [
                           CircleAvatar(
                             maxRadius: 55,
-                            backgroundImage: NetworkImage(
-                              "${Provider.of<Profile_provider>(context, listen: false).image}",
-                            ),
+                            backgroundImage: Provider.of<Profile_provider>(
+                                            context,
+                                            listen: false)
+                                        .imageUrl !=
+                                    null
+                                ? NetworkImage(
+                                    Provider.of<Profile_provider>(context,
+                                            listen: false)
+                                        .image!,
+                                  )
+                                : NetworkImage(
+                                    "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
                           ),
                           Positioned(
                               bottom: 0,
                               right: 0,
                               child: InkWell(
                                 onTap: () async {
-                                  // --------------------------------------image picker
                                   final ImagePicker picker = ImagePicker();
                                   final XFile? image = await picker.pickImage(
                                       source: ImageSource.gallery);
                                   if (image != null) {
                                     print('Image path: ${image.path}');
-                                    Provider.of<File_provider>(context,
-                                            listen: false)
-                                        .upload_profile_picture(
-                                            user_id:
-                                                Provider.of<Login_provider>(
-                                                        context,
-                                                        listen: false)
-                                                    .user_id,
-                                            image_path: image.path,
-                                            token: Provider.of<Login_provider>(
-                                                    context,
-                                                    listen: false)
-                                                .token);
+                                    bool success =
+                                        await Provider.of<File_provider>(
+                                                context,
+                                                listen: false)
+                                            .upload_profile_picture(
+                                                userId:
+                                                    Provider.of<Login_provider>(
+                                                            context,
+                                                            listen: false)
+                                                        .user_id,
+                                                imagePath: image.path,
+                                                token:
+                                                    Provider.of<Login_provider>(
+                                                            context,
+                                                            listen: false)
+                                                        .token);
+                                    setState(() {
+                                      Provider.of<Profile_provider>(context,
+                                              listen: false)
+                                          .get_details(
+                                              id: Provider.of<Login_provider>(
+                                                      context,
+                                                      listen: false)
+                                                  .user_id,
+                                              reference_id:
+                                                  Provider.of<Login_provider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token);
+                                    });
+                                    if (success) {
+                                    } else {
+                                      show_bottom_sheet(
+                                          context: context,
+                                          data_to_display: "Try again later");
+                                    }
                                   } else {
                                     print('No image selected.');
                                   }

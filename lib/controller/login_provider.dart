@@ -19,8 +19,8 @@ class Login_provider extends ChangeNotifier {
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({'user_name': user_name, 'password': password}));
-      print(response.statusCode);
-      print('Response body: ${response.body}');
+      // print(response.statusCode);
+      // print('Response body: ${response.body}');
       if (response.statusCode == 200) {
         final parse_response = jsonDecode(response.body);
         user_id = parse_response['user_id'];

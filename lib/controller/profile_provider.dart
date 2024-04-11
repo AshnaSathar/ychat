@@ -8,10 +8,12 @@ class Profile_provider extends ChangeNotifier {
   var user_id;
   var userName;
   var token;
-  var email_id;
+  var emailId;
   var gender;
   var dob;
-  XFile? image;
+  String? imageUrl;
+  var image;
+
   Future get_details({required id, required reference_id}) async {
     try {
       var url =
@@ -23,24 +25,60 @@ class Profile_provider extends ChangeNotifier {
           "Authorization": "Bearer $reference_id"
         },
       );
-      print(response.statusCode);
-      print('Response body: ${response.body}');
       if (response.statusCode == 200) {
-        final parse_response = jsonDecode(response.body);
-        var userData = parse_response['user'];
+        final parseResponse = jsonDecode(response.body);
+        var userData = parseResponse['user'];
         user_id = userData['id'];
         userName = userData['user_name'];
         token = userData['reference_id'];
-        email_id = userData['email'];
-        image = userData['profile_picture'];
+        emailId = userData['email'];
+        imageUrl = userData['profile_picture_url'];
         gender = userData['gender'];
         dob = userData['dob'];
-        print("token generated is $token");
-        print("user id is ${user_id} and username is ${userName}");
 
+        print("Token generated is $token");
+        print("User ID is $user_id and username is $userName");
+        print("Image URL is $imageUrl");
+        print("http://127.0.0.1:8000$imageUrl");
+        image = "http://127.0.0.1:8000$imageUrl";
         notifyListeners();
         return true;
       } else {
+        return false;
+      }
+    } catch (error) {
+      print("Error is $error");
+    }
+  }
+
+  Future updateProfile(
+      {required name,
+      required id,
+      required referenceId,
+      required gender,
+      required mobileNumber,
+      required dob,
+      required bio}) async {
+    try {
+      var url = Uri.parse("http://127.0.0.1:8000/api/user/$id/profile/update");
+      var response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $referenceId"
+          },
+          body: jsonEncode({
+            'name': name,
+            'gender': gender,
+            'dob': dob,
+            'mobile_number': mobileNumber,
+            'bio': bio
+          }));
+      if (response.statusCode == 200) {
+        print("Success");
+        return true;
+      } else {
+        print(response.body);
+        print("Failed");
         return false;
       }
     } catch (error) {

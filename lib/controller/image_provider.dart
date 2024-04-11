@@ -1,39 +1,40 @@
-import 'dart:convert';
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 class File_provider extends ChangeNotifier {
-  Future upload_profile_picture(
-      {required user_id, required image_path, required token}) async {
-    try {
-      final url =
-          Uri.parse('http://127.0.0.1:8000/api/user/$user_id/profile/update');
-      var response = await http.post(
-        url,
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token"
-        },
-        body: jsonEncode(
-          {'profile_picture': image_path},
-        ),
-      );
-      print(response.statusCode);
-      if (response.statusCode == 200) {
-        print(response.body);
-        // final parse_response = jsonDecode(response.body);
+  Future upload_profile_picture({
+    required int userId,
+    required String token,
+    required String imagePath,
+  }) async {
+    final url = Uri.parse(
+        'http://127.0.0.1:8000/api/users/$userId/update-profile-picture');
+    var request = http.MultipartRequest('POST', url);
 
-        notifyListeners();
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'profile_picture',
+        imagePath,
+        contentType: MediaType('image', 'jpeg'),
+      ),
+    );
+
+    request.headers['Authorization'] = 'Bearer $token';
+
+    try {
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      if (response.statusCode == 200) {
+        print('Profile picture uploaded successfully');
         return true;
       } else {
-        print(response.statusCode);
-        print(response.body);
-        notifyListeners();
+        print('Failed to upload profile picture: ${response.statusCode}');
         return false;
       }
-    } catch (error) {
-      print("errod is $error");
+    } catch (e) {
+      print('Error uploading profile picture: $e');
     }
   }
 }
