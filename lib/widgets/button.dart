@@ -13,7 +13,7 @@ Widget Button({required text, required context}) {
     child: Center(
       child: Text(
         text,
-        style: Text_style_constant.H2,
+        style: Text_style_constant.H3_purple,
       ),
     ),
   );

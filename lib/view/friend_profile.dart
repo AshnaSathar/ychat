@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/friendship_provider.dart';
+import 'package:flutter_application_1/controller/login_provider.dart';
+import 'package:flutter_application_1/controller/profile_provider.dart';
+import 'package:flutter_application_1/widgets/bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 class Friend_profile_page extends StatefulWidget {
   const Friend_profile_page({super.key});
@@ -19,7 +24,6 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
         children: [
           Stack(
             children: [
-              Icon(Icons.arrow_back_ios_new_sharp),
               Container(
                 height: MediaQuery.sizeOf(context).height / 3,
                 width: MediaQuery.sizeOf(context).width,
@@ -52,7 +56,26 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                     ),
                   ),
                 ),
-              )
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.arrow_back_ios_new_sharp,
+                      color: Color_constant.secondaryColor,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      Provider.of<Profile_provider>(context, listen: false)
+                          .userName,
+                      style: Text_style_constant.H2_white,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
           Padding(
@@ -62,7 +85,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
               child: Text(
                 "It has survived not only five centuries, but also the leap into electronic typesetting,",
                 textAlign: TextAlign.justify,
-                style: Text_style_constant.content_style_white,
+                style: Text_style_constant.H4_white,
                 maxLines: 5,
               ),
             ),
@@ -72,21 +95,62 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Small_container_refactor(
-                    context: context, data_to_display: "Friends"),
+                InkWell(
+                  onTap: () async {
+                    bool success = await Provider.of<Friendship_provider>(
+                            context,
+                            listen: false)
+                        .add_friend(
+                            user_id: Provider.of<Login_provider>(context,
+                                    listen: false)
+                                .user_id,
+                            token: Provider.of<Login_provider>(context,
+                                    listen: false)
+                                .token,
+                            friend_uid: Provider.of<Profile_provider>(context,
+                                    listen: false)
+                                .user_id);
+                    if (success) {
+                      show_bottom_sheet(
+                          context: context,
+                          data_to_display: "Added to your Friend List");
+                    }
+                    //
+                  },
+                  child: Small_container_refactor(
+                      context: context, data_to_display: "Friends"),
+                ),
                 SizedBox(
                   width: MediaQuery.sizeOf(context).width * .02,
                 ),
                 Small_container_refactor(
-                    context: context, data_to_display: "Friends"),
+                    context: context, data_to_display: "Message"),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
-                onTap: () {
-                  //
+                onTap: () async {
+                  bool success = await Provider.of<Friendship_provider>(context,
+                          listen: false)
+                      .block_user(
+                          user_id: Provider.of<Login_provider>(context,
+                                  listen: false)
+                              .user_id,
+                          friend_id: Provider.of<Profile_provider>(context,
+                                  listen: false)
+                              .user_id,
+                          token: Provider.of<Login_provider>(context,
+                                  listen: false)
+                              .token);
+                  if (success) {
+                    show_bottom_sheet(
+                        context: context, data_to_display: "Blocked");
+                  } else {
+                    show_bottom_sheet(
+                        context: context, data_to_display: "Try again later");
+                  }
                 },
                 child: Large_container_refactor(
                     context: context,
@@ -134,7 +198,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
           ),
           Text(
             "$data_to_display",
-            style: Text_style_constant.content_style_white,
+            style: Text_style_constant.H4_white,
           )
         ],
       ),
@@ -160,7 +224,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
       child: Center(
         child: Text(
           "$data_to_display",
-          style: Text_style_constant.H2,
+          style: Text_style_constant.H2_white,
         ),
       ),
     );

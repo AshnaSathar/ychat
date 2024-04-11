@@ -141,9 +141,8 @@ class Home_pageAppbar extends StatelessWidget {
                         reference_id:
                             Provider.of<Login_provider>(context, listen: false)
                                 .token,
-                        user_id:
-                            Provider.of<Login_provider>(context, listen: false)
-                                .user_id);
+                        id: Provider.of<Login_provider>(context, listen: false)
+                            .user_id);
                 if (success == true) {
                   print("trueeeee");
                   Navigator.push(

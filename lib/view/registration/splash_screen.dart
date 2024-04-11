@@ -25,7 +25,7 @@ class _Splash_pageState extends State<Splash_page> {
             children: [
               Text(
                 "Lets get started",
-                style: Text_style_constant.H2_white_bold,
+                style: Text_style_constant.H2_white,
               )
             ],
           ),
@@ -33,7 +33,9 @@ class _Splash_pageState extends State<Splash_page> {
             padding: const EdgeInsets.only(top: 50, bottom: 8),
             child: CircleAvatar(
               radius: 100,
+              // child: Image.asset("assets/5932928_3014278.jpg"),
               backgroundColor: Color_constant.secondaryColor,
+              backgroundImage: AssetImage("assets/5932928_3014278.jpg"),
             ),
           ),
           Padding(
@@ -73,7 +75,7 @@ class _Splash_pageState extends State<Splash_page> {
                 children: [
                   Text(
                     "Already have an account?",
-                    style: Text_style_constant.content_style_white,
+                    style: Text_style_constant.H4_white,
                   ),
                   InkWell(
                       onTap: () {

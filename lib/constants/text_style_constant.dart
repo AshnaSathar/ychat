@@ -3,38 +3,59 @@ import 'package:flutter_application_1/constants/color_constants/color_constant.d
 import 'package:google_fonts/google_fonts.dart';
 
 class Text_style_constant {
-  static TextStyle H1 = TextStyle(
-      fontFamily: 'Inter',
-      fontSize: 50,
-      fontWeight: FontWeight.w900,
-      color: Colors.white);
+  static TextStyle H1_white = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 60,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w900);
+  static TextStyle H4_white = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 12,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w400);
 
-  static TextStyle H2 = TextStyle(
-      fontFamily: GoogleFonts.montserrat().fontFamily,
-      fontSize: 18,
-      // fontWeight: FontWeight.bold,
-      color: Color_constant.primaryColor);
-  static TextStyle H2_white = TextStyle(
+  static TextStyle H4_purple = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 12,
+      color: Color_constant.primaryColor,
+      fontWeight: FontWeight.w400);
+
+  static TextStyle H3_purple = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
       fontSize: 14,
-      color: Color_constant.secondaryColor);
-  static TextStyle H2_white_bold = TextStyle(
+      color: Color_constant.primaryColor,
+      fontWeight: FontWeight.w600);
+
+  static TextStyle H3_white = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      color: Color_constant.secondaryColor);
-  static TextStyle content_style = TextStyle(
-    fontFamily: GoogleFonts.inter().fontFamily,
-    fontSize: 14,
-    color: Color_constant.secondaryColor,
-  );
-  static TextStyle content_style_white = TextStyle(
-    fontFamily: GoogleFonts.inter().fontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w200,
-    color: Color_constant.secondaryColor,
-  );
-  static TextStyle content_style_white_bold = TextStyle(
+      fontSize: 14,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w600);
+
+  static TextStyle H2_purple = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 16,
+      color: Color_constant.primaryColor,
+      fontWeight: FontWeight.w800);
+
+  static TextStyle H2_white = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 32,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w800);
+  // static TextStyle H2 = TextStyle(
+  //     fontFamily: GoogleFonts.inter().fontFamily,
+  //     fontSize: 18,
+  //     // fontWeight: FontWeight.bold,
+  //     color: Color_constant.primaryColor);
+
+  // static TextStyle H4_white = TextStyle(
+  //   fontFamily: GoogleFonts.inter().fontFamily,
+  //   fontSize: 14,
+  //   fontWeight: FontWeight.w200,
+  //   color: Color_constant.secondaryColor,
+  // );
+  static TextStyle H4_white_bold = TextStyle(
     fontFamily: GoogleFonts.inter().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,

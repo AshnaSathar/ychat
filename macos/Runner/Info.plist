@@ -28,5 +28,12 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>permission for the photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>access to the camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>access to the microphone</string>
+
 </dict>
 </plist>

@@ -32,7 +32,7 @@ class _Registration_pageState extends State<Registration_page> {
           Center(
             child: Text(
               "ynotz",
-              style: Text_style_constant.H1,
+              style: Text_style_constant.H1_white,
             ),
           ),
           Spacer(),

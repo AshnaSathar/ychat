@@ -44,7 +44,7 @@ class Forgot_password extends StatelessWidget {
               children: [
                 Text(
                   "Email Address",
-                  style: Text_style_constant.content_style,
+                  style: Text_style_constant.H4_white,
                 ),
               ],
             ),

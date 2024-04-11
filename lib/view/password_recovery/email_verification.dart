@@ -39,12 +39,12 @@ class _Email_verification_pageState extends State<Email_verification_page> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Please Enter The 4 Digit Code Send To",
-              style: Text_style_constant.H2_white_bold,
+              style: Text_style_constant.H4_white,
             ),
           ),
           Text(
             widget.email_id,
-            style: Text_style_constant.H2_white_bold,
+            style: Text_style_constant.H4_white,
           ),
           Padding(
             padding: const EdgeInsets.all(35.0),
@@ -193,7 +193,7 @@ class _Email_verification_pageState extends State<Email_verification_page> {
             },
             child: Text(
               "Resend Code",
-              style: Text_style_constant.content_style_white,
+              style: Text_style_constant.H4_white,
             ),
           ),
           Spacer(),

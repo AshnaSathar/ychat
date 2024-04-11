@@ -5,6 +5,7 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/password_recovery/forgot_password.dart';
 import 'package:flutter_application_1/view/registration/registration_page.dart';
+import 'package:flutter_application_1/view/registration/splash_screen.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
@@ -33,7 +34,7 @@ class _Login_pageState extends State<Login_page> {
           Center(
             child: Text(
               "Ynotz",
-              style: Text_style_constant.H1,
+              style: Text_style_constant.H1_white,
             ),
           ),
           Padding(
@@ -49,7 +50,7 @@ class _Login_pageState extends State<Login_page> {
                   ),
                 ),
                 hintText: "User name",
-                hintStyle: Text_style_constant.content_style_white,
+                hintStyle: Text_style_constant.H4_white,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
@@ -113,14 +114,14 @@ class _Login_pageState extends State<Login_page> {
               children: [
                 Text(
                   "Don't have an account? ",
-                  style: Text_style_constant.content_style_white_bold,
+                  style: Text_style_constant.H4_white_bold,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Registration_page(),
+                          builder: (context) => Splash_page(),
                         ));
                   },
                   child: Text("SIGN UP"),
@@ -141,7 +142,7 @@ class _Login_pageState extends State<Login_page> {
               },
               child: Text(
                 "Forgot password?",
-                style: Text_style_constant.content_style_white,
+                style: Text_style_constant.H4_white,
               ),
             ),
           ),

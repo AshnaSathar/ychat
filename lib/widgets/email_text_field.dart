@@ -14,8 +14,8 @@ Widget Email_text_field({required context}) {
         ),
         hintText: "email",
         labelText: "email",
-        labelStyle: Text_style_constant.content_style,
-        hintStyle: Text_style_constant.content_style,
+        labelStyle: Text_style_constant.H4_white,
+        hintStyle: Text_style_constant.H4_white,
         border: OutlineInputBorder(
           borderSide: BorderSide(color: Color_constant.secondaryColor),
           borderRadius: BorderRadius.circular(15),

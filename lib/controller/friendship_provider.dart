@@ -25,9 +25,6 @@ class Friendship_provider extends ChangeNotifier {
       print(response.statusCode);
       print('Response body: ${responseBody}');
       if (response.statusCode == 200) {
-        print(friends);
-        print("--------------------");
-        print(friends?.length);
         print(responseBody);
         notifyListeners();
         return true;
@@ -79,10 +76,9 @@ class Friendship_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'friend_id': friend_id}));
-      var responseBody =
-          '{"success":true,"message":"User unfriended successfully"}';
-      var jsonResponse = json.decode(responseBody);
-      if (jsonResponse['success']) {
+
+      var jsonResponse = json.decode(response.body);
+      if (response.statusCode == 200) {
         friendsModel?.friends.removeWhere((friend) => friend.id == friend_id);
         notifyListeners();
         return true;
@@ -91,6 +87,54 @@ class Friendship_provider extends ChangeNotifier {
       }
     } catch (error) {
       print("Error removing friend: $error");
+      return false;
+    }
+  }
+
+  Future block_user(
+      {required user_id, required friend_id, required token}) async {
+    try {
+      final url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/block");
+      final response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          },
+          body: jsonEncode({'blocked_user_id': friend_id}));
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return true;
+      } else {
+        notifyListeners();
+        return false;
+      }
+    } catch (error) {
+      print("Error blocking user: $error");
+      return false;
+    }
+  }
+
+  Future un_block_user(
+      {required user_id, required friend_id, required token}) async {
+    try {
+      final url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/unblock");
+      final response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          },
+          body: jsonEncode({'blocked_user_id': friend_id}));
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return true;
+      } else {
+        notifyListeners();
+        return false;
+      }
+    } catch (error) {
+      print("Error blocking user: $error");
       return false;
     }
   }

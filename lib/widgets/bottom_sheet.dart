@@ -9,7 +9,7 @@ Future show_bottom_sheet({required context, required data_to_display}) async {
         height: 100,
         width: double.infinity,
         child: Center(
-          child: Text(data_to_display, style: Text_style_constant.H2),
+          child: Text(data_to_display, style: Text_style_constant.H4_purple),
         ),
       );
     },

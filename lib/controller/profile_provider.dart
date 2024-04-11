@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class Profile_provider extends ChangeNotifier {
   var user_id;
@@ -10,10 +11,11 @@ class Profile_provider extends ChangeNotifier {
   var email_id;
   var gender;
   var dob;
-  Future get_details({required user_id, required reference_id}) async {
+  XFile? image;
+  Future get_details({required id, required reference_id}) async {
     try {
-      var url = Uri.parse(
-          "http://127.0.0.1:8000/api/users/$user_id/get-profile-details");
+      var url =
+          Uri.parse("http://127.0.0.1:8000/api/users/$id/get-profile-details");
       var response = await http.get(
         url,
         headers: {
@@ -30,7 +32,7 @@ class Profile_provider extends ChangeNotifier {
         userName = userData['user_name'];
         token = userData['reference_id'];
         email_id = userData['email'];
-
+        image = userData['profile_picture'];
         gender = userData['gender'];
         dob = userData['dob'];
         print("token generated is $token");

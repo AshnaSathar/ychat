@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
+import 'package:flutter_application_1/controller/image_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/password_recovery.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => Friendship_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => File_provider(),
         ),
       ],
       child: MaterialApp(

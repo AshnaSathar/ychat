@@ -29,17 +29,61 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
       appBar: app_bar(title: "Edit Profile", context: context),
       body: Column(
         children: [
-          Center(
-            child: Container(
-              width: MediaQuery.sizeOf(context).width * .5,
-              height: MediaQuery.sizeOf(context).height * .2,
-              decoration: BoxDecoration(
-                  color: Color_constant.secondaryColor, shape: BoxShape.circle),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width * .5,
+                height: MediaQuery.sizeOf(context).height * .2,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color_constant.secondaryColor,
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(2, 2),
+                              ),
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.2),
+                                spreadRadius: 1,
+                                blurRadius: 1,
+                                offset: Offset(-2, -2),
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 65,
+                            backgroundImage: NetworkImage(
+                                "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -53,7 +97,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     children: [
                       Text(
                         "Name",
-                        style: Text_style_constant.H2_white,
+                        style: Text_style_constant.H4_white,
                       ),
                     ],
                   ),
@@ -76,7 +120,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     children: [
                       Text(
                         "Bio",
-                        style: Text_style_constant.H2_white,
+                        style: Text_style_constant.H4_white,
                       ),
                     ],
                   ),
@@ -99,7 +143,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     children: [
                       Text(
                         "Phone Number",
-                        style: Text_style_constant.H2_white,
+                        style: Text_style_constant.H4_white,
                       ),
                     ],
                   ),
@@ -122,7 +166,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     children: [
                       Text(
                         "Gender",
-                        style: Text_style_constant.H2_white,
+                        style: Text_style_constant.H4_white,
                       ),
                     ],
                   ),

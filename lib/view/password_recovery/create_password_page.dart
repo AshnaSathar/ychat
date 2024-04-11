@@ -31,13 +31,13 @@ class Create_password_page extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Your New Password Must Be Different",
-              style: Text_style_constant.H2_white_bold,
+              style: Text_style_constant.H4_white,
             ),
           ),
           Center(
               child: Text(
             " From Previously Used Password",
-            style: Text_style_constant.H2_white_bold,
+            style: Text_style_constant.H4_white,
           )),
           Row(
             children: [
@@ -45,7 +45,7 @@ class Create_password_page extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "New Password",
-                  style: Text_style_constant.content_style_white,
+                  style: Text_style_constant.H4_white,
                 ),
               ),
             ],
@@ -61,7 +61,7 @@ class Create_password_page extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "Confirm Password",
-                  style: Text_style_constant.content_style_white,
+                  style: Text_style_constant.H4_white,
                 ),
               ),
             ],

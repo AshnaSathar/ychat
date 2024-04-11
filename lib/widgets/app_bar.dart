@@ -8,7 +8,7 @@ PreferredSizeWidget app_bar(
     backgroundColor: Color_constant.primaryColor,
     title: Text(
       title,
-      style: Text_style_constant.H2_white_bold,
+      style: Text_style_constant.H3_white,
     ),
     leading: IconButton(
       icon: Icon(

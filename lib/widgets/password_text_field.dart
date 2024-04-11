@@ -23,8 +23,8 @@ class PasswordTextField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: "Password",
             hintText: "Password",
-            hintStyle: Text_style_constant.content_style_white,
-            labelStyle: Text_style_constant.content_style_white,
+            hintStyle: Text_style_constant.H4_white,
+            labelStyle: Text_style_constant.H4_white,
             suffixIconColor: Color_constant.secondaryColor,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),

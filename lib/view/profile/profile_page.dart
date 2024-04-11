@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
+import 'package:flutter_application_1/controller/image_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friends_list.dart';
 import 'package:flutter_application_1/widgets/button.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class Profile_page extends StatefulWidget {
@@ -115,14 +119,37 @@ class _Profile_pageState extends State<Profile_page> {
                           CircleAvatar(
                             maxRadius: 55,
                             backgroundImage: NetworkImage(
-                              "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+                              "${Provider.of<Profile_provider>(context, listen: false).image}",
                             ),
                           ),
                           Positioned(
                               bottom: 0,
                               right: 0,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () async {
+                                  // --------------------------------------image picker
+                                  final ImagePicker picker = ImagePicker();
+                                  final XFile? image = await picker.pickImage(
+                                      source: ImageSource.gallery);
+                                  if (image != null) {
+                                    print('Image path: ${image.path}');
+                                    Provider.of<File_provider>(context,
+                                            listen: false)
+                                        .upload_profile_picture(
+                                            user_id:
+                                                Provider.of<Login_provider>(
+                                                        context,
+                                                        listen: false)
+                                                    .user_id,
+                                            image_path: image.path,
+                                            token: Provider.of<Login_provider>(
+                                                    context,
+                                                    listen: false)
+                                                .token);
+                                  } else {
+                                    print('No image selected.');
+                                  }
+                                },
                                 child: CircleAvatar(
                                   child: Icon(
                                     Icons.camera_alt_outlined,
@@ -141,7 +168,7 @@ class _Profile_pageState extends State<Profile_page> {
           ),
           Text(
             "${Provider.of<Profile_provider>(context, listen: false).userName}",
-            style: Text_style_constant.H2_white_bold,
+            style: Text_style_constant.H2_white,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -167,7 +194,7 @@ class _Profile_pageState extends State<Profile_page> {
                 },
                 child: Text(
                   "${friendsList.length} Friends",
-                  style: Text_style_constant.content_style_white,
+                  style: Text_style_constant.H4_white,
                 ),
               ),
             ],
@@ -188,4 +215,14 @@ class _Profile_pageState extends State<Profile_page> {
       ),
     );
   }
+
+  // Future<void> selectImage() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  //   if (image != null) {
+  //     print('Image path: ${image.path}');
+  //   } else {
+  //     print('No image selected.');
+  //   }
+  // }
 }

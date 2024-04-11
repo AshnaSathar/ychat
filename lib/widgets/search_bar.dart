@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
+import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
+import 'package:flutter_application_1/view/friend_profile.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +102,28 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                           },
                           icon: Icon(Icons.add),
                         ),
-                        title: Text(user.userName),
+                        title: InkWell(
+                            onTap: () async {
+                              bool success =
+                                  await Provider.of<Profile_provider>(context,
+                                          listen: false)
+                                      .get_details(
+                                          id: user.id,
+                                          reference_id:
+                                              Provider.of<Login_provider>(
+                                                      context,
+                                                      listen: false)
+                                                  .token);
+                              if (success) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Friend_profile_page(),
+                                    ));
+                              }
+                            },
+                            child: Text(user.userName)),
                       );
                     },
                   ),
