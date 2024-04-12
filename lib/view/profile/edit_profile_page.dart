@@ -24,6 +24,9 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
 
   @override
   Widget build(BuildContext context) {
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
+    var profile_provider =
+        Provider.of<Profile_provider>(context, listen: false);
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       appBar: app_bar(title: "Edit Profile", context: context),
@@ -188,19 +191,14 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
           ),
           InkWell(
               onTap: () async {
-                bool success = await Provider.of<Profile_provider>(context,
-                        listen: false)
-                    .update_profile(
-                        id: Provider.of<Login_provider>(context, listen: false)
-                            .user_id,
-                        name: name_controller.text,
-                        reference_id:
-                            Provider.of<Login_provider>(context, listen: false)
-                                .token,
-                        gender: gender_controller.text,
-                        mobile_number: mobile_number_controller.text,
-                        dob: dob_controller.text,
-                        bio: bio_controller.text);
+                bool success = await profile_provider.update_profile(
+                    id: login_provider.user_id,
+                    name: name_controller.text,
+                    reference_id: login_provider.token,
+                    gender: gender_controller.text,
+                    mobile_number: mobile_number_controller.text,
+                    dob: dob_controller.text,
+                    bio: bio_controller.text);
                 name_controller.clear();
                 gender_controller.clear();
                 mobile_number_controller.clear();

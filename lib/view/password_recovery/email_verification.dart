@@ -27,6 +27,9 @@ class _Email_verification_pageState extends State<Email_verification_page> {
   TextEditingController c4 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var email_provider = Provider.of<Email_provider>(context, listen: false);
+    var password_recovey_provider =
+        Provider.of<Password_recovery_provider>(context, listen: false);
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       appBar: app_bar(title: "Verify your Email", context: context),
@@ -172,13 +175,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
           ),
           InkWell(
             onTap: () async {
-              bool success = await Provider.of<Password_recovery_provider>(
-                      context,
-                      listen: false)
-                  .send_otp(
-                      email: Provider.of<email_provider>(context, listen: false)
-                          .email_controller
-                          .text);
+              bool success = await password_recovey_provider.send_otp(
+                  email: email_provider.email_controller.text);
               if (success) {
                 show_bottom_sheet(
                     context: context,
@@ -201,17 +199,12 @@ class _Email_verification_pageState extends State<Email_verification_page> {
             padding: const EdgeInsets.only(bottom: 100),
             child: InkWell(
                 onTap: () async {
-                  print("the otp is ");
-                  print("c1.text ${c1.text}");
-                  print("c2.text ${c2.text}");
-                  print("c3.text ${c3.text}");
-                  print("c4.text ${c4.text}");
                   if (c1.text.isNotEmpty &&
                       c2.text.isNotEmpty &&
                       c3.text.isNotEmpty &&
                       c4.text.isNotEmpty) {
                     var otp = c1.text + c2.text + c3.text + c4.text;
-                    print("the otp is $otp");
+
                     if (otp.length == 4) {
                       bool success = await Provider.of<Register_provider>(
                               context,
@@ -233,8 +226,6 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                           context: context, data_to_display: "Invalid otp");
                     }
                   }
-
-                  //
                 },
                 child: Button(text: "verify", context: context)),
           )

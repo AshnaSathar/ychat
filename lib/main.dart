@@ -6,6 +6,7 @@ import 'package:flutter_application_1/controller/password_recovery.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/register_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
+import 'package:flutter_application_1/view/block_page/block_page.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => email_provider(),
+          create: (context) => Email_provider(),
         ),
         ChangeNotifierProvider(
           create: (context) => Password_provider(),

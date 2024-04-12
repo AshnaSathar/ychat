@@ -4,6 +4,7 @@ import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
+import 'package:flutter_application_1/view/chat_page/personalChatPage.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -34,10 +35,17 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                     height: MediaQuery.sizeOf(context).height * .2,
                     color: Colors.green,
                     width: MediaQuery.sizeOf(context).width,
-                    child: Image.network(
-                      "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-                      fit: BoxFit.cover,
-                    ),
+                    child: Provider.of<Profile_provider>(context, listen: false)
+                                .cover_imageUrl !=
+                            null
+                        ? Image.network(
+                            "${Provider.of<Profile_provider>(context, listen: false).cover_image}",
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            "https://img.freepik.com/premium-photo/blurred-colorful-wallpaper-background_976742-179.jpg",
+                            fit: BoxFit.fill,
+                          ),
                   ),
                   Container(
                     height: MediaQuery.sizeOf(context).height * .1,
@@ -67,9 +75,14 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.arrow_back_ios_new_sharp,
-                      color: Color_constant.secondaryColor,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios_new_sharp,
+                        color: Color_constant.secondaryColor,
+                      ),
                     ),
                   ),
                   Padding(
@@ -129,8 +142,24 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                 SizedBox(
                   width: MediaQuery.sizeOf(context).width * .02,
                 ),
-                Small_container_refactor(
-                    context: context, data_to_display: "Message"),
+                InkWell(
+                  onTap: () {
+                    //
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Chat_Page(
+                              id: Provider.of<Profile_provider>(context,
+                                      listen: false)
+                                  .user_id,
+                              name: Provider.of<Profile_provider>(context,
+                                      listen: false)
+                                  .userName),
+                        ));
+                  },
+                  child: Small_container_refactor(
+                      context: context, data_to_display: "Message"),
+                )
               ],
             ),
           ),
@@ -230,7 +259,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
       child: Center(
         child: Text(
           "$data_to_display",
-          style: Text_style_constant.H2_white,
+          style: Text_style_constant.H2_purple,
         ),
       ),
     );

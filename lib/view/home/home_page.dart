@@ -28,7 +28,7 @@ class _Home_pageState extends State<Home_page> {
 
   getData() async {
     try {
-      Provider.of<Profile_provider>(context, listen: false).get_details(
+      await Provider.of<Profile_provider>(context, listen: false).get_details(
           id: Provider.of<Login_provider>(context, listen: false).user_id,
           reference_id:
               Provider.of<Login_provider>(context, listen: false).token);
@@ -123,6 +123,9 @@ class Home_pageAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
+    var profile_provider =
+        Provider.of<Profile_provider>(context, listen: false);
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Container(
@@ -148,14 +151,9 @@ class Home_pageAppbar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () async {
-                bool success = await Provider.of<Profile_provider>(context,
-                        listen: false)
-                    .get_details(
-                        reference_id:
-                            Provider.of<Login_provider>(context, listen: false)
-                                .token,
-                        id: Provider.of<Login_provider>(context, listen: false)
-                            .user_id);
+                bool success = await profile_provider.get_details(
+                    reference_id: login_provider.token,
+                    id: login_provider.user_id);
                 if (success == true) {
                   Navigator.push(
                       context,
@@ -181,16 +179,12 @@ class Home_pageAppbar extends StatelessWidget {
                     //  NetworkImage(
                     //     Provider.of<Profile_provider>(context, listen: false)
                     //         .image),
-                    child: Provider.of<Profile_provider>(context, listen: false)
-                                .image !=
-                            null
+                    child: profile_provider.image != null
                         ? Container(
                             decoration: BoxDecoration(shape: BoxShape.circle),
                             child: ClipOval(
                               child: Image.network(
-                                Provider.of<Profile_provider>(context,
-                                        listen: false)
-                                    .image,
+                                profile_provider.image,
                                 fit: BoxFit.contain,
                               ),
                             ),

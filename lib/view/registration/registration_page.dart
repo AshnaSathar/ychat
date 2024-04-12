@@ -18,6 +18,8 @@ class Registration_page extends StatefulWidget {
 class _Registration_pageState extends State<Registration_page> {
   @override
   Widget build(BuildContext context) {
+    var register_provider =
+        Provider.of<Register_provider>(context, listen: false);
     TextEditingController name_controller = TextEditingController();
     TextEditingController email_controller = TextEditingController();
     TextEditingController user_name_controller = TextEditingController();
@@ -189,15 +191,13 @@ class _Registration_pageState extends State<Registration_page> {
                                 dob_controller.text.isNotEmpty &&
                                 password_controller.text.isNotEmpty) {
                               bool success =
-                                  await Provider.of<Register_provider>(context,
-                                          listen: false)
-                                      .request_otp(
-                                          user_name: user_name_controller.text,
-                                          name: name_controller.text,
-                                          dob: dob_controller.text,
-                                          gender: gender_controller.text,
-                                          password: password_controller.text,
-                                          email_id: email_controller.text);
+                                  await register_provider.request_otp(
+                                      user_name: user_name_controller.text,
+                                      name: name_controller.text,
+                                      dob: dob_controller.text,
+                                      gender: gender_controller.text,
+                                      password: password_controller.text,
+                                      email_id: email_controller.text);
                               if (success) {
                                 Navigator.push(
                                     context,

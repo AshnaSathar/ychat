@@ -62,7 +62,7 @@ class Forgot_password extends StatelessWidget {
                         await Provider.of<Password_recovery_provider>(context,
                                 listen: false)
                             .send_otp(
-                                email: Provider.of<email_provider>(context,
+                                email: Provider.of<Email_provider>(context,
                                         listen: false)
                                     .email_controller
                                     .text);
@@ -71,7 +71,7 @@ class Forgot_password extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => Email_verification_page(
-                              email_id: Provider.of<email_provider>(context,
+                              email_id: Provider.of<Email_provider>(context,
                                       listen: false)
                                   .email_controller
                                   .text,

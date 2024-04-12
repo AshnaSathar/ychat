@@ -25,10 +25,12 @@ class _Friends_list_pageState extends State<Friends_list_page> {
   }
 
   Widget build(BuildContext context) {
+    var friendship_provider =
+        Provider.of<Friendship_provider>(context, listen: false);
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
     print("rebuild ");
-    Provider.of<Friendship_provider>(context, listen: false).get_friends(
-        user_id: Provider.of<Login_provider>(context, listen: false).user_id,
-        token: Provider.of<Login_provider>(context, listen: false).token);
+    friendship_provider.get_friends(
+        user_id: login_provider.user_id, token: login_provider.token);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color_constant.primaryColor,
@@ -47,38 +49,22 @@ class _Friends_list_pageState extends State<Friends_list_page> {
                 print(index);
                 return ListTile(
                   title: Text(
-                      "${Provider.of<Friendship_provider>(context, listen: false).friendsModel?.friends[index].name}"),
+                      "${friendship_provider.friendsModel?.friends[index].name}"),
                   trailing: InkWell(
                       onTap: () async {
-                        bool success = await Provider.of<Friendship_provider>(
-                                context,
-                                listen: false)
-                            .remove_friend(
-                                friend_id: Provider.of<Friendship_provider>(
-                                        context,
-                                        listen: false)
-                                    .friendsModel
-                                    ?.friends[index]
-                                    .id,
-                                token: Provider.of<Login_provider>(context,
-                                        listen: false)
-                                    .token,
-                                user_id: Provider.of<Login_provider>(context,
-                                        listen: false)
-                                    .user_id);
+                        bool success = await friendship_provider.remove_friend(
+                            friend_id: friendship_provider
+                                .friendsModel?.friends[index].id,
+                            token: login_provider.token,
+                            user_id: login_provider.user_id);
                         if (success) {
-                          print("refreshing");
                           setState(() {});
                         }
                       },
                       child: Icon(Icons.remove)),
                 );
               },
-              itemCount:
-                  Provider.of<Friendship_provider>(context, listen: false)
-                      .friendsModel
-                      ?.friends
-                      .length,
+              itemCount: friendship_provider.friendsModel?.friends.length,
             ),
           )
         ],

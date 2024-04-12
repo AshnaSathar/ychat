@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 Widget Email_text_field({required context}) {
   return TextField(
     controller:
-        Provider.of<email_provider>(context, listen: false).email_controller,
+        Provider.of<Email_provider>(context, listen: false).email_controller,
     decoration: InputDecoration(
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color_constant.secondaryColor),
@@ -29,7 +29,7 @@ Widget Email_text_field({required context}) {
   );
 }
 
-class email_provider extends ChangeNotifier {
+class Email_provider extends ChangeNotifier {
   TextEditingController email_controller = TextEditingController();
   bool is_email_id = false;
 }

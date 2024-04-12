@@ -47,10 +47,12 @@ class _Profile_pageState extends State<Profile_page> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider.of<Friendship_provider>(context, listen: false).get_friends(
-    //   user_id: Provider.of<Login_provider>(context, listen: false).user_id,
-    //   token: Provider.of<Login_provider>(context, listen: false).token,
-    // );
+    var file_provider = Provider.of<File_provider>(context, listen: false);
+    var profile_provider =
+        Provider.of<Profile_provider>(context, listen: false);
+    var friendship_provider =
+        Provider.of<Friendship_provider>(context, listen: false);
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
     friendsList =
         Provider.of<Friendship_provider>(context).friendsModel?.friends ?? [];
 
@@ -76,10 +78,15 @@ class _Profile_pageState extends State<Profile_page> {
                     ),
                   ),
                 ),
-                child: Image.network(
-                  "https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?cs=srgb&dl=pexels-codioful-%28formerly-gradienta%29-7130560.jpg&fm=jpg",
-                  fit: BoxFit.fill,
-                ),
+                child: profile_provider.cover_imageUrl != null
+                    ? Image.network(
+                        "${profile_provider.cover_image}",
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        "https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?cs=srgb&dl=pexels-codioful-%28formerly-gradienta%29-7130560.jpg&fm=jpg",
+                        fit: BoxFit.fill,
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -91,7 +98,35 @@ class _Profile_pageState extends State<Profile_page> {
                       child: Icon(Icons.settings_outlined, color: Colors.black),
                     ),
                     Spacer(),
-                    Icon(Icons.edit)
+                    InkWell(
+                        onTap: () async {
+                          //image picker
+                          final ImagePicker picker = ImagePicker();
+                          final XFile? image = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (image != null) {
+                            print('Image path: ${image.path}');
+                            bool success = await Provider.of<File_provider>(
+                                    context,
+                                    listen: false)
+                                .upload_cover_images(
+                                    userId: login_provider.user_id,
+                                    token: login_provider.token,
+                                    imagePath: image.path);
+                            setState(() {
+                              profile_provider.get_details(
+                                  id: login_provider.user_id,
+                                  reference_id: login_provider.token);
+                            });
+                            if (success) {
+                            } else {
+                              show_bottom_sheet(
+                                  context: context,
+                                  data_to_display: "Try again later");
+                            }
+                          }
+                        },
+                        child: Icon(Icons.edit))
                   ],
                 ),
               ),
@@ -121,15 +156,9 @@ class _Profile_pageState extends State<Profile_page> {
                         children: [
                           CircleAvatar(
                             maxRadius: 55,
-                            backgroundImage: Provider.of<Profile_provider>(
-                                            context,
-                                            listen: false)
-                                        .imageUrl !=
-                                    null
+                            backgroundImage: profile_provider.imageUrl != null
                                 ? NetworkImage(
-                                    Provider.of<Profile_provider>(context,
-                                            listen: false)
-                                        .image!,
+                                    profile_provider.image!,
                                   )
                                 : NetworkImage(
                                     "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
@@ -144,35 +173,15 @@ class _Profile_pageState extends State<Profile_page> {
                                       source: ImageSource.gallery);
                                   if (image != null) {
                                     print('Image path: ${image.path}');
-                                    bool success =
-                                        await Provider.of<File_provider>(
-                                                context,
-                                                listen: false)
-                                            .upload_profile_picture(
-                                                userId:
-                                                    Provider.of<Login_provider>(
-                                                            context,
-                                                            listen: false)
-                                                        .user_id,
-                                                imagePath: image.path,
-                                                token:
-                                                    Provider.of<Login_provider>(
-                                                            context,
-                                                            listen: false)
-                                                        .token);
+                                    bool success = await file_provider
+                                        .upload_profile_picture(
+                                            userId: login_provider.user_id,
+                                            imagePath: image.path,
+                                            token: login_provider.token);
                                     setState(() {
-                                      Provider.of<Profile_provider>(context,
-                                              listen: false)
-                                          .get_details(
-                                              id: Provider.of<Login_provider>(
-                                                      context,
-                                                      listen: false)
-                                                  .user_id,
-                                              reference_id:
-                                                  Provider.of<Login_provider>(
-                                                          context,
-                                                          listen: false)
-                                                      .token);
+                                      profile_provider.get_details(
+                                          id: login_provider.user_id,
+                                          reference_id: login_provider.token);
                                     });
                                     if (success) {
                                     } else {
@@ -201,7 +210,7 @@ class _Profile_pageState extends State<Profile_page> {
             ],
           ),
           Text(
-            "${Provider.of<Profile_provider>(context, listen: false).userName}",
+            "${profile_provider.userName}",
             style: Text_style_constant.H2_white,
           ),
           Row(
@@ -209,13 +218,9 @@ class _Profile_pageState extends State<Profile_page> {
             children: [
               InkWell(
                 onTap: () async {
-                  bool success = await Provider.of<Friendship_provider>(context,
-                          listen: false)
-                      .get_friends(
-                    user_id: Provider.of<Login_provider>(context, listen: false)
-                        .user_id,
-                    token: Provider.of<Login_provider>(context, listen: false)
-                        .token,
+                  bool success = await friendship_provider.get_friends(
+                    user_id: login_provider.user_id,
+                    token: login_provider.token,
                   );
                   if (success) {
                     Navigator.push(
@@ -249,14 +254,4 @@ class _Profile_pageState extends State<Profile_page> {
       ),
     );
   }
-
-  // Future<void> selectImage() async {
-  //   final ImagePicker picker = ImagePicker();
-  //   final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-  //   if (image != null) {
-  //     print('Image path: ${image.path}');
-  //   } else {
-  //     print('No image selected.');
-  //   }
-  // }
 }

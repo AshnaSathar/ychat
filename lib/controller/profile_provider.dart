@@ -12,6 +12,8 @@ class Profile_provider extends ChangeNotifier {
   var dob;
   String? imageUrl;
   var image;
+  String? cover_imageUrl;
+  var cover_image;
 
   Future get_details({required id, required reference_id}) async {
     print("profile_provider");
@@ -35,10 +37,14 @@ class Profile_provider extends ChangeNotifier {
         imageUrl = userData['profile_picture_url'];
         gender = userData['gender'];
         dob = userData['dob'];
-
+        cover_imageUrl = userData['cover_image'];
+        cover_image =
+            "http://127.0.0.1:8000/storage/cover_images/$cover_imageUrl";
         print("Token generated is $token");
         print("User ID is $user_id and username is $userName");
         print("Image URL is $imageUrl");
+        print("cover imageUrl is $cover_imageUrl");
+        print("cover image is $cover_image");
         print("http://127.0.0.1:8000$imageUrl");
         image = "http://127.0.0.1:8000$imageUrl";
         notifyListeners();

@@ -26,6 +26,11 @@ class _Home_front_bodyState extends State<Home_front_body> {
   }
 
   Widget build(BuildContext context) {
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
+    var friendship_provider =
+        Provider.of<Friendship_provider>(context, listen: false);
+    var profile_provider =
+        Provider.of<Profile_provider>(context, listen: false);
     return Scaffold(
       body: Column(
         children: [
@@ -35,17 +40,10 @@ class _Home_front_bodyState extends State<Home_front_body> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount:
-                  Provider.of<Friendship_provider>(context, listen: false)
-                      .friendsModel
-                      ?.friends
-                      .length,
+              itemCount: friendship_provider.friendsModel?.friends.length,
               itemBuilder: (context, index) {
-                var profile_pic =
-                    Provider.of<Friendship_provider>(context, listen: false)
-                        .friendsModel
-                        ?.friends[index]
-                        .profilePicture;
+                var profile_pic = friendship_provider
+                    .friendsModel?.friends[index].profilePicture;
                 var image;
                 if (profile_pic != null) {
                   image = "http://localhost:8000/storage/$profile_pic";
@@ -54,40 +52,25 @@ class _Home_front_bodyState extends State<Home_front_body> {
                       "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
                 }
                 print(
-                    "image is ${Provider.of<Friendship_provider>(context, listen: false).friendsModel?.friends[index].profilePicture}");
+                    "image is ${friendship_provider.friendsModel?.friends[index].profilePicture}");
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () async {
                       //
-                      bool success = await Provider.of<Profile_provider>(
-                              context,
-                              listen: false)
-                          .get_details(
-                              id: Provider.of<Friendship_provider>(context,
-                                      listen: false)
-                                  .friendsModel
-                                  ?.friends[index]
-                                  .id,
-                              reference_id: Provider.of<Login_provider>(context,
-                                      listen: false)
-                                  .token);
+                      bool success = await profile_provider.get_details(
+                          id: friendship_provider
+                              .friendsModel?.friends[index].id,
+                          reference_id: login_provider.token);
                       if (success) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Chat_Page(
-                                  name: Provider.of<Friendship_provider>(
-                                          context,
-                                          listen: false)
-                                      .friendsModel
-                                      ?.friends[index]
-                                      .userName,
-                                  id: Provider.of<Friendship_provider>(context,
-                                          listen: false)
-                                      .friendsModel
-                                      ?.friends[index]
-                                      .id),
+                                  name: friendship_provider
+                                      .friendsModel?.friends[index].userName,
+                                  id: friendship_provider
+                                      .friendsModel?.friends[index].id),
                             ));
                       }
                     },
@@ -95,7 +78,7 @@ class _Home_front_bodyState extends State<Home_front_body> {
                       title: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${Provider.of<Friendship_provider>(context, listen: false).friendsModel?.friends[index].name}",
+                          "${friendship_provider.friendsModel?.friends[index].name}",
                           style: TextStyle(
                               color: Color_constant.name_color,
                               fontWeight: FontWeight.bold),

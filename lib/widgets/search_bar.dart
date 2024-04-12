@@ -44,7 +44,7 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
             decoration: InputDecoration(
               suffixIcon: Icon(
                 Icons.search,
-                color: Color_constant.secondaryColor,
+                color: Color_constant.name_color,
                 size: 40,
               ),
               filled: true,
