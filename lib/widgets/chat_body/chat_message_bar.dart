@@ -132,10 +132,6 @@ class _MessageBarState extends State<MessageBar> {
           )
         : InkWell(
             onTap: () {
-              // Provider.of<ProviderClass>(context, listen: false).isActive =
-              //     true;
-              // Provider.of<ProviderClass>(context, listen: false)
-              //     .addmessage(message: messageController.text);
               messageController.clear();
             },
             child: Icon(Icons.send),

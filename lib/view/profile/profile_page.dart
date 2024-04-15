@@ -78,7 +78,7 @@ class _Profile_pageState extends State<Profile_page> {
                     ),
                   ),
                 ),
-                child: profile_provider.cover_imageUrl != null
+                child: profile_provider.cover_image_url != null
                     ? Image.network(
                         "${profile_provider.cover_image}",
                         fit: BoxFit.fill,
@@ -156,9 +156,11 @@ class _Profile_pageState extends State<Profile_page> {
                         children: [
                           CircleAvatar(
                             maxRadius: 55,
-                            backgroundImage: profile_provider.imageUrl != null
+                            backgroundImage: profile_provider
+                                        .profile_picture_url !=
+                                    null
                                 ? NetworkImage(
-                                    profile_provider.image!,
+                                    profile_provider.profile_image!,
                                   )
                                 : NetworkImage(
                                     "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
@@ -172,7 +174,6 @@ class _Profile_pageState extends State<Profile_page> {
                                   final XFile? image = await picker.pickImage(
                                       source: ImageSource.gallery);
                                   if (image != null) {
-                                    print('Image path: ${image.path}');
                                     bool success = await file_provider
                                         .upload_profile_picture(
                                             userId: login_provider.user_id,

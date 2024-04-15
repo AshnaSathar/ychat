@@ -73,7 +73,10 @@ class _Registration_pageState extends State<Registration_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: name_controller,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Name",
+                            hintStyle: Text_style_constant.H4_purple),
                       ),
                     ),
                   ),
@@ -97,7 +100,10 @@ class _Registration_pageState extends State<Registration_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: dob_controller,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "DOB",
+                            hintStyle: Text_style_constant.H4_purple),
                       ),
                     ),
                   ),
@@ -121,7 +127,10 @@ class _Registration_pageState extends State<Registration_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: user_name_controller,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: InputDecoration(
+                            hintStyle: Text_style_constant.H4_purple,
+                            hintText: "User Name",
+                            border: InputBorder.none),
                       ),
                     ),
                   ),
@@ -145,7 +154,10 @@ class _Registration_pageState extends State<Registration_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: email_controller,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: InputDecoration(
+                            hintText: "Email",
+                            hintStyle: Text_style_constant.H4_purple,
+                            border: InputBorder.none),
                       ),
                     ),
                   ),
@@ -169,7 +181,10 @@ class _Registration_pageState extends State<Registration_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: password_controller,
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: InputDecoration(
+                            hintText: "Password",
+                            hintStyle: Text_style_constant.H4_purple,
+                            border: InputBorder.none),
                       ),
                     ),
                   ),

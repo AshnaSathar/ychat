@@ -53,6 +53,7 @@ class Friendship_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         friendsModel = FriendListModel.fromJson(jsonData);
+        print("---------------${response.body}");
         notifyListeners();
         return true;
       } else {
@@ -117,6 +118,30 @@ class Friendship_provider extends ChangeNotifier {
 
   Future un_block_user(
       {required user_id, required friend_id, required token}) async {
+    try {
+      final url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/unblock");
+      final response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          },
+          body: jsonEncode({'blocked_user_id': friend_id}));
+
+      if (response.statusCode == 200) {
+        notifyListeners();
+        return true;
+      } else {
+        notifyListeners();
+        return false;
+      }
+    } catch (error) {
+      print("Error blocking user: $error");
+      return false;
+    }
+  }
+
+  Future report_user(
+      {required user_id, required token, required friend_id}) async {
     try {
       final url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/unblock");
       final response = await http.post(url,

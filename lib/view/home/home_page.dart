@@ -58,6 +58,13 @@ class _Home_pageState extends State<Home_page> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      Provider.of<Profile_provider>(context, listen: false).get_details(
+          id: Provider.of<Login_provider>(context, listen: false).user_id,
+          reference_id:
+              Provider.of<Login_provider>(context, listen: false).token);
+    });
+
     return Scaffold(
       backgroundColor: Color_constant.secondaryColor,
       body: DefaultTabController(
@@ -165,32 +172,13 @@ class Home_pageAppbar extends StatelessWidget {
                       context: context, data_to_display: "Error! Try again");
                 }
               },
-              child: Container(
-                height: height * 0.15,
-                width: width * 0.15,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: CircleAvatar(
-                    radius:
-                        width * 0.15, // Half of the width to make it a circle
-                    // backgroundImage:
-
-                    //  NetworkImage(
-                    //     Provider.of<Profile_provider>(context, listen: false)
-                    //         .image),
-                    child: profile_provider.image != null
-                        ? Container(
-                            decoration: BoxDecoration(shape: BoxShape.circle),
-                            child: ClipOval(
-                              child: Image.network(
-                                profile_provider.image,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          )
-                        : Image.network(
-                            "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png")),
+              child: CircleAvatar(
+                backgroundImage: profile_provider.profile_picture_url != null
+                    ? NetworkImage(
+                        profile_provider.profile_image!,
+                      )
+                    : NetworkImage(
+                        "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
               ),
             ),
           ),

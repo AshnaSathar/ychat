@@ -24,7 +24,7 @@ class _Splash_pageState extends State<Splash_page> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Lets get started",
+                "Let's get started!",
                 style: Text_style_constant.H2_white,
               )
             ],

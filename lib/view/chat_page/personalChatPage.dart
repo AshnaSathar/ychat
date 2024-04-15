@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
-import 'package:flutter_application_1/widgets/chat_body.dart';
+import 'package:flutter_application_1/widgets/chat_body/chat_body.dart';
 import 'package:flutter_application_1/widgets/chat_body/chat_app_bar.dart';
 import 'package:flutter_application_1/widgets/chat_body/chat_message_bar.dart';
 import 'package:provider/provider.dart';

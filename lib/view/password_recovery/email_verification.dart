@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/password_recovery.dart';
@@ -80,9 +81,11 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                 borderRadius: BorderRadius.circular(5))),
                       ),
                     ),
-                    height: 50,
-                    width: 50,
-                    color: Color_constant.secondaryColor,
+                    height: MediaQuery.sizeOf(context).height * .08,
+                    width: MediaQuery.sizeOf(context).width * .15,
+                    decoration: BoxDecoration(
+                        color: Color_constant.secondaryColor,
+                        borderRadius: BorderRadius.circular(5)),
                   ),
                 ),
                 Padding(
@@ -109,14 +112,19 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor),
                               borderRadius: BorderRadius.circular(5))),
                     ),
-                    height: 50,
-                    width: 50,
-                    color: Color_constant.secondaryColor,
+                    height: MediaQuery.sizeOf(context).height * .08,
+                    width: MediaQuery.sizeOf(context).width * .15,
+                    decoration: BoxDecoration(
+                        color: Color_constant.secondaryColor,
+                        borderRadius: BorderRadius.circular(5)),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    decoration: BoxDecoration(
+                        color: Color_constant.secondaryColor,
+                        borderRadius: BorderRadius.circular(5)),
                     child: TextField(
                       controller: c3,
                       onChanged: (value) {
@@ -138,9 +146,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor),
                               borderRadius: BorderRadius.circular(5))),
                     ),
-                    height: 50,
-                    width: 50,
-                    color: Color_constant.secondaryColor,
+                    height: MediaQuery.sizeOf(context).height * .08,
+                    width: MediaQuery.sizeOf(context).width * .15,
                   ),
                 ),
                 Padding(
@@ -165,9 +172,11 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor),
                               borderRadius: BorderRadius.circular(5))),
                     ),
-                    height: 50,
-                    width: 50,
-                    color: Color_constant.secondaryColor,
+                    height: MediaQuery.sizeOf(context).height * .08,
+                    width: MediaQuery.sizeOf(context).width * .15,
+                    decoration: BoxDecoration(
+                        color: Color_constant.secondaryColor,
+                        borderRadius: BorderRadius.circular(5)),
                   ),
                 )
               ],
@@ -194,41 +203,41 @@ class _Email_verification_pageState extends State<Email_verification_page> {
               style: Text_style_constant.H4_white,
             ),
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 100),
-            child: InkWell(
-                onTap: () async {
-                  if (c1.text.isNotEmpty &&
-                      c2.text.isNotEmpty &&
-                      c3.text.isNotEmpty &&
-                      c4.text.isNotEmpty) {
-                    var otp = c1.text + c2.text + c3.text + c4.text;
+          InkWell(
+              onTap: () async {
+                if (c1.text.isNotEmpty &&
+                    c2.text.isNotEmpty &&
+                    c3.text.isNotEmpty &&
+                    c4.text.isNotEmpty) {
+                  var otp = c1.text + c2.text + c3.text + c4.text;
 
-                    if (otp.length == 4) {
-                      bool success = await Provider.of<Register_provider>(
-                              context,
-                              listen: false)
-                          .verify_otp_register(otp: otp);
-                      if (success) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Create_password_page(),
-                            ));
-                      } else {
-                        show_bottom_sheet(
-                            context: context,
-                            data_to_display: "Try again later !failed");
-                      }
+                  if (otp.length == 4) {
+                    bool success = await Provider.of<Register_provider>(context,
+                            listen: false)
+                        .verify_otp_register(otp: otp);
+                    if (success) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Create_password_page(
+                              email_id: email_provider.email_controller.text,
+                            ),
+                          ));
                     } else {
                       show_bottom_sheet(
-                          context: context, data_to_display: "Invalid otp");
+                          context: context,
+                          data_to_display: "Try again later !failed");
                     }
+                  } else {
+                    show_bottom_sheet(
+                        context: context, data_to_display: "Invalid otp");
                   }
-                },
-                child: Button(text: "verify", context: context)),
-          )
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: Button(text: "verify", context: context),
+              ))
         ],
       ),
     );

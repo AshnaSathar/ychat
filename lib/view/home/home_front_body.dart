@@ -51,8 +51,7 @@ class _Home_front_bodyState extends State<Home_front_body> {
                   image =
                       "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
                 }
-                print(
-                    "image is ${friendship_provider.friendsModel?.friends[index].profilePicture}");
+
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
@@ -78,7 +77,7 @@ class _Home_front_bodyState extends State<Home_front_body> {
                       title: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "${friendship_provider.friendsModel?.friends[index].name}",
+                          "${friendship_provider.friendsModel?.friends[index].userName}",
                           style: TextStyle(
                               color: Color_constant.name_color,
                               fontWeight: FontWeight.bold),

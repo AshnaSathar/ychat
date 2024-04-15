@@ -8,15 +8,9 @@ class AppbarContainer extends StatelessWidget {
   final String title;
   const AppbarContainer({Key? key, required this.title}) : super(key: key);
   Widget build(BuildContext context) {
-    var image;
-    var profile_picture =
-        Provider.of<Profile_provider>(context, listen: false).imageUrl!;
-    if (profile_picture != null) {
-      image = "http://localhost:8000$profile_picture";
-    } else {
-      image =
-          "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
-    }
+    var profile_provider =
+        Provider.of<Profile_provider>(context, listen: false);
+
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Container(
@@ -52,13 +46,14 @@ class AppbarContainer extends StatelessWidget {
                       builder: (context) => Friend_profile_page(),
                     ));
               },
-              child: Container(
-                height: height * 0.06,
-                width: width * 0.1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network("$image"),
-                ),
+              child: CircleAvatar(
+                // maxRadius: 25,
+                backgroundImage: profile_provider.profile_picture_url != null
+                    ? NetworkImage(
+                        profile_provider.profile_image!,
+                      )
+                    : NetworkImage(
+                        "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),
               ),
             ),
           ),

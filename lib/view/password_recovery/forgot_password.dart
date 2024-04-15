@@ -26,20 +26,25 @@ class Forgot_password extends StatelessWidget {
                 child: circle_avatar(
                     content: "assets/lock.png", context: context)),
           ),
-          Center(
-            child: Text(
-              "Please Enter Your Email Address",
-              style: Text_style_constant.H2_white,
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 30, left: 8, right: 8, bottom: 5),
+            child: Center(
+              child: Text(
+                "Please Enter Your Email Address",
+                style: Text_style_constant.H3_white,
+              ),
             ),
           ),
           Center(
             child: Text(
-              "To Receive A verification Code",
-              style: Text_style_constant.H2_white,
+              "To Receive A verification Code.",
+              style: Text_style_constant.H3_white,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.only(top: 30, right: 8, left: 8, bottom: 8),
             child: Row(
               children: [
                 Text(
@@ -50,12 +55,11 @@ class Forgot_password extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
             child: Email_text_field(context: context),
           ),
-          Spacer(),
           Padding(
-              padding: const EdgeInsets.only(bottom: 100),
+              padding: const EdgeInsets.only(top: 50),
               child: InkWell(
                   onTap: () async {
                     bool success =

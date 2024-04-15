@@ -21,7 +21,7 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
     TextEditingController search_controller = TextEditingController();
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color_constant.secondaryColor,
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(

@@ -10,9 +10,11 @@ class Profile_provider extends ChangeNotifier {
   var emailId;
   var gender;
   var dob;
-  String? imageUrl;
-  var image;
-  String? cover_imageUrl;
+  var bio;
+  String? cover_image_url;
+  String? profile_picture_url;
+
+  var profile_image;
   var cover_image;
 
   Future get_details({required id, required reference_id}) async {
@@ -28,25 +30,30 @@ class Profile_provider extends ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
+        print(response.body);
         final parseResponse = jsonDecode(response.body);
         var userData = parseResponse['user'];
         user_id = userData['id'];
         userName = userData['user_name'];
         token = userData['reference_id'];
         emailId = userData['email'];
-        imageUrl = userData['profile_picture_url'];
         gender = userData['gender'];
         dob = userData['dob'];
-        cover_imageUrl = userData['cover_image'];
-        cover_image =
-            "http://127.0.0.1:8000/storage/cover_images/$cover_imageUrl";
+        bio = userData['bio'];
+        cover_image_url = parseResponse['cover_image_url'];
+        profile_picture_url = parseResponse['profile_picture_url'];
+
+        // file_content = userData['file_contents'];
+        // print("file contents is $file_content");
+        print("profile picture is $profile_picture_url");
         print("Token generated is $token");
         print("User ID is $user_id and username is $userName");
-        print("Image URL is $imageUrl");
-        print("cover imageUrl is $cover_imageUrl");
-        print("cover image is $cover_image");
-        print("http://127.0.0.1:8000$imageUrl");
-        image = "http://127.0.0.1:8000$imageUrl";
+
+        print("cover image is $cover_image_url");
+        profile_image = "http://localhost:8000$profile_picture_url";
+        cover_image = "http://localhost:8000$cover_image_url";
+        print("profile picture is $profile_image");
+        print("cover image is $cover_image ");
         notifyListeners();
         return true;
       } else {

@@ -80,8 +80,15 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                           ),
                           child: CircleAvatar(
                             radius: 65,
-                            backgroundImage: NetworkImage(
-                                "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
+                            backgroundImage: (profile_provider
+                                        .profile_picture_url !=
+                                    null)
+                                ? NetworkImage(Provider.of<Profile_provider>(
+                                        context,
+                                        listen: false)
+                                    .profile_image)
+                                : NetworkImage(
+                                    "https://i.pinimg.com/736x/c0/27/be/c027bec07c2dc08b9df60921dfd539bd.jpg"),
                           ),
                         ),
                       ),

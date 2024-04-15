@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/password_provider.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
+import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/circle_avatar.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
+import 'package:provider/provider.dart';
 
 class Create_password_page extends StatelessWidget {
-  const Create_password_page({super.key});
+  final email_id;
+  const Create_password_page({super.key, required this.email_id});
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +35,13 @@ class Create_password_page extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "Your New Password Must Be Different",
-              style: Text_style_constant.H4_white,
+              style: Text_style_constant.H3_white,
             ),
           ),
           Center(
               child: Text(
             " From Previously Used Password",
-            style: Text_style_constant.H4_white,
+            style: Text_style_constant.H3_white,
           )),
           Row(
             children: [
@@ -72,14 +76,40 @@ class Create_password_page extends StatelessWidget {
                 context: context, controller: confirm_password_controller),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 40),
+            padding: const EdgeInsets.only(top: 20),
             child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home_page(),
-                      ));
+                onTap: () async {
+                  if (password_controller.text ==
+                      confirm_password_controller.text) {
+                    bool get_details_success =
+                        await Provider.of<Passsword_provider>(context,
+                                listen: false)
+                            .get_user_details(email_id: this.email_id);
+                    if (get_details_success) {
+                      bool success = await Provider.of<Passsword_provider>(
+                              context,
+                              listen: false)
+                          .forget_password(
+                              password: password_controller.text,
+                              password_confirmation:
+                                  confirm_password_controller.text);
+                      if (success) {
+                        print("true");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Home_page(),
+                            ));
+                      } else {
+                        show_bottom_sheet(
+                            context: context, data_to_display: "try again");
+                      }
+                    }
+                  } else {
+                    show_bottom_sheet(
+                        context: context,
+                        data_to_display: "Both fields must be same");
+                  }
                 },
                 child: Button(text: "Save", context: context)),
           )
