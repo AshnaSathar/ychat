@@ -1,14 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
+import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
+import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/profile/profile_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Home_page extends StatefulWidget {
@@ -58,48 +63,45 @@ class _Home_pageState extends State<Home_page> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      Provider.of<Profile_provider>(context, listen: false).get_details(
-          id: Provider.of<Login_provider>(context, listen: false).user_id,
-          reference_id:
-              Provider.of<Login_provider>(context, listen: false).token);
-    });
+    Provider.of<Rooms_provider>(context, listen: false).fetch_rooms_data(
+        token: Provider.of<Login_provider>(context, listen: false).token);
+    // setState(() {
+    Provider.of<Profile_provider>(context, listen: false).get_details(
+        id: Provider.of<Login_provider>(context, listen: false).user_id,
+        reference_id:
+            Provider.of<Login_provider>(context, listen: false).token);
+    // });
 
     return Scaffold(
       backgroundColor: Color_constant.secondaryColor,
       body: DefaultTabController(
-        length: 2,
+        length: 4,
         child: Column(
           children: [
             Home_pageAppbar(),
             TabBar(
               tabs: [
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        size: 15,
-                        color: Colors.green,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Tab(
-                        text: ' Chats',
-                      ),
-                    ],
+                Tab(
+                  icon: Icon(
+                    Icons.group,
+                    size: 16,
                   ),
+                  child: Text("Chats", style: Text_style_constant.tab_style),
                 ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Tab(text: 'Rooms'),
-                    ],
-                  ),
+                Tab(
+                  icon: Icon(Icons.groups_3_sharp),
+                  child: Text("Rooms", style: Text_style_constant.tab_style),
                 ),
+                Tab(
+                  icon: Icon(Icons.chat),
+                  // text: 'Active chats',
+                  child:
+                      Text("Acive chats", style: Text_style_constant.tab_style),
+                ),
+                Tab(
+                    icon: Icon(Icons.favorite),
+                    child: Text("Favorites",
+                        style: Text_style_constant.tab_style)),
               ],
             ),
             Expanded(
@@ -112,6 +114,10 @@ class _Home_pageState extends State<Home_page> {
 
                       // Content of Tab 2
 
+                      Home_room_body(),
+                      // Content of Tab 3
+                      Home_room_body(),
+                      // Content of Tab 4
                       Home_room_body()
                     ],
                   );

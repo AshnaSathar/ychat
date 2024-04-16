@@ -24,8 +24,7 @@ class ChatMessage {
 }
 
 class MessageBar extends StatefulWidget {
-  final friend_id;
-  const MessageBar({Key? key, required this.friend_id});
+  const MessageBar({Key? key});
 
   @override
   State<MessageBar> createState() => _MessageBarState();
@@ -34,33 +33,47 @@ class MessageBar extends StatefulWidget {
 int? maxLines = 1;
 
 class _MessageBarState extends State<MessageBar> {
-  List<ChatMessage> sentMessages = [];
-
   bool _emojiShowing = false;
-  TextEditingController messageController = TextEditingController();
-
   late IO.Socket socket;
+  TextEditingController messageController = TextEditingController();
+  List<ChatMessage> messages = [];
   @override
   void initState() {
     super.initState();
-    // Initialize socket and set up event listener
+    getData();
+    messageController = TextEditingController();
+  }
+
+  getData() {
     socket = IO.io("http://localhost:3000/", <String, dynamic>{
       'transports': ['websocket'],
-      'autoConnect': true,
+      'autoConnect': true
     });
-    socket.on('message_sent', (data) {
-      // Add message to sentMessages when acknowledgment is received
-      sentMessages.add(ChatMessage(
-        status: "sent",
-        timestamp: DateTime.now(),
-        message: messageController.text,
-        receiverId: widget.friend_id,
-        senderId: Provider.of<Login_provider>(context, listen: false).user_id,
-      ));
-      // Clear message input field
-      messageController.clear();
-      // Update UI
-      setState(() {});
+    socket.onConnect((_) {
+      socket.emit('connection');
+    });
+    socket.emit('storeSocket',
+        {'uid': Provider.of<Login_provider>(context, listen: false).user_id});
+
+    socket.on('messages', (data) {
+      print('Received message data: $data');
+      setState(() {
+        String rid = data['rid'];
+        var msg = data['msg'];
+        var sid = data['sid'];
+
+        print('Received message: $msg from $sid to $rid');
+
+        ChatMessage chatMessage = ChatMessage(
+          senderId: sid,
+          message: msg,
+          receiverId: rid,
+          timestamp: DateTime.now(),
+          status: 'delivered',
+        );
+
+        messages.add(chatMessage);
+      });
     });
   }
 
@@ -178,31 +191,8 @@ class _MessageBarState extends State<MessageBar> {
           )
         : InkWell(
             onTap: () {
-              var sid =
-                  Provider.of<Login_provider>(context, listen: false).user_id;
-              var rid = widget.friend_id;
-              // print("---------------");
-              // print("sid is $sid");
-              // print("rid is ${widget.friend_id}");
-              final message = messageController.text.trim();
-              if (message.isNotEmpty) {
-                socket = IO.io("http://localhost:3000/", <String, dynamic>{
-                  'transports': ['websocket'],
-                  'autoConnect': true
-                });
-                socket.emit('message',
-                    {'sid': sid, 'msg': messageController.text, 'rid': rid});
-                ChatMessage chatMessage = ChatMessage(
-                  senderId: sid.toString(),
-                  message: messageController.text,
-                  receiverId: rid.toString(),
-                  timestamp: DateTime.now(),
-                  status: "sent",
-                );
-
-                //  /
-                messageController.clear();
-              }
+              // socket connection to send msg
+              messageController.clear();
             },
             child: Icon(Icons.send),
           );

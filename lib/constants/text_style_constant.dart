@@ -43,6 +43,7 @@ class Text_style_constant {
       fontSize: 32,
       color: Color_constant.secondaryColor,
       fontWeight: FontWeight.w800);
+
   // static TextStyle H2 = TextStyle(
   //     fontFamily: GoogleFonts.inter().fontFamily,
   //     fontSize: 18,
@@ -61,6 +62,10 @@ class Text_style_constant {
     fontWeight: FontWeight.w400,
     color: Color_constant.secondaryColor,
   );
+  static TextStyle tab_style = TextStyle(
+      fontSize: 8,
+      color: Color(0xFF746E6E),
+      fontFamily: GoogleFonts.inder().fontFamily);
   static TextStyle content_style_bold = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
       fontSize: 14,

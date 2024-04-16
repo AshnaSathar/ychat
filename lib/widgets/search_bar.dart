@@ -4,7 +4,7 @@ import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
-import 'package:flutter_application_1/view/friend_profile.dart';
+import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
@@ -45,10 +45,10 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
               suffixIcon: Icon(
                 Icons.search,
                 color: Color_constant.name_color,
-                size: 40,
+                size: 20,
               ),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: Color_constant.secondaryColor,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
               border: OutlineInputBorder(
@@ -72,8 +72,8 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                       return ListTile(
                         trailing: IconButton(
                           onPressed: () async {
-                            print("user.id is");
-                            print(user.id);
+                            // print("user.id is");
+                            // print(user.id);
                             bool success =
                                 await Provider.of<Friendship_provider>(context,
                                         listen: false)

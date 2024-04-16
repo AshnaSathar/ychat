@@ -82,7 +82,7 @@ class Forgot_password extends StatelessWidget {
                             ),
                           ));
                     } else {
-                      print("something happens");
+                      // print("something happens");
                     }
                   },
                   child: Button(text: "Send", context: context))),

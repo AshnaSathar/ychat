@@ -22,7 +22,9 @@ class _Room_chat_pageState extends State<Room_chat_page> {
           bottom: 0,
           left: 0,
           right: 0,
-          child: MessageBar(),
+          child: MessageBar(
+            friend_id: "",
+          ),
         ),
       ]),
     );

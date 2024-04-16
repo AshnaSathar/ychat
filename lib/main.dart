@@ -5,11 +5,10 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/password_recovery.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/register_provider.dart';
+import 'package:flutter_application_1/controller/rooms_provider.dart';
+import 'package:flutter_application_1/controller/update_password.dart';
 import 'package:flutter_application_1/controller/users.dart';
-import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
-import 'package:flutter_application_1/view/password_recovery/create_password_page.dart';
-import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +50,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => File_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Update_password_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Rooms_provider(),
         ),
       ],
       child: MaterialApp(

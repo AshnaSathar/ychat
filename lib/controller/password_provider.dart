@@ -15,10 +15,10 @@ class Passsword_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final parsed_response = jsonDecode(responseBody);
         user_id = parsed_response['user_id'];
-        print("true..");
+        // print("true..");
       } else {
-        print(responseBody);
-        print("false");
+        // print(responseBody);
+        // print("false");
       }
     } catch (error) {
       print("Error is $error");
@@ -36,12 +36,12 @@ class Passsword_provider extends ChangeNotifier {
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
       if (response.statusCode == 200) {
-        print("true..");
-        print(responseBody);
+        // print("true..");
+        // print(responseBody);
         return true;
       } else {
-        print(responseBody);
-        print("false");
+        // print(responseBody);
+        // print("false");
         return false;
       }
     } catch (error) {

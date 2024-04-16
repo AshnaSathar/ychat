@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
-import 'package:flutter_application_1/view/friend_profile.dart';
+import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
 import 'package:provider/provider.dart';
 
 class App_bar_room extends StatelessWidget {

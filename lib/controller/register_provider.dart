@@ -29,13 +29,13 @@ class Register_provider extends ChangeNotifier {
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
 
-      print('Response status: ${response.statusCode}');
-      print('Response body: $responseBody');
+      // print('Response status: ${response.statusCode}');
+      // print('Response body: $responseBody');
 
       if (response.statusCode == 200) {
         final parsedResponse = jsonDecode(responseBody);
         referenceId = parsedResponse['reference_id'];
-        print("User reference id is $referenceId");
+        // print("User reference id is $referenceId");
 
         // Save cookies
         final cookies = response.headers['set-cookie'];
@@ -139,11 +139,11 @@ class Register_provider extends ChangeNotifier {
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
       if (response.statusCode == 200) {
-        print("true");
+        // print("true");
         return true;
       } else {
-        print("false");
-        print("responseBody is $responseBody");
+        // print("false");
+        // print("responseBody is $responseBody");
         return false;
       }
     } catch (error) {

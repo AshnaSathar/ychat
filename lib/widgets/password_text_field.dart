@@ -45,10 +45,10 @@ class PasswordTextField extends StatelessWidget {
             suffixIcon: InkWell(
               onTap: () {
                 if (passwordProvider != null) {
-                  print('Password provider is not null');
+                  // print('Password provider is not null');
                   passwordProvider.toggleVisibility(controller);
                 } else {
-                  print('Password provider is null');
+                  // print('Password provider is null');
                 }
               },
               child: Icon(

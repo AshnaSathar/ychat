@@ -11,9 +11,9 @@ class Password_recovery_provider extends ChangeNotifier {
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({'email': email}));
-      print(response.statusCode);
+      // print(response.statusCode);
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         final parse_response = jsonDecode(response.body);
         reference_id = parse_response['reference_id'];
 
@@ -21,7 +21,7 @@ class Password_recovery_provider extends ChangeNotifier {
         return true;
       } else {
         print(response.statusCode);
-        print(response.body);
+        // print(response.body);
         notifyListeners();
         return false;
       }
@@ -37,7 +37,7 @@ class Password_recovery_provider extends ChangeNotifier {
         body: ({"otp": otp, "reference_id": user_reference_id}));
     print(response.statusCode);
     if (response.statusCode == 200) {
-      print(response.body);
+      // print(response.body);
       notifyListeners();
       return true;
     } else {

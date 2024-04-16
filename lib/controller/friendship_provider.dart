@@ -13,24 +13,24 @@ class Friendship_provider extends ChangeNotifier {
   Future add_friend(
       {required user_id, required token, required friend_uid}) async {
     try {
-      print("user_id is $user_id");
-      print("friend_uid is $friend_uid");
-      print("token received is $token");
+      // print("user_id is $user_id");
+      // print("friend_uid is $friend_uid");
+      // print("token received is $token");
       var url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/friends");
       var request = await http.MultipartRequest('POST', url);
       request.headers['Authorization'] = "Bearer $token";
       request.fields['friend_id'] = friend_uid.toString();
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
-      print(response.statusCode);
-      print('Response body: ${responseBody}');
+      // print(response.statusCode);
+      // print('Response body: ${responseBody}');
       if (response.statusCode == 200) {
-        print(responseBody);
+        // print(responseBody);
         notifyListeners();
         return true;
       } else {
-        print("failed");
-        print(responseBody);
+        // print("failed");
+        // print(responseBody);
         notifyListeners();
         return false;
       }
@@ -53,12 +53,12 @@ class Friendship_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         friendsModel = FriendListModel.fromJson(jsonData);
-        print("---------------${response.body}");
+        // print("---------------${response.body}");
         notifyListeners();
         return true;
       } else {
-        print("Request failed with status: ${response.statusCode}");
-        print(response.body);
+        // print("Request failed with status: ${response.statusCode}");
+        // print(response.body);
         notifyListeners();
         return false;
       }
@@ -87,7 +87,7 @@ class Friendship_provider extends ChangeNotifier {
         return false;
       }
     } catch (error) {
-      print("Error removing friend: $error");
+      // print("Error removing friend: $error");/
       return false;
     }
   }

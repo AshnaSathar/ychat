@@ -7,7 +7,8 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
-import 'package:flutter_application_1/view/profile/friends_list.dart';
+import 'package:flutter_application_1/view/profile/friends_list_page.dart';
+import 'package:flutter_application_1/view/profile/update_password_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:image_picker/image_picker.dart';
@@ -92,10 +93,21 @@ class _Profile_pageState extends State<Profile_page> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor: const Color.fromARGB(255, 239, 187, 248),
-                      radius: 15,
-                      child: Icon(Icons.settings_outlined, color: Colors.black),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Update_password_page(),
+                            ));
+                      },
+                      child: CircleAvatar(
+                        backgroundColor:
+                            const Color.fromARGB(255, 239, 187, 248),
+                        radius: 15,
+                        child:
+                            Icon(Icons.settings_outlined, color: Colors.black),
+                      ),
                     ),
                     Spacer(),
                     InkWell(
@@ -105,7 +117,7 @@ class _Profile_pageState extends State<Profile_page> {
                           final XFile? image = await picker.pickImage(
                               source: ImageSource.gallery);
                           if (image != null) {
-                            print('Image path: ${image.path}');
+                            // print('Image path: ${image.path}');
                             bool success = await Provider.of<File_provider>(
                                     context,
                                     listen: false)
@@ -191,7 +203,7 @@ class _Profile_pageState extends State<Profile_page> {
                                           data_to_display: "Try again later");
                                     }
                                   } else {
-                                    print('No image selected.');
+                                    // print('No image selected.');
                                   }
                                 },
                                 child: CircleAvatar(

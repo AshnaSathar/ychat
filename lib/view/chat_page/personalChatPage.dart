@@ -42,7 +42,10 @@ class _Chat_PageState extends State<Chat_Page> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: MessageBar(),
+            child: MessageBar(
+              friend_id:
+                  Provider.of<Profile_provider>(context, listen: false).user_id,
+            ),
           ),
         ],
       ),

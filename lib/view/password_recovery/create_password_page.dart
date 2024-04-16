@@ -94,7 +94,7 @@ class Create_password_page extends StatelessWidget {
                               password_confirmation:
                                   confirm_password_controller.text);
                       if (success) {
-                        print("true");
+                        // print("true");
                         Navigator.push(
                             context,
                             MaterialPageRoute(

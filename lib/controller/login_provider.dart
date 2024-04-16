@@ -14,9 +14,9 @@ class Login_provider extends ChangeNotifier {
   late IO.Socket socket;
   Future post_db({required user_name, required password}) async {
     try {
-      print("$user_name");
-      print("$password");
-      print("invoked login provider- post_db");
+      // print("$user_name");
+      // print("$password");
+      // print("invoked login provider- post_db");
       final url = Uri.parse('http://127.0.0.1:8000/api/login');
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
@@ -27,6 +27,7 @@ class Login_provider extends ChangeNotifier {
         user_id = parse_response['user_id'];
         userName = parse_response['user_name'];
         token = parse_response['token'];
+        print("token generated : $token");
         is_success = true;
         socket = IO.io("http://localhost:3000/", <String, dynamic>{
           'transports': ['websocket'],
@@ -41,7 +42,7 @@ class Login_provider extends ChangeNotifier {
         return true;
       } else {
         is_success = false;
-        print("Failed to post data");
+        // print("Failed to post data");
         notifyListeners();
         return false;
       }

@@ -27,10 +27,10 @@ class File_provider extends ChangeNotifier {
       final response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        print('Profile picture uploaded successfully');
+        // print('Profile picture uploaded successfully');
         return true;
       } else {
-        print('Failed to upload profile picture: ${response.statusCode}');
+        // print('Failed to upload profile picture: ${response.statusCode}');
         return false;
       }
     } catch (e) {
@@ -43,7 +43,7 @@ class File_provider extends ChangeNotifier {
     required String token,
     required String imagePath,
   }) async {
-    print("upload_cover_picture");
+    // print("upload_cover_picture");
     final url =
         Uri.parse('http://127.0.0.1:8000/api/users/$userId/update-cover-image');
     var request = http.MultipartRequest('POST', url);
@@ -63,10 +63,10 @@ class File_provider extends ChangeNotifier {
       final response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         return true;
       } else {
-        print(response.body);
+        // print(response.body);
         print('Failed to upload cover picture: ${response.statusCode}');
         return false;
       }

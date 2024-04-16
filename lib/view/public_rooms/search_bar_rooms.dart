@@ -31,7 +31,7 @@ class _Search_bar_roomsState extends State<Search_bar_rooms> {
               suffixIconColor: Color_constant.name_color,
               suffixIcon: Icon(Icons.search),
               border: InputBorder.none,
-              hintText: "Type here",
+              // hintText: "Type here",
               hintStyle: Text_style_constant.normal_text),
         ),
       ),

@@ -35,7 +35,7 @@ class _Home_front_bodyState extends State<Home_front_body> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(right: 8.0, left: 8.0, bottom: 8.0),
             child: SearchbarCustom(),
           ),
           Expanded(

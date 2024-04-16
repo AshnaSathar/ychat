@@ -30,7 +30,7 @@ class Profile_provider extends ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         final parseResponse = jsonDecode(response.body);
         var userData = parseResponse['user'];
         user_id = userData['id'];
@@ -45,15 +45,15 @@ class Profile_provider extends ChangeNotifier {
 
         // file_content = userData['file_contents'];
         // print("file contents is $file_content");
-        print("profile picture is $profile_picture_url");
-        print("Token generated is $token");
-        print("User ID is $user_id and username is $userName");
+        // print("profile picture is $profile_picture_url");
+        // print("Token generated is $token");
+        // print("User ID is $user_id and username is $userName");
 
-        print("cover image is $cover_image_url");
+        // print("cover image is $cover_image_url");
         profile_image = "http://localhost:8000$profile_picture_url";
         cover_image = "http://localhost:8000$cover_image_url";
-        print("profile picture is $profile_image");
-        print("cover image is $cover_image ");
+        // print("profile picture is $profile_image");
+        // print("cover image is $cover_image ");
         notifyListeners();
         return true;
       } else {
@@ -90,7 +90,7 @@ class Profile_provider extends ChangeNotifier {
         print("Success");
         return true;
       } else {
-        print(response.body);
+        // print(response.body);
         print("Failed");
         return false;
       }
@@ -125,7 +125,7 @@ class Profile_provider extends ChangeNotifier {
         print("success");
         return true;
       } else {
-        print(response.body);
+        // print(response.body);
         print("failed");
         return false;
       }

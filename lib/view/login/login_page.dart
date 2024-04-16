@@ -4,7 +4,6 @@ import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/password_recovery/forgot_password.dart';
-import 'package:flutter_application_1/view/registration/registration_page.dart';
 import 'package:flutter_application_1/view/registration/splash_screen.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
@@ -25,7 +24,7 @@ class _Login_pageState extends State<Login_page> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = context.watch<Login_provider>();
-
+    ;
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       body: Column(
