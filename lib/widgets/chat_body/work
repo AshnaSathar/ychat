@@ -1,200 +1,200 @@
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
-import 'package:flutter_application_1/controller/login_provider.dart';
-import 'package:flutter_application_1/widgets/chat_body/chat_bottom_sheet.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+// import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
+// import 'package:flutter_application_1/controller/login_provider.dart';
+// import 'package:flutter_application_1/widgets/chat_body/chat_bottom_sheet.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:provider/provider.dart';
+// import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-class ChatMessage {
-  final String senderId;
-  final String message;
-  final String receiverId;
-  final DateTime timestamp;
-  final String status;
+// class ChatMessage {
+//   final String senderId;
+//   final String message;
+//   final String receiverId;
+//   final DateTime timestamp;
+//   final String status;
 
-  ChatMessage({
-    required this.senderId,
-    required this.message,
-    required this.receiverId,
-    required this.timestamp,
-    required this.status,
-  });
-}
+//   ChatMessage({
+//     required this.senderId,
+//     required this.message,
+//     required this.receiverId,
+//     required this.timestamp,
+//     required this.status,
+//   });
+// }
 
-class MessageBar extends StatefulWidget {
-  const MessageBar({Key? key});
+// class MessageBar extends StatefulWidget {
+//   const MessageBar({Key? key});
 
-  @override
-  State<MessageBar> createState() => _MessageBarState();
-}
+//   @override
+//   State<MessageBar> createState() => _MessageBarState();
+// }
 
-int? maxLines = 1;
+// int? maxLines = 1;
 
-class _MessageBarState extends State<MessageBar> {
-  bool _emojiShowing = false;
-  late IO.Socket socket;
-  TextEditingController messageController = TextEditingController();
-  List<ChatMessage> messages = [];
-  @override
-  void initState() {
-    super.initState();
-    getData();
-    messageController = TextEditingController();
-  }
+// class _MessageBarState extends State<MessageBar> {
+//   bool _emojiShowing = false;
+//   late IO.Socket socket;
+//   TextEditingController messageController = TextEditingController();
+//   List<ChatMessage> messages = [];
+//   @override
+//   void initState() {
+//     super.initState();
+//     getData();
+//     messageController = TextEditingController();
+//   }
 
-  getData() {
-    socket = IO.io("http://localhost:3000/", <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true
-    });
-    socket.onConnect((_) {
-      socket.emit('connection');
-    });
-    socket.emit('storeSocket',
-        {'uid': Provider.of<Login_provider>(context, listen: false).user_id});
+//   getData() {
+//     socket = IO.io("http://localhost:3000/", <String, dynamic>{
+//       'transports': ['websocket'],
+//       'autoConnect': true
+//     });
+//     socket.onConnect((_) {
+//       socket.emit('connection');
+//     });
+//     socket.emit('storeSocket',
+//         {'uid': Provider.of<Login_provider>(context, listen: false).user_id});
 
-    socket.on('messages', (data) {
-      print('Received message data: $data');
-      setState(() {
-        String rid = data['rid'];
-        var msg = data['msg'];
-        var sid = data['sid'];
+//     socket.on('messages', (data) {
+//       print('Received message data: $data');
+//       setState(() {
+//         String rid = data['rid'];
+//         var msg = data['msg'];
+//         var sid = data['sid'];
 
-        print('Received message: $msg from $sid to $rid');
+//         print('Received message: $msg from $sid to $rid');
 
-        ChatMessage chatMessage = ChatMessage(
-          senderId: sid,
-          message: msg,
-          receiverId: rid,
-          timestamp: DateTime.now(),
-          status: 'delivered',
-        );
+//         ChatMessage chatMessage = ChatMessage(
+//           senderId: sid,
+//           message: msg,
+//           receiverId: rid,
+//           timestamp: DateTime.now(),
+//           status: 'delivered',
+//         );
 
-        messages.add(chatMessage);
-      });
-    });
-  }
+//         messages.add(chatMessage);
+//       });
+//     });
+//   }
 
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.emoji_emotions,
-                  color: Colors.amber,
-                ),
-                onPressed: () {
-                  _toggleEmojiPicker();
-                },
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Color_constant.name_color,
-                ),
-                onPressed: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (builder) => bottomsheet(context: context),
-                  );
-                },
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color_constant.textfield_color,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextField(
-                      style: TextStyle(fontSize: 16),
-                      controller: messageController,
-                      minLines: 1,
-                      onChanged: (text) {
-                        setState(() {});
-                        // int lines = '\n'.allMatches(text).length + 1;
-                        // if (lines > 5) {
-                        //   setState(() {
-                        //     maxLines = lines > 5 ? 5 : lines;
-                        //   });
-                        // }
-                      },
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(8.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              buildSendButton()
-            ],
-          ),
-        ),
-        if (_emojiShowing)
-          EmojiPicker(
-            config: Config(
-                emojiTextStyle: GoogleFonts.notoColorEmoji(),
-                categoryViewConfig:
-                    CategoryViewConfig(showBackspaceButton: false),
-                bottomActionBarConfig: BottomActionBarConfig(
-                    buttonIconColor: Colors.black,
-                    buttonColor: Color_constant.secondaryColor,
-                    backgroundColor: Color_constant.secondaryColor,
-                    showBackspaceButton: false),
-                emojiViewConfig: EmojiViewConfig(
-                  columns: 9,
-                ),
-                searchViewConfig: SearchViewConfig(buttonColor: Colors.black)),
-            onEmojiSelected: (category, emoji) {
-              setState(() {
-                messageController.text += emoji.emoji;
-              });
-            },
-          ),
-      ],
-    );
-  }
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Container(
+//           decoration: BoxDecoration(
+//             color: Colors.white,
+//             boxShadow: [
+//               BoxShadow(
+//                 color: Colors.grey.withOpacity(0.5),
+//                 spreadRadius: 2,
+//                 blurRadius: 5,
+//                 offset: Offset(0, 3),
+//               ),
+//             ],
+//           ),
+//           child: Row(
+//             children: [
+//               IconButton(
+//                 icon: Icon(
+//                   Icons.emoji_emotions,
+//                   color: Colors.amber,
+//                 ),
+//                 onPressed: () {
+//                   _toggleEmojiPicker();
+//                 },
+//               ),
+//               IconButton(
+//                 icon: Icon(
+//                   Icons.add,
+//                   color: Color_constant.name_color,
+//                 ),
+//                 onPressed: () {
+//                   showModalBottomSheet(
+//                     backgroundColor: Colors.transparent,
+//                     context: context,
+//                     builder: (builder) => bottomsheet(context: context),
+//                   );
+//                 },
+//               ),
+//               Expanded(
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Container(
+//                     decoration: BoxDecoration(
+//                       color: Color_constant.textfield_color,
+//                       borderRadius: BorderRadius.circular(10),
+//                     ),
+//                     child: TextField(
+//                       style: TextStyle(fontSize: 16),
+//                       controller: messageController,
+//                       minLines: 1,
+//                       onChanged: (text) {
+//                         setState(() {});
+//                         // int lines = '\n'.allMatches(text).length + 1;
+//                         // if (lines > 5) {
+//                         //   setState(() {
+//                         //     maxLines = lines > 5 ? 5 : lines;
+//                         //   });
+//                         // }
+//                       },
+//                       maxLines: 5,
+//                       decoration: InputDecoration(
+//                         border: InputBorder.none,
+//                         contentPadding: EdgeInsets.all(8.0),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//               buildSendButton()
+//             ],
+//           ),
+//         ),
+//         if (_emojiShowing)
+//           EmojiPicker(
+//             config: Config(
+//                 emojiTextStyle: GoogleFonts.notoColorEmoji(),
+//                 categoryViewConfig:
+//                     CategoryViewConfig(showBackspaceButton: false),
+//                 bottomActionBarConfig: BottomActionBarConfig(
+//                     buttonIconColor: Colors.black,
+//                     buttonColor: Color_constant.secondaryColor,
+//                     backgroundColor: Color_constant.secondaryColor,
+//                     showBackspaceButton: false),
+//                 emojiViewConfig: EmojiViewConfig(
+//                   columns: 9,
+//                 ),
+//                 searchViewConfig: SearchViewConfig(buttonColor: Colors.black)),
+//             onEmojiSelected: (category, emoji) {
+//               setState(() {
+//                 messageController.text += emoji.emoji;
+//               });
+//             },
+//           ),
+//       ],
+//     );
+//   }
 
-  void _toggleEmojiPicker() {
-    setState(() {
-      _emojiShowing = !_emojiShowing;
-    });
-  }
+//   void _toggleEmojiPicker() {
+//     setState(() {
+//       _emojiShowing = !_emojiShowing;
+//     });
+//   }
 
-  Widget buildSendButton() {
-    return messageController.text.isEmpty
-        ? InkWell(
-            child: Icon(
-              Icons.mic,
-              color: Color_constant.name_color,
-            ),
-          )
-        : InkWell(
-            onTap: () {
-              // socket connection to send msg
-              messageController.clear();
-            },
-            child: Icon(Icons.send),
-          );
-  }
-}
+//   Widget buildSendButton() {
+//     return messageController.text.isEmpty
+//         ? InkWell(
+//             child: Icon(
+//               Icons.mic,
+//               color: Color_constant.name_color,
+//             ),
+//           )
+//         : InkWell(
+//             onTap: () {
+//               // socket connection to send msg
+//               messageController.clear();
+//             },
+//             child: Icon(Icons.send),
+//           );
+//   }
+// }

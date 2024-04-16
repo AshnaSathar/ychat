@@ -86,7 +86,6 @@ class _Home_front_bodyState extends State<Home_front_body> {
                       trailing: Icon(
                         Icons.circle,
                         size: 10,
-                        color: Colors.green,
                       ),
                       leading: CircleAvatar(
                         radius: 25,

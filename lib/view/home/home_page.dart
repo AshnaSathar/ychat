@@ -9,6 +9,8 @@ import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
+import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
+import 'package:flutter_application_1/view/favourites/favourites_page.dart';
 import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/profile/profile_page.dart';
@@ -116,9 +118,9 @@ class _Home_pageState extends State<Home_page> {
 
                       Home_room_body(),
                       // Content of Tab 3
-                      Home_room_body(),
+                      Active_chat_page(),
                       // Content of Tab 4
-                      Home_room_body()
+                      Favourites_page()
                     ],
                   );
                 },

@@ -37,7 +37,6 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height * .2,
-                    color: Colors.green,
                     width: MediaQuery.of(context).size.width,
                     child: Provider.of<Profile_provider>(context, listen: false)
                                 .cover_image_url !=
