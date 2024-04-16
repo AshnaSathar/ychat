@@ -30,36 +30,41 @@ class _Favourites_pageState extends State<Favourites_page> {
     List<Favorite> favourites =
         Provider.of<Favourites_provider>(context, listen: false).favourites;
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-            child: Search_bar_rooms(),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: favourites.length,
-              itemBuilder: (context, index) {
-                var image;
-                var profile_pic = favourites[index].profilePicture;
-                if (profile_pic != null) {
-                  image = "http://localhost:8000/storage/$profile_pic";
-                } else {
-                  image =
-                      "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
-                }
+      body: Consumer<Favourites_provider>(
+        builder: (context, value, child) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                child: Search_bar_rooms(),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: favourites.length,
+                  itemBuilder: (context, index) {
+                    var image;
+                    var profile_pic = favourites[index].profilePicture;
+                    if (profile_pic != null) {
+                      image = "http://localhost:8000/storage/$profile_pic";
+                    } else {
+                      image =
+                          "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
+                    }
 
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    leading: CircleAvatar(backgroundImage: NetworkImage(image)),
-                    title: Text("${favourites[index].name}"),
-                  ),
-                );
-              },
-            ),
-          )
-        ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading:
+                            CircleAvatar(backgroundImage: NetworkImage(image)),
+                        title: Text("${favourites[index].userName}"),
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }
