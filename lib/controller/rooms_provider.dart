@@ -18,8 +18,8 @@ class Rooms_provider extends ChangeNotifier {
 
         // Extract categories from the RoomsModel
         categories = roomsModel.categories;
-        print(categories.length);
-        print(categories);
+        // print(categories.length);
+        // print(categories);
         notifyListeners();
         return true;
       } else {

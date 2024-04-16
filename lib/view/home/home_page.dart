@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
@@ -15,7 +13,6 @@ import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/profile/profile_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Home_page extends StatefulWidget {
