@@ -25,7 +25,8 @@ Widget Email_text_field({required context}) {
             borderSide: BorderSide(color: Color_constant.secondaryColor)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Color_constant.secondaryColor))),
+            borderSide: BorderSide(
+                color: Color_constant.secondaryColor.withOpacity(.5)))),
   );
 }
 

@@ -41,6 +41,8 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.2
   socket_io_client: ^2.0.3+1
+  flutter_svg: ^0.22.0
+  go_router: ^13.2.4
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -62,6 +64,11 @@ flutter:
     - assets/email.png
     - assets/5932928_3014278.jpg
     - assets/background_Image.jpg
+    - assets/Group.svg
+    - assets/active_chats.svg
+    - assets/fav_chats.svg
+    
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

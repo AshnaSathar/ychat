@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
-import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
 import 'package:provider/provider.dart';
 
 class AppbarContainer extends StatelessWidget {
@@ -40,11 +39,12 @@ class AppbarContainer extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 //
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Friend_profile_page(),
-                    ));
+                Navigator.pushNamed(context, '/friend_profile_page');
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => Friend_profile_page(),
+                //     ));
               },
               child: CircleAvatar(
                 // maxRadius: 25,

@@ -3,6 +3,7 @@ import 'package:flutter_application_1/constants/color_constants/color_constant.d
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
 import 'package:flutter_application_1/view/registration/registration_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Splash_page extends StatefulWidget {
@@ -44,11 +45,12 @@ class _Splash_pageState extends State<Splash_page> {
             ),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Registration_page(),
-                    ));
+                context.go('/registration_page');
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => Registration_page(),
+                //     ));
               },
               child: Container(
                 width: MediaQuery.sizeOf(context).width * .7,
@@ -79,11 +81,12 @@ class _Splash_pageState extends State<Splash_page> {
                   ),
                   InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Login_page(),
-                            ));
+                        context.go('/login_page');
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => Login_page(),
+                        //     ));
                       },
                       child: Text("Sing In"))
                 ],

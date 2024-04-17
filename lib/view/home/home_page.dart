@@ -11,8 +11,9 @@ import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
 import 'package:flutter_application_1/view/favourites/favourites_page.dart';
 import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
-import 'package:flutter_application_1/view/profile/profile_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Home_page extends StatefulWidget {
@@ -92,13 +93,20 @@ class _Home_pageState extends State<Home_page> {
                   child: Text("Rooms", style: Text_style_constant.tab_style),
                 ),
                 Tab(
-                  icon: Icon(Icons.chat),
-                  // text: 'Active chats',
+                  icon: SvgPicture.asset(
+                    "assets/active_chats.svg",
+                    width: MediaQuery.sizeOf(context).width * .05,
+                    height: MediaQuery.sizeOf(context).width * .05,
+                  ),
                   child:
                       Text("Acive chats", style: Text_style_constant.tab_style),
                 ),
                 Tab(
-                    icon: Icon(Icons.favorite),
+                    icon: SvgPicture.asset(
+                      "assets/fav_chats.svg",
+                      height: MediaQuery.sizeOf(context).height * .05,
+                      width: MediaQuery.sizeOf(context).width * .05,
+                    ),
                     child: Text("Favorites",
                         style: Text_style_constant.tab_style)),
               ],
@@ -167,11 +175,13 @@ class Home_pageAppbar extends StatelessWidget {
                     reference_id: login_provider.token,
                     id: login_provider.user_id);
                 if (success == true) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Profile_page(),
-                      ));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => Profile_page(),
+                  //     ));
+                  // Navigator.pushNamed(context, '/profile_page');
+                  context.push('/profile_page');
                 } else {
                   show_bottom_sheet(
                       context: context, data_to_display: "Error! Try again");

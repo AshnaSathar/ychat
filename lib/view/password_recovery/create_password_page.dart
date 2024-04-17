@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/password_provider.dart';
-import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/circle_avatar.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Create_password_page extends StatelessWidget {
@@ -95,11 +95,13 @@ class Create_password_page extends StatelessWidget {
                                   confirm_password_controller.text);
                       if (success) {
                         // print("true");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home_page(),
-                            ));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => Home_page(),
+                        //     ));
+                        // Navigator.pushNamed(context, '/home_page');
+                        context.go('/home_page');
                       } else {
                         show_bottom_sheet(
                             context: context, data_to_display: "try again");

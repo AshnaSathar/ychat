@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:go_router/go_router.dart';
 
 PreferredSizeWidget app_bar(
     {required String title, required BuildContext context}) {
@@ -16,7 +17,7 @@ PreferredSizeWidget app_bar(
         color: Color_constant.secondaryColor,
       ),
       onPressed: () {
-        Navigator.pop(context);
+        context.pop();
       },
     ),
   );

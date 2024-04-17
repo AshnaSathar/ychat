@@ -10,10 +10,14 @@ class Text_style_constant {
       fontWeight: FontWeight.w900);
   static TextStyle H4_white = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
-      fontSize: 12,
+      fontSize: 14,
       color: Color_constant.secondaryColor,
       fontWeight: FontWeight.w400);
-
+  static TextStyle H4_white_100 = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 12,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w100);
   static TextStyle H4_purple = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
       fontSize: 12,

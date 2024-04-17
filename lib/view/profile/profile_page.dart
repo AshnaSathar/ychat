@@ -6,11 +6,11 @@ import 'package:flutter_application_1/controller/image_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
-import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friends_list_page.dart';
 import 'package:flutter_application_1/view/profile/update_password_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -95,11 +95,12 @@ class _Profile_pageState extends State<Profile_page> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Update_password_page(),
-                            ));
+                        context.go('/update_password_page');
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => Update_password_page(),
+                        //     ));
                       },
                       child: CircleAvatar(
                         backgroundColor:
@@ -236,12 +237,13 @@ class _Profile_pageState extends State<Profile_page> {
                     token: login_provider.token,
                   );
                   if (success) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Friends_list_page(),
-                      ),
-                    );
+                    context.go('/friends_list_page');
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => Friends_list_page(),
+                    //   ),
+                    // );
                   }
                 },
                 child: Text(
@@ -255,11 +257,13 @@ class _Profile_pageState extends State<Profile_page> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Edit_profile_page(),
-                      ));
+                  context.go('/edit_profile_page');
+                  // Navigator.pushNamed(context, '/edit_profile_page');
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => Edit_profile_page(),
+                  //     ));
                 },
                 child: Button(text: "Edit Availability", context: context)),
           )

@@ -36,7 +36,8 @@ class PasswordTextField extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Color_constant.secondaryColor),
+              borderSide: BorderSide(
+                  color: Color_constant.secondaryColor.withOpacity(.5)),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
+import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/public_rooms/search_bar_rooms.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Home_room_body extends StatelessWidget {
@@ -69,33 +71,28 @@ class Home_room_body extends StatelessWidget {
                                       itemBuilder: (context, chatIndex) {
                                         final chatRoom =
                                             category.chatRooms[chatIndex];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                border: Border.all(
-                                                  color: Colors.black
-                                                      .withOpacity(.2),
-                                                )),
-                                            child: ListTile(
-                                              iconColor: Color_constant
-                                                  .primaryColor
-                                                  .withOpacity(.5),
-                                              trailing: Icon(
-                                                Icons.send,
-                                                size: 14,
+                                        return ListTile(
+                                          iconColor: Color_constant.primaryColor
+                                              .withOpacity(.5),
+                                          trailing: InkWell(
+                                            onTap: () {
+                                              context.go('/room_chat_page');
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //       builder: (context) =>
+                                              //           Room_chat_page(),
+                                              //     ));
+                                            },
+                                            child: Icon(Icons.send,
+                                                size: 20,
                                                 color: Color_constant
-                                                    .primaryColor
-                                                    .withOpacity(.5),
-                                              ),
-                                              title: Text(
-                                                chatRoom.name,
-                                                style: Text_style_constant
-                                                    .normal_text,
-                                              ),
-                                            ),
+                                                    .primaryColor),
+                                          ),
+                                          title: Text(
+                                            chatRoom.name,
+                                            style:
+                                                Text_style_constant.normal_text,
                                           ),
                                         );
                                       },
@@ -106,25 +103,11 @@ class Home_room_body extends StatelessWidget {
                                       itemBuilder: (context, childIndex) {
                                         final subcategory =
                                             category.subcategories[childIndex];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                border: Border.all(
-                                                  color: Colors.black
-                                                      .withOpacity(.2),
-                                                )),
-                                            child: ExpansionTile(
-                                              title: Text(
-                                                subcategory.name,
-                                                style: Text_style_constant
-                                                    .normal_text,
-                                              ),
-                                              children: [],
-                                            ),
-                                          ),
+                                        return ExpansionTile(
+                                          title: Text(subcategory.name,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
+                                          children: [],
                                         );
                                       },
                                     ),

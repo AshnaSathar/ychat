@@ -4,7 +4,7 @@ import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
-import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Friends_list_page extends StatefulWidget {
@@ -81,11 +81,13 @@ class _Friends_list_pageState extends State<Friends_list_page> {
                                       listen: false)
                                   .token);
                       if (success) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Friend_profile_page(),
-                            ));
+                        // Navigator.pushNamed(context, '/friend_profile_page');
+                        context.go('/friend_profile_page');
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => Friend_profile_page(),
+                        //     ));
                       }
                     },
                     child: Text(

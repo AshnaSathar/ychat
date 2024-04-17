@@ -62,6 +62,7 @@ class _Home_front_bodyState extends State<Home_front_body> {
                               .friendsModel?.friends[index].id,
                           reference_id: login_provider.token);
                       if (success) {
+                        // ------------router
                         Navigator.push(
                             context,
                             MaterialPageRoute(

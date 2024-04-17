@@ -8,6 +8,7 @@ import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Update_password_page extends StatefulWidget {
@@ -112,11 +113,12 @@ class _Update_password_pageState extends State<Update_password_page> {
                           // show_bottom_sheet(
                           //     context: context,
                           //     data_to_display: "Updated successfully");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Password_success_page(),
-                              ));
+                          context.go('/password_success_page');
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => Password_success_page(),
+                          //     ));
                         } else {
                           show_bottom_sheet(
                               context: context,

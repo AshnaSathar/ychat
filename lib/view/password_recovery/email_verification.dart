@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/password_recovery.dart';
@@ -73,7 +72,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                     color: Color_constant.secondaryColor)),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color_constant.secondaryColor)),
+                                    color: Color_constant.secondaryColor
+                                        .withOpacity(.5))),
                             counter: Text(" "),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -105,7 +105,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor)),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color_constant.secondaryColor)),
+                                  color: Color_constant.secondaryColor
+                                      .withOpacity(.5))),
                           counter: Text(" "),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -139,7 +140,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor)),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color_constant.secondaryColor)),
+                                  color: Color_constant.secondaryColor
+                                      .withOpacity(.5))),
                           counter: Text(" "),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -165,7 +167,8 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                                   color: Color_constant.secondaryColor)),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Color_constant.secondaryColor)),
+                                  color: Color_constant.secondaryColor
+                                      .withOpacity(.5))),
                           counter: Text(" "),
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -216,6 +219,7 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                             listen: false)
                         .verify_otp_register(otp: otp);
                     if (success) {
+                      // --------------router
                       Navigator.push(
                           context,
                           MaterialPageRoute(

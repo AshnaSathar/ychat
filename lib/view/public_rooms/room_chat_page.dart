@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/view/public_rooms/app_bar_room.dart';
 import 'package:flutter_application_1/widgets/chat_body/chat_body.dart';
 import 'package:flutter_application_1/widgets/chat_body/chat_message_bar.dart';

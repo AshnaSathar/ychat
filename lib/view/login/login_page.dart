@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
-import 'package:flutter_application_1/view/home/home_page.dart';
-import 'package:flutter_application_1/view/password_recovery/forgot_password.dart';
-import 'package:flutter_application_1/view/registration/splash_screen.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Login_page extends StatefulWidget {
@@ -53,7 +51,7 @@ class _Login_pageState extends State<Login_page> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
-                    color: Color_constant.secondaryColor,
+                    color: Color_constant.secondaryColor.withOpacity(.5),
                   ),
                 ),
                 border: OutlineInputBorder(
@@ -85,11 +83,13 @@ class _Login_pageState extends State<Login_page> {
                   if (success) {
                     usernameController.clear();
                     passwordController.clear();
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home_page(),
-                        ));
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => Home_page(),
+                    //     ));
+                    // Navigator.pushNamed(context, '/home_page');
+                    context.go('/home_page');
                   } else {
                     show_bottom_sheet(
                       context: context,
@@ -117,11 +117,13 @@ class _Login_pageState extends State<Login_page> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Splash_page(),
-                        ));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => Splash_page(),
+                    //     ));
+                    // Navigator.pushNamed(context, '/splash_page');
+                    context.go('/splash_page');
                   },
                   child: Text("SIGN UP"),
                 )
@@ -132,12 +134,14 @@ class _Login_pageState extends State<Login_page> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Forgot_password(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => Forgot_password(),
+                //   ),
+                // );
+                // Navigator.pushNamed(context, '/forget_password');
+                context.go('/forget_password');
               },
               child: Text(
                 "Forgot password?",

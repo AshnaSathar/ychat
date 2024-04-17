@@ -119,9 +119,11 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                                 color: Color_constant.secondaryColor)),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color_constant.secondaryColor)),
+                                color: Color_constant.secondaryColor
+                                    .withOpacity(.5))),
                         border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white))),
+                            borderSide: BorderSide(
+                                color: Color_constant.secondaryColor))),
                   ),
                   SizedBox(
                     height: MediaQuery.sizeOf(context).height * .05,
@@ -142,7 +144,8 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                                 color: Color_constant.secondaryColor)),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color_constant.secondaryColor)),
+                                color: Color_constant.secondaryColor
+                                    .withOpacity(.5))),
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white))),
                   ),
@@ -165,7 +168,8 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                                 color: Color_constant.secondaryColor)),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color_constant.secondaryColor)),
+                                color: Color_constant.secondaryColor
+                                    .withOpacity(.5))),
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white))),
                   ),
@@ -188,9 +192,11 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                                 color: Color_constant.secondaryColor)),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                                color: Color_constant.secondaryColor)),
+                                color: Color_constant.secondaryColor
+                                    .withOpacity(.5))),
                         border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white))),
+                            borderSide: BorderSide(
+                                color: Color_constant.secondaryColor))),
                   ),
                 ],
               ),

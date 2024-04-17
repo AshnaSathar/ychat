@@ -6,6 +6,7 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/view/chat_page/personalChatPage.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Friend_profile_page extends StatefulWidget {
@@ -147,7 +148,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                 ),
                 InkWell(
                   onTap: () {
-                    //
+                    //-------------router
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -250,7 +251,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                           actions: [
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                context.pop();
                               },
                               child: Text('Cancel'),
                             ),
@@ -273,7 +274,8 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                                         .token,
                                   );
                                 }
-                                Navigator.of(context).pop();
+                                // Navigator.of(context).pop();
+                                context.pop();
                               },
                               child: Text('Report'),
                             ),

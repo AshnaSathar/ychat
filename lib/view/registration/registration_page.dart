@@ -6,6 +6,7 @@ import 'package:flutter_application_1/view/login/login_page.dart';
 import 'package:flutter_application_1/view/password_recovery/email_verification.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Registration_page extends StatefulWidget {
@@ -214,6 +215,7 @@ class _Registration_pageState extends State<Registration_page> {
                                       password: password_controller.text,
                                       email_id: email_controller.text);
                               if (success) {
+                                // ------router
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -253,11 +255,12 @@ class _Registration_pageState extends State<Registration_page> {
                         ),
                         InkWell(
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Login_page(),
-                                  ));
+                              context.go('/login_page');
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => Login_page(),
+                              //     ));
                             },
                             child: Text(
                               "Sign In",
