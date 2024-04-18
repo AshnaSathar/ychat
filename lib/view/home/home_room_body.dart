@@ -76,7 +76,7 @@ class Home_room_body extends StatelessWidget {
                                               .withOpacity(.5),
                                           trailing: InkWell(
                                             onTap: () {
-                                              context.go('/room_chat_page');
+                                              context.push('/room_chat_page');
                                               // Navigator.push(
                                               //     context,
                                               //     MaterialPageRoute(

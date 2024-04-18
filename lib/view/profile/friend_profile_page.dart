@@ -79,7 +79,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        GoRouter.of(context).pop();
                       },
                       child: Icon(
                         Icons.arrow_back_ios_new_sharp,

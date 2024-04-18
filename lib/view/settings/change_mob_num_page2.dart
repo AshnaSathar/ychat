@@ -85,22 +85,14 @@ class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
             padding: EdgeInsets.only(bottom: buttonPadding),
             child: InkWell(
                 onTap: () {
-                  context.go('/change_mob_num_page_2');
+                  context.push('/change_mob_number_page_3');
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
-                  //       builder: (context) => Change_mob_number_page_2(),
+                  //       builder: (context) => Change_mob_number_page_3(),
                   //     ));
                 },
-                child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Change_mob_number_page_3(),
-                          ));
-                    },
-                    child: Button(text: "Next", context: context))),
+                child: Button(text: "Next", context: context)),
           ),
         ],
       ),

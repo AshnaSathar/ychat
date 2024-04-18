@@ -198,13 +198,73 @@ class Home_pageAppbar extends StatelessWidget {
             ),
           ),
           Spacer(),
-          IconButton(
-              onPressed: () {
-                // -------------------------------------------settings functionality
-              },
-              icon: Icon(
-                Icons.more_vert,
-              ))
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            offset: Offset(0, 30),
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Text('Account'),
+                  value: 1,
+                ),
+                PopupMenuItem(
+                  child: Text('Privacy'),
+                  value: 2,
+                ),
+                PopupMenuItem(
+                  child: Text('Chat History'),
+                  value: 3,
+                ),
+                PopupMenuItem(
+                  child: Text('Notifications'),
+                  value: 4,
+                ),
+                PopupMenuItem(
+                  child: Text('Storage and Data'),
+                  value: 5,
+                ),
+                PopupMenuItem(
+                  child: Text('Help'),
+                  value: 6,
+                ),
+              ];
+            },
+            onSelected: (value) {
+              if (value == 1) {
+                context.push('/account_page');
+              } else if (value == 2) {
+              } else if (value == 3) {
+              } else if (value == 4) {
+              } else if (value == 5) {
+              } else if (value == 6) {
+              } else if (value == 7) {}
+            },
+          ),
+
+          // IconButton(
+          //     onPressed: () {
+          //       PopupMenuButton(
+          //         offset: Offset(0, 30), // Adjust the offset as needed
+          //         itemBuilder: (BuildContext context) {
+          //           return [
+          //             PopupMenuItem(
+          //               child: Text('Item 1'),
+          //               value: 1,
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text('Item 2'),
+          //               value: 2,
+          //             ),
+          //             // Add more items as needed
+          //           ];
+          //         },
+          //       );
+
+          //       // -------------------------------------------settings functionality
+          //     },
+          //     icon: Icon(
+          //       Icons.more_vert,
+          //     ))
         ],
       ),
     );

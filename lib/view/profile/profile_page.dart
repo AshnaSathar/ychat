@@ -6,8 +6,6 @@ import 'package:flutter_application_1/controller/image_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
-import 'package:flutter_application_1/view/profile/friends_list_page.dart';
-import 'package:flutter_application_1/view/profile/update_password_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:go_router/go_router.dart';
@@ -237,7 +235,7 @@ class _Profile_pageState extends State<Profile_page> {
                     token: login_provider.token,
                   );
                   if (success) {
-                    context.go('/friends_list_page');
+                    context.push('/friend_list_page');
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
@@ -257,7 +255,7 @@ class _Profile_pageState extends State<Profile_page> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
                 onTap: () {
-                  context.go('/edit_profile_page');
+                  context.push('/edit_profile_page');
                   // Navigator.pushNamed(context, '/edit_profile_page');
                   // Navigator.push(
                   //     context,

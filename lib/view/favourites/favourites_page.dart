@@ -57,7 +57,7 @@ class _Favourites_pageState extends State<Favourites_page> {
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: () {
-                          context.go('/room_chat_page');
+                          context.push('/room_chat_page');
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(

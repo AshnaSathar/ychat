@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AppbarContainer extends StatelessWidget {
@@ -30,7 +31,7 @@ class AppbarContainer extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Navigator.pop(context);
+              context.pop();
             },
             child: Icon(Icons.arrow_back_ios_new_sharp),
           ),
@@ -39,7 +40,8 @@ class AppbarContainer extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 //
-                Navigator.pushNamed(context, '/friend_profile_page');
+                context.push('/friend_profile_page');
+                // Navigator.pushNamed(context, '/friend_profile_page');
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(
@@ -81,10 +83,32 @@ class AppbarContainer extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(child: Icon(Icons.call)),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(child: Icon(Icons.more_vert_sharp)),
-          )
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            offset: Offset(0, 30),
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  child: Text('Item 1'),
+                  value: 1,
+                ),
+                PopupMenuItem(
+                  child: Text('Item 2'),
+                  value: 2,
+                ),
+              ];
+            },
+            onSelected: (value) {
+              if (value == 1) {
+              } else if (value == 2) {
+              } else if (value == 3) {
+              } else {}
+            },
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: InkWell(child: Icon(Icons.more_vert_sharp)),
+          // )
         ],
       ),
     );

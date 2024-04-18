@@ -4,6 +4,7 @@ import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
+import 'package:flutter_application_1/view/profile/profile_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,7 @@ class _Friends_list_pageState extends State<Friends_list_page> {
         backgroundColor: Color_constant.primaryColor,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              GoRouter.of(context).pop();
             },
             icon: Icon(Icons.arrow_back_ios_new)),
       ),
@@ -82,7 +83,7 @@ class _Friends_list_pageState extends State<Friends_list_page> {
                                   .token);
                       if (success) {
                         // Navigator.pushNamed(context, '/friend_profile_page');
-                        context.go('/friend_profile_page');
+                        context.push('/friend_profile_page');
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(

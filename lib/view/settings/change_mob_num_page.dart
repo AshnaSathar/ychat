@@ -64,7 +64,7 @@ class _Change_mob_number_pageState extends State<Change_mob_number_page> {
             padding: EdgeInsets.only(bottom: buttonPadding),
             child: InkWell(
                 onTap: () {
-                  context.go('/change_mob_num_page_2');
+                  context.push('/change_mob_num_page_2');
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(

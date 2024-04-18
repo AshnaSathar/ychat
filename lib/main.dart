@@ -17,6 +17,7 @@ import 'package:flutter_application_1/view/password_recovery/create_password_pag
 import 'package:flutter_application_1/view/password_recovery/email_verification.dart';
 import 'package:flutter_application_1/view/password_recovery/forgot_password.dart';
 import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
+import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friends_list_page.dart';
 import 'package:flutter_application_1/view/profile/password_success_page.dart';
 import 'package:flutter_application_1/view/profile/profile_page.dart';
@@ -118,12 +119,18 @@ class MyApp extends StatelessWidget {
             path: '/change_mob_num_page_2',
             builder: (context, state) => const Change_mob_number_page_2()),
         GoRoute(
-            path: '/change_mob_num_page_3',
+            path: '/change_mob_number_page_3',
             builder: (context, state) => const Change_mob_number_page_3()),
         // GoRoute(
         //   path: '/chat_page',
         //   builder: (context, state) => const Chat_Page(),
         // )
+        GoRoute(
+          path: '/friend_profile_page',
+          builder: (context, state) {
+            return Friend_profile_page();
+          },
+        )
       ],
     );
 
