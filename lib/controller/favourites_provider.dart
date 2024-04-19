@@ -19,13 +19,11 @@ class Favourites_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         FavouritesModel favouritesModel = favouritesModelFromJson(responseBody);
         favourites = favouritesModel.favorites;
-        // print("favorites is ${favourites}");
-        // final parsed_response = jsonDecode(responseBody);
+        print("favourites are :");
+        print(favourites);
         notifyListeners();
         return true;
       } else {
-        // print(responseBody);
-        // print("failed");
         return false;
       }
     } catch (error) {

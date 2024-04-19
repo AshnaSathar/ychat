@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/favourites_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/model/favourites_model.dart';
-import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/public_rooms/search_bar_rooms.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

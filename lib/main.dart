@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/append.dart';
 import 'package:flutter_application_1/controller/favourites_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/image_provider.dart';
@@ -9,7 +10,9 @@ import 'package:flutter_application_1/controller/register_provider.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/update_password.dart';
 import 'package:flutter_application_1/controller/users.dart';
-import 'package:flutter_application_1/view/home/home_front_body.dart';
+import 'package:flutter_application_1/view/home/home/chat_page_content.dart';
+import 'package:flutter_application_1/view/home/home/home_chat_page.dart';
+import 'package:flutter_application_1/view/home/home/search_row.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
@@ -25,10 +28,15 @@ import 'package:flutter_application_1/view/profile/update_password_page.dart';
 import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/registration/registration_page.dart';
 import 'package:flutter_application_1/view/registration/splash_screen.dart';
+import 'package:flutter_application_1/view/settings/Delete_account/delete_account_reason_page.dart';
 import 'package:flutter_application_1/view/settings/account_page.dart';
-import 'package:flutter_application_1/view/settings/change_mob_num_page.dart';
-import 'package:flutter_application_1/view/settings/change_mob_num_page2.dart';
-import 'package:flutter_application_1/view/settings/change_mob_num_page_3.dart';
+import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page.dart';
+import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page2.dart';
+import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page_3.dart';
+import 'package:flutter_application_1/view/settings/Delete_account/delete_account_page.dart';
+import 'package:flutter_application_1/view/settings/privacy/Privacy_page.dart';
+import 'package:flutter_application_1/view/settings/privacy/profile_privacy.dart';
+import 'package:flutter_application_1/view/settings/privacy/status_privacy.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
 import 'package:go_router/go_router.dart';
@@ -57,10 +65,23 @@ class MyApp extends StatelessWidget {
             builder: (context, state) => const Profile_page()),
         GoRoute(
             path: '/home_front_body',
-            builder: (context, state) => const Home_front_body()),
+            builder: (context, state) => const Home_room_body()),
         GoRoute(
             path: '/home_room_body',
             builder: (context, state) => const Home_room_body()),
+        GoRoute(
+          path: '/Search_row',
+          builder: (context, state) => const Search_row(),
+        ),
+        GoRoute(
+          path: '/chat_page_content',
+          builder: (context, state) => const Chat_page_content(),
+        ),
+        GoRoute(
+          path: '/home_chat_page',
+          builder: (context, state) => const Home_chat_page(),
+        ),
+
         GoRoute(
             path: '/create_password_page/:email_id',
             builder: (context, state) {
@@ -130,6 +151,29 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             return Friend_profile_page();
           },
+        ),
+        GoRoute(
+          path: '/delete_account',
+          builder: (context, state) {
+            return Delete_account_page();
+          },
+        ),
+        GoRoute(
+          path: '/delete_account_reason_page',
+          builder: (context, state) => Delete_account_reason_page(),
+        ),
+        GoRoute(
+          path: '/privacy_page',
+          builder: (context, state) => const Privacy_page(),
+        ),
+
+        GoRoute(
+          path: '/profile_privacy_page',
+          builder: (context, state) => Profile_privacy_page(),
+        ),
+        GoRoute(
+          path: '/status_privacy_page',
+          builder: (context, state) => Status_privacy_page(),
         )
       ],
     );
@@ -141,6 +185,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => Password_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Append(),
         ),
         ChangeNotifierProvider(
           create: (context) => Login_provider(),

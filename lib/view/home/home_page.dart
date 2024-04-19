@@ -233,6 +233,7 @@ class Home_pageAppbar extends StatelessWidget {
               if (value == 1) {
                 context.push('/account_page');
               } else if (value == 2) {
+                context.push('/privacy_page');
               } else if (value == 3) {
               } else if (value == 4) {
               } else if (value == 5) {

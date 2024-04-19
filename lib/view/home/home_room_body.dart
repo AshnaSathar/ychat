@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
-import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/public_rooms/search_bar_rooms.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

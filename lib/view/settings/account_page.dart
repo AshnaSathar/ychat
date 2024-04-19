@@ -3,7 +3,8 @@ import 'package:flutter_application_1/constants/color_constants/color_constant.d
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/view/profile/update_password_page.dart';
 import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
-import 'package:flutter_application_1/view/settings/change_mob_num_page.dart';
+import 'package:flutter_application_1/view/settings/Delete_account/delete_account_page.dart';
+import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Account_page extends StatefulWidget {
@@ -19,7 +20,7 @@ class _Account_pageState extends State<Account_page> {
     Map<String, Widget> content = {
       "Reset password": Update_password_page(),
       "Number changing": Change_mob_number_page(),
-      "Delete account": Room_chat_page(),
+      "Delete account": Delete_account_page(),
       "App info": Room_chat_page(),
     };
 

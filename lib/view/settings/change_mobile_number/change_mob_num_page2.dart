@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
-import 'package:flutter_application_1/view/settings/change_mob_num_page_3.dart';
+import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page_3.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:go_router/go_router.dart';

@@ -22,7 +22,8 @@ class Login_provider extends ChangeNotifier {
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({'user_name': user_name, 'password': password}));
 
-      if (response.statusCode == 200) {
+      var statusCode = response.statusCode;
+      if (statusCode == 200) {
         final parse_response = jsonDecode(response.body);
         user_id = parse_response['user_id'];
         userName = parse_response['user_name'];
@@ -38,12 +39,12 @@ class Login_provider extends ChangeNotifier {
         });
         socket.emit('storeSocket', {'uid': user_id});
 
-        notifyListeners();
+        // notifyListeners();
         return true;
       } else {
         is_success = false;
         // print("Failed to post data");
-        notifyListeners();
+        // notifyListeners();
         return false;
       }
     } catch (error) {
