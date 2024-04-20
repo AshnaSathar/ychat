@@ -10,10 +10,8 @@ import 'package:flutter_application_1/controller/register_provider.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/update_password.dart';
 import 'package:flutter_application_1/controller/users.dart';
-import 'package:flutter_application_1/view/home/home/chat_page_content.dart';
-import 'package:flutter_application_1/view/home/home/home_chat_page.dart';
-import 'package:flutter_application_1/view/home/home/search_row.dart';
-import 'package:flutter_application_1/view/home/home_front_body.dart';
+import 'package:flutter_application_1/widgets/chat_body/gallery_page.dart';
+
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
@@ -30,6 +28,8 @@ import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/registration/registration_page.dart';
 import 'package:flutter_application_1/view/registration/splash_screen.dart';
 import 'package:flutter_application_1/view/settings/Delete_account/delete_account_reason_page.dart';
+import 'package:flutter_application_1/view/settings/Help/help_center.dart';
+import 'package:flutter_application_1/view/settings/Help/help_page_1.dart';
 import 'package:flutter_application_1/view/settings/account_page.dart';
 import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page.dart';
 import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page2.dart';
@@ -38,7 +38,8 @@ import 'package:flutter_application_1/view/settings/Delete_account/delete_accoun
 import 'package:flutter_application_1/view/settings/privacy/Privacy_page.dart';
 import 'package:flutter_application_1/view/settings/privacy/profile_privacy.dart';
 import 'package:flutter_application_1/view/settings/privacy/status_privacy.dart';
-import 'package:flutter_application_1/view/unwanted/h1.dart';
+import 'package:flutter_application_1/view/home/h1.dart';
+import 'package:flutter_application_1/view/settings/Help/terms_and_policy.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
 import 'package:go_router/go_router.dart';
@@ -66,23 +67,23 @@ class MyApp extends StatelessWidget {
             path: '/Profile_page',
             builder: (context, state) => const Profile_page()),
         GoRoute(
-            path: '/home_front_body',
-            builder: (context, state) => const Home_front_body()),
+          path: '/help_page_1',
+          builder: (context, state) => const Help_page_1(),
+        ),
+        GoRoute(
+          path: '/help_center',
+          builder: (context, state) => const Help_center(),
+        ),
+        GoRoute(
+            path: '/gallery_page',
+            builder: (context, state) => const Gallery_page()),
+        GoRoute(
+          path: '/terms_and_privacy',
+          builder: (context, state) => const Terms_and_privacy_page(),
+        ),
         GoRoute(
             path: '/home_room_body',
             builder: (context, state) => const Home_room_body()),
-        GoRoute(
-          path: '/Search_row',
-          builder: (context, state) => const Search_row(),
-        ),
-        GoRoute(
-          path: '/chat_page_content',
-          builder: (context, state) => const Chat_page_content(),
-        ),
-        GoRoute(
-          path: '/home_chat_page',
-          builder: (context, state) => const Home_chat_page(),
-        ),
 
         GoRoute(
             path: '/create_password_page/:email_id',

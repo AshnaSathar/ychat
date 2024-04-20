@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class Password_recovery_provider extends ChangeNotifier {
   var reference_id;
+  var message;
   Future send_otp({required email}) async {
     try {
       final url = Uri.parse('http://127.0.0.1:8000/api/send-otp');
@@ -20,6 +21,9 @@ class Password_recovery_provider extends ChangeNotifier {
         notifyListeners();
         return true;
       } else {
+        final parsed_response = jsonDecode(response.body);
+        message = parsed_response['message'];
+        print(message);
         print(response.statusCode);
         // print(response.body);
         notifyListeners();

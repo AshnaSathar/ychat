@@ -21,6 +21,8 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
 
   @override
   Widget build(BuildContext context) {
+    bool success;
+
     var profile_provider =
         Provider.of<Profile_provider>(context, listen: false);
     return Scaffold(
@@ -175,25 +177,85 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               onTap: () async {
-                bool success = await Provider.of<Friendship_provider>(context,
-                        listen: false)
-                    .block_user(
-                        user_id:
-                            Provider.of<Login_provider>(context, listen: false)
-                                .user_id,
-                        friend_id: Provider.of<Profile_provider>(context,
-                                listen: false)
-                            .user_id,
-                        token:
-                            Provider.of<Login_provider>(context, listen: false)
-                                .token);
-                if (success) {
-                  show_bottom_sheet(
-                      context: context, data_to_display: "Blocked");
-                } else {
-                  show_bottom_sheet(
-                      context: context, data_to_display: "Try again later");
-                }
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Block user",
+                        style: Text_style_constant.H2_purple,
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "The last 5 messages from this contact will be forwarded to Ynotz. If you block this contact and delete the chat, messages will only be removed from this device and your devices on the newer versions of ynotz.\n\n This contact will not be notified",
+                            style: Text_style_constant.H4_purple,
+                          ),
+                          Row(
+                            children: [
+                              // Checkbox
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    isChecked = value!;
+                                  });
+                                },
+                              ),
+                              Text(
+                                "Block Contact and delete chat",
+                                style: Text_style_constant.H4_purple,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            if (isChecked) {
+                              bool success = await Provider.of<Friendship_provider>(
+                                      context,
+                                      listen: false)
+                                  .block_user(
+                                      user_id: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .user_id,
+                                      friend_id: Provider.of<Profile_provider>(
+                                              context,
+                                              listen: false)
+                                          .user_id,
+                                      token: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .token);
+                              if (success == true) {
+                                show_bottom_sheet(
+                                    context: context,
+                                    data_to_display: "Blocked");
+                              } else {
+                                show_bottom_sheet(
+                                    context: context,
+                                    data_to_display: "Try again later");
+                              }
+                            }
+                            // Navigator.of(context).pop();
+                            context.pop();
+                          },
+                          child: Text('Block'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Large_container_refactor(
                 context: context,

@@ -18,7 +18,8 @@ class Favourites_provider extends ChangeNotifier {
       var responseBody = await utf8.decodeStream(response.stream);
       if (response.statusCode == 200) {
         FavouritesModel favouritesModel = favouritesModelFromJson(responseBody);
-        favourites = favouritesModel.favorites;
+        favourites = [];
+
         print("favourites are :");
         print(favourites);
         notifyListeners();

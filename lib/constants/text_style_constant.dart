@@ -18,6 +18,11 @@ class Text_style_constant {
       fontSize: 12,
       color: Color_constant.secondaryColor,
       fontWeight: FontWeight.w100);
+  static TextStyle H5_white_100 = TextStyle(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      fontSize: 10,
+      color: Color_constant.secondaryColor,
+      fontWeight: FontWeight.w100);
   static TextStyle H4_purple = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
       fontSize: 12,
@@ -67,9 +72,9 @@ class Text_style_constant {
     color: Color_constant.secondaryColor,
   );
   static TextStyle tab_style = TextStyle(
-      fontSize: 8,
+      fontSize: 12,
       color: Color(0xFF746E6E),
-      fontFamily: GoogleFonts.inder().fontFamily);
+      fontFamily: GoogleFonts.inter().fontFamily);
   static TextStyle content_style_bold = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,
       fontSize: 14,

@@ -93,7 +93,7 @@ class _Profile_pageState extends State<Profile_page> {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.go('/update_password_page');
+                        context.pop();
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -101,11 +101,14 @@ class _Profile_pageState extends State<Profile_page> {
                         //     ));
                       },
                       child: CircleAvatar(
-                        backgroundColor:
-                            const Color.fromARGB(255, 239, 187, 248),
                         radius: 15,
-                        child:
-                            Icon(Icons.settings_outlined, color: Colors.black),
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Color_constant.primaryColor,
+                            size: 15,
+                          ),
+                        ),
                       ),
                     ),
                     Spacer(),

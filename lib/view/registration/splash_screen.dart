@@ -45,7 +45,7 @@ class _Splash_pageState extends State<Splash_page> {
             ),
             child: InkWell(
               onTap: () {
-                context.go('/registration_page');
+                context.push('/registration_page');
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(

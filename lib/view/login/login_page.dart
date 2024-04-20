@@ -123,7 +123,7 @@ class _Login_pageState extends State<Login_page> {
                     //       builder: (context) => Splash_page(),
                     //     ));
                     // Navigator.pushNamed(context, '/splash_page');
-                    context.go('/splash_page');
+                    context.push('/splash_page');
                   },
                   child: Text("SIGN UP"),
                 )
@@ -141,10 +141,10 @@ class _Login_pageState extends State<Login_page> {
                 //   ),
                 // );
                 // Navigator.pushNamed(context, '/forget_password');
-                context.go('/forget_password');
+                context.push('/forget_password');
               },
               child: Text(
-                "Forgot password?",
+                "Forget password?",
                 style: Text_style_constant.H4_white,
               ),
             ),

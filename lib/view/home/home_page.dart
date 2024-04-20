@@ -8,10 +8,8 @@ import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
-import 'package:flutter_application_1/view/favourites/favourites_page.dart';
-import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
-import 'package:flutter_application_1/view/unwanted/h1.dart';
+import 'package:flutter_application_1/view/home/h1.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -76,7 +74,7 @@ class _Home_pageState extends State<Home_page> {
     return Scaffold(
       backgroundColor: Color_constant.secondaryColor,
       body: DefaultTabController(
-        length: 4,
+        length: 3,
         child: Column(
           children: [
             Home_pageAppbar(),
@@ -102,14 +100,14 @@ class _Home_pageState extends State<Home_page> {
                   child:
                       Text("Acive chats", style: Text_style_constant.tab_style),
                 ),
-                Tab(
-                    icon: SvgPicture.asset(
-                      "assets/fav_chats.svg",
-                      height: MediaQuery.sizeOf(context).height * .05,
-                      width: MediaQuery.sizeOf(context).width * .05,
-                    ),
-                    child: Text("Favorites",
-                        style: Text_style_constant.tab_style)),
+                // Tab(
+                //     icon: SvgPicture.asset(
+                //       "assets/fav_chats.svg",
+                //       height: MediaQuery.sizeOf(context).height * .05,
+                //       width: MediaQuery.sizeOf(context).width * .05,
+                //     ),
+                //     child: Text("Favorites",
+                //         style: Text_style_constant.tab_style)),
               ],
             ),
             Expanded(
@@ -125,8 +123,6 @@ class _Home_pageState extends State<Home_page> {
                       Home_room_body(),
                       // Content of Tab 3
                       Active_chat_page(),
-                      // Content of Tab 4
-                      Favourites_page()
                     ],
                   );
                 },
@@ -176,12 +172,6 @@ class Home_pageAppbar extends StatelessWidget {
                     reference_id: login_provider.token,
                     id: login_provider.user_id);
                 if (success == true) {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => Profile_page(),
-                  //     ));
-                  // Navigator.pushNamed(context, '/profile_page');
                   context.push('/profile_page');
                 } else {
                   show_bottom_sheet(
@@ -213,20 +203,12 @@ class Home_pageAppbar extends StatelessWidget {
                   value: 2,
                 ),
                 PopupMenuItem(
-                  child: Text('Chat History'),
+                  child: Text('Notifications'),
                   value: 3,
                 ),
                 PopupMenuItem(
-                  child: Text('Notifications'),
-                  value: 4,
-                ),
-                PopupMenuItem(
-                  child: Text('Storage and Data'),
-                  value: 5,
-                ),
-                PopupMenuItem(
                   child: Text('Help'),
-                  value: 6,
+                  value: 4,
                 ),
               ];
             },
@@ -237,9 +219,8 @@ class Home_pageAppbar extends StatelessWidget {
                 context.push('/privacy_page');
               } else if (value == 3) {
               } else if (value == 4) {
-              } else if (value == 5) {
-              } else if (value == 6) {
-              } else if (value == 7) {}
+                context.push('/help_page_1');
+              }
             },
           ),
 

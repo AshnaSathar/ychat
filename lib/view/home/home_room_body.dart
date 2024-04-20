@@ -46,76 +46,64 @@ class Home_room_body extends StatelessWidget {
                     itemCount: categories.length,
                     itemBuilder: (context, index) {
                       final category = categories[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Colors.black.withOpacity(.2),
-                              )),
-                          child: ExpansionTile(
-                            title: Text(
-                              category.name,
-                              style: Text_style_constant.normal_text,
-                            ),
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: category.chatRooms.length,
-                                      itemBuilder: (context, chatIndex) {
-                                        final chatRoom =
-                                            category.chatRooms[chatIndex];
-                                        return ListTile(
-                                          iconColor: Color_constant.primaryColor
-                                              .withOpacity(.5),
-                                          trailing: InkWell(
-                                            onTap: () {
-                                              context.push('/room_chat_page');
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //       builder: (context) =>
-                                              //           Room_chat_page(),
-                                              //     ));
-                                            },
-                                            child: Icon(Icons.send,
-                                                size: 20,
-                                                color: Color_constant
-                                                    .primaryColor),
-                                          ),
-                                          title: Text(
-                                            chatRoom.name,
-                                            style:
-                                                Text_style_constant.normal_text,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: category.subcategories.length,
-                                      itemBuilder: (context, childIndex) {
-                                        final subcategory =
-                                            category.subcategories[childIndex];
-                                        return ExpansionTile(
-                                          title: Text(subcategory.name,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          children: [],
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                      return ExpansionTile(
+                        title: Text(
+                          category.name,
+                          style: Text_style_constant.tab_style,
                         ),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: category.chatRooms.length,
+                                  itemBuilder: (context, chatIndex) {
+                                    final chatRoom =
+                                        category.chatRooms[chatIndex];
+                                    return ListTile(
+                                      tileColor: Color(0xFFF3EAFF),
+                                      iconColor: Color_constant.primaryColor
+                                          .withOpacity(.5),
+                                      trailing: InkWell(
+                                        onTap: () {
+                                          context.push('/room_chat_page');
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           Room_chat_page(),
+                                          //     ));
+                                        },
+                                        child: Icon(Icons.send,
+                                            size: 20,
+                                            color: Color_constant.primaryColor),
+                                      ),
+                                      title: Text(
+                                        chatRoom.name,
+                                        style: Text_style_constant.tab_style,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: category.subcategories.length,
+                                  itemBuilder: (context, childIndex) {
+                                    final subcategory =
+                                        category.subcategories[childIndex];
+                                    return ExpansionTile(
+                                      title: Text(subcategory.name,
+                                          style: Text_style_constant.tab_style),
+                                      children: [],
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       );
                     },
                   ),

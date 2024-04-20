@@ -104,6 +104,8 @@ class Friendship_provider extends ChangeNotifier {
           body: jsonEncode({'blocked_user_id': friend_id}));
 
       if (response.statusCode == 200) {
+        print("response is=========");
+        print(response.body);
         notifyListeners();
         return true;
       } else {

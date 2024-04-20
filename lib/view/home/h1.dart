@@ -6,6 +6,7 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/view/chat_page/personalChatPage.dart';
+import 'package:flutter_application_1/view/favourites/favourites_page.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -118,13 +119,16 @@ class _H1State extends State<H1> {
                           blurRadius: 1,
                           offset: Offset(2, 2))
                     ],
-                    color: Color.fromARGB(231, 243, 234, 255),
+                    color: show_fav
+                        ? Color_constant.primaryColor
+                        : Color.fromARGB(231, 243, 234, 255),
                     borderRadius: BorderRadius.circular(5)),
                 height: MediaQuery.sizeOf(context).height * .08,
                 width: MediaQuery.sizeOf(context).width * .15,
-                child: show_fav
-                    ? Icon(Icons.person_2)
-                    : SvgPicture.asset("assets/fav_chats.svg"),
+                child: SvgPicture.asset(
+                  "assets/fav_chats.svg",
+                  color: show_fav ? Colors.white : Colors.black,
+                ),
               ),
             ),
           ),
@@ -180,56 +184,56 @@ class _H1State extends State<H1> {
                           itemBuilder: (context, index) {
                             final user = provider.usersModel!.users[index];
                             return ListTile(
-                              trailing: IconButton(
-                                onPressed: () async {
-                                  // print("user.id is");
-                                  // print(user.id);
-                                  bool success =
-                                      await Provider.of<Friendship_provider>(
-                                              context,
-                                              listen: false)
-                                          .add_friend(
-                                              user_id:
-                                                  Provider.of<Login_provider>(
-                                                          context,
-                                                          listen: false)
-                                                      .user_id,
-                                              token:
-                                                  Provider.of<Login_provider>(
-                                                          context,
-                                                          listen: false)
-                                                      .token,
-                                              friend_uid: user.id);
-                                  if (success == true) {
-                                    show_bottom_sheet(
-                                        context: context,
-                                        data_to_display:
-                                            "Added to your friend list");
+                              // trailing: IconButton(
+                              //   onPressed: () async {
+                              //     // print("user.id is");
+                              //     // print(user.id);
+                              //     bool success =
+                              //         await Provider.of<Friendship_provider>(
+                              //                 context,
+                              //                 listen: false)
+                              //             .add_friend(
+                              //                 user_id:
+                              //                     Provider.of<Login_provider>(
+                              //                             context,
+                              //                             listen: false)
+                              //                         .user_id,
+                              //                 token:
+                              //                     Provider.of<Login_provider>(
+                              //                             context,
+                              //                             listen: false)
+                              //                         .token,
+                              //                 friend_uid: user.id);
+                              //     if (success == true) {
+                              //       show_bottom_sheet(
+                              //           context: context,
+                              //           data_to_display:
+                              //               "Added to your friend list");
 
-                                    setState(() {
-                                      Provider.of<Friendship_provider>(context,
-                                              listen: false)
-                                          .get_friends(
-                                              user_id:
-                                                  Provider.of<Login_provider>(
-                                                          context,
-                                                          listen: false)
-                                                      .user_id,
-                                              token:
-                                                  Provider.of<Login_provider>(
-                                                          context,
-                                                          listen: false)
-                                                      .token);
-                                    });
-                                  } else {
-                                    show_bottom_sheet(
-                                        context: context,
-                                        data_to_display:
-                                            "Failed to add. Try again later");
-                                  }
-                                },
-                                icon: Icon(Icons.add),
-                              ),
+                              //       setState(() {
+                              //         Provider.of<Friendship_provider>(context,
+                              //                 listen: false)
+                              //             .get_friends(
+                              //                 user_id:
+                              //                     Provider.of<Login_provider>(
+                              //                             context,
+                              //                             listen: false)
+                              //                         .user_id,
+                              //                 token:
+                              //                     Provider.of<Login_provider>(
+                              //                             context,
+                              //                             listen: false)
+                              //                         .token);
+                              //       });
+                              //     } else {
+                              //       show_bottom_sheet(
+                              //           context: context,
+                              //           data_to_display:
+                              //               "Failed to add. Try again later");
+                              //     }
+                              //   },
+                              //   icon: Icon(Icons.add),
+                              // ),
                               title: InkWell(
                                   onTap: () async {
                                     bool success =
@@ -255,7 +259,11 @@ class _H1State extends State<H1> {
                                       //     ));
                                     }
                                   },
-                                  child: Text(user.userName)),
+                                  child: Text(
+                                    user.userName,
+                                    style: Text_style_constant.normal_text,
+                                  )),
+                              // leading: CircleAvatar(child: ,),
                             );
                           },
                         ),
@@ -268,19 +276,7 @@ class _H1State extends State<H1> {
               ],
             )
           : show_fav
-              ? Column(
-                  children: [
-                    Text(
-                      "Close Friends",
-                      style: Text_style_constant.H4_purple,
-                    ),
-                    Container(
-                      color: Colors.green,
-                      height: 50,
-                      width: 50,
-                    ),
-                  ],
-                )
+              ? Expanded(child: Favourites_page())
               : Expanded(
                   child: Column(
                     children: [

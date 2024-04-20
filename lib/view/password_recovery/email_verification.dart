@@ -206,42 +206,43 @@ class _Email_verification_pageState extends State<Email_verification_page> {
               style: Text_style_constant.H4_white,
             ),
           ),
-          InkWell(
-              onTap: () async {
-                if (c1.text.isNotEmpty &&
-                    c2.text.isNotEmpty &&
-                    c3.text.isNotEmpty &&
-                    c4.text.isNotEmpty) {
-                  var otp = c1.text + c2.text + c3.text + c4.text;
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: InkWell(
+                onTap: () async {
+                  if (c1.text.isNotEmpty &&
+                      c2.text.isNotEmpty &&
+                      c3.text.isNotEmpty &&
+                      c4.text.isNotEmpty) {
+                    var otp = c1.text + c2.text + c3.text + c4.text;
 
-                  if (otp.length == 4) {
-                    bool success = await Provider.of<Register_provider>(context,
-                            listen: false)
-                        .verify_otp_register(otp: otp);
-                    if (success) {
-                      // --------------router
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Create_password_page(
-                              email_id: email_provider.email_controller.text,
-                            ),
-                          ));
+                    if (otp.length == 4) {
+                      bool success = await Provider.of<Register_provider>(
+                              context,
+                              listen: false)
+                          .verify_otp_register(otp: otp);
+                      if (success) {
+                        // --------------router
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Create_password_page(
+                                email_id: email_provider.email_controller.text,
+                              ),
+                            ));
+                      } else {
+                        show_bottom_sheet(
+                            context: context,
+                            data_to_display: "Try again later !failed");
+                      }
                     } else {
                       show_bottom_sheet(
-                          context: context,
-                          data_to_display: "Try again later !failed");
+                          context: context, data_to_display: "Invalid otp");
                     }
-                  } else {
-                    show_bottom_sheet(
-                        context: context, data_to_display: "Invalid otp");
                   }
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Button(text: "verify", context: context),
-              ))
+                },
+                child: Button(text: "verify", context: context)),
+          )
         ],
       ),
     );
