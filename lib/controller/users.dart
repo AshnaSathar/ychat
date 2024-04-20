@@ -7,6 +7,7 @@ import 'package:flutter_application_1/model/user_model.dart';
 class All_users_provider extends ChangeNotifier {
   UserModel? _usersModel;
   List<User>? _originalUsers;
+  List<User> filteredUsers = [];
 
   UserModel? get usersModel => _usersModel;
 
@@ -36,11 +37,11 @@ class All_users_provider extends ChangeNotifier {
     print(searchTerm);
     List users = [];
     if (_originalUsers != null) {
-      List<User> filteredUsers = _originalUsers!
+      filteredUsers = _originalUsers!
           .where((user) =>
               user.userName.toLowerCase().startsWith(searchTerm.toLowerCase()))
           .toList();
-      filteredUsers.forEach(
+      filteredUsers?.forEach(
         (element) {
           users.add(element.userName);
         },

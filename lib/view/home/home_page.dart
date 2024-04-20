@@ -11,6 +11,7 @@ import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
 import 'package:flutter_application_1/view/favourites/favourites_page.dart';
 import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
+import 'package:flutter_application_1/view/unwanted/h1.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -117,8 +118,8 @@ class _Home_pageState extends State<Home_page> {
                   return TabBarView(
                     children: [
                       // Content of Tab 1
-                      Home_front_body(),
-
+                      // Home_front_body(),
+                      H1(),
                       // Content of Tab 2
 
                       Home_room_body(),

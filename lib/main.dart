@@ -13,6 +13,7 @@ import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/view/home/home/chat_page_content.dart';
 import 'package:flutter_application_1/view/home/home/home_chat_page.dart';
 import 'package:flutter_application_1/view/home/home/search_row.dart';
+import 'package:flutter_application_1/view/home/home_front_body.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
@@ -37,6 +38,7 @@ import 'package:flutter_application_1/view/settings/Delete_account/delete_accoun
 import 'package:flutter_application_1/view/settings/privacy/Privacy_page.dart';
 import 'package:flutter_application_1/view/settings/privacy/profile_privacy.dart';
 import 'package:flutter_application_1/view/settings/privacy/status_privacy.dart';
+import 'package:flutter_application_1/view/unwanted/h1.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
             builder: (context, state) => const Profile_page()),
         GoRoute(
             path: '/home_front_body',
-            builder: (context, state) => const Home_room_body()),
+            builder: (context, state) => const Home_front_body()),
         GoRoute(
             path: '/home_room_body',
             builder: (context, state) => const Home_room_body()),
@@ -174,7 +176,8 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/status_privacy_page',
           builder: (context, state) => Status_privacy_page(),
-        )
+        ),
+        GoRoute(path: '/h1', builder: (context, state) => const H1()),
       ],
     );
 
