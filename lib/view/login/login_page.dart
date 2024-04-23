@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
+import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:flutter_application_1/widgets/password_text_field.dart';
@@ -23,6 +24,7 @@ class _Login_pageState extends State<Login_page> {
   Widget build(BuildContext context) {
     final loginProvider = context.watch<Login_provider>();
     ;
+
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       body: Column(
@@ -37,6 +39,7 @@ class _Login_pageState extends State<Login_page> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              style: Text_style_constant.H4_white_100,
               controller: usernameController,
               decoration: InputDecoration(
                 focusColor: Color_constant.secondaryColor,

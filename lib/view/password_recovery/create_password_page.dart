@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
-import 'package:flutter_application_1/controller/password_provider.dart';
+import 'package:flutter_application_1/controller/recovery_password_provider.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
@@ -82,17 +82,17 @@ class Create_password_page extends StatelessWidget {
                   if (password_controller.text ==
                       confirm_password_controller.text) {
                     bool get_details_success =
-                        await Provider.of<Passsword_provider>(context,
+                        await Provider.of<recover_password_provider>(context,
                                 listen: false)
                             .get_user_details(email_id: this.email_id);
                     if (get_details_success) {
-                      bool success = await Provider.of<Passsword_provider>(
-                              context,
-                              listen: false)
-                          .forget_password(
-                              password: password_controller.text,
-                              password_confirmation:
-                                  confirm_password_controller.text);
+                      bool success =
+                          await Provider.of<recover_password_provider>(context,
+                                  listen: false)
+                              .post_forget_password(
+                                  password: password_controller.text,
+                                  password_confirmation:
+                                      confirm_password_controller.text);
                       if (success) {
                         // print("true");
                         // Navigator.push(

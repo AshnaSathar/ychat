@@ -3,7 +3,6 @@ import 'package:flutter_application_1/constants/color_constants/color_constant.d
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/button.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Delete_account_reason_page extends StatelessWidget {
   const Delete_account_reason_page({super.key});

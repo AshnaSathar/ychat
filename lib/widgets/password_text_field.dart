@@ -18,6 +18,7 @@ class PasswordTextField extends StatelessWidget {
     return Consumer<Password_provider>(
       builder: (context, passwordProvider, _) {
         return TextField(
+          style: Text_style_constant.H4_white_100,
           controller: controller,
           obscureText: !passwordProvider.isVisible(controller),
           decoration: InputDecoration(

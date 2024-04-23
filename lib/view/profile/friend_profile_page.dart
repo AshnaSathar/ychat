@@ -68,7 +68,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                     backgroundImage: profile_provider.profile_picture_url !=
                             null
                         ? NetworkImage(
-                            profile_provider.profile_image!,
+                            "http:127.0.01:8000/${profile_provider.profile_responseData?.user.profilePictureUrl}",
                           )
                         : NetworkImage(
                             "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),
@@ -92,8 +92,8 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      Provider.of<Profile_provider>(context, listen: false)
-                          .userName,
+                      " ${profile_provider.profile_responseData?.user.userName}",
+                      overflow: TextOverflow.ellipsis,
                       style: Text_style_constant.H2_white,
                     ),
                   ),
@@ -106,7 +106,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
             child: Container(
               width: MediaQuery.of(context).size.width / 1.5,
               child: Text(
-                Provider.of<Profile_provider>(context, listen: false).bio,
+                " ${profile_provider.profile_responseData?.user.bio}",
                 textAlign: TextAlign.justify,
                 style: Text_style_constant.H4_white,
                 maxLines: 5,
@@ -130,9 +130,8 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                             token: Provider.of<Login_provider>(context,
                                     listen: false)
                                 .token,
-                            friend_uid: Provider.of<Profile_provider>(context,
-                                    listen: false)
-                                .user_id);
+                            friend_uid:
+                                profile_provider.profile_responseData?.user.id);
                     if (success) {
                       show_bottom_sheet(
                           context: context,
@@ -155,12 +154,9 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => Chat_Page(
-                          id: Provider.of<Profile_provider>(context,
-                                  listen: false)
-                              .user_id,
-                          name: Provider.of<Profile_provider>(context,
-                                  listen: false)
-                              .userName,
+                          id: profile_provider.profile_responseData?.user.id,
+                          name: profile_provider
+                              .profile_responseData?.user.userName,
                         ),
                       ),
                     );
@@ -221,22 +217,25 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                         TextButton(
                           onPressed: () async {
                             if (isChecked) {
-                              bool success = await Provider.of<Friendship_provider>(
-                                      context,
-                                      listen: false)
-                                  .block_user(
-                                      user_id: Provider.of<Login_provider>(
-                                              context,
-                                              listen: false)
-                                          .user_id,
-                                      friend_id: Provider.of<Profile_provider>(
-                                              context,
-                                              listen: false)
-                                          .user_id,
-                                      token: Provider.of<Login_provider>(
-                                              context,
-                                              listen: false)
-                                          .token);
+                              bool success =
+                                  await Provider.of<Friendship_provider>(
+                                          context,
+                                          listen: false)
+                                      .block_user(
+                                          user_id:
+                                              Provider.of<Login_provider>(
+                                                      context,
+                                                      listen: false)
+                                                  .user_id,
+                                          friend_id:
+                                              profile_provider
+                                                  .profile_responseData
+                                                  ?.user
+                                                  .id,
+                                          token: Provider.of<Login_provider>(
+                                                  context,
+                                                  listen: false)
+                                              .token);
                               if (success == true) {
                                 show_bottom_sheet(
                                     context: context,
@@ -327,10 +326,8 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                                             context,
                                             listen: false)
                                         .user_id,
-                                    friend_id: Provider.of<Profile_provider>(
-                                            context,
-                                            listen: false)
-                                        .user_id,
+                                    friend_id: profile_provider
+                                        .profile_responseData?.user.id,
                                     token: Provider.of<Login_provider>(context,
                                             listen: false)
                                         .token,

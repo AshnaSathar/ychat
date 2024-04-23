@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/append.dart';
-import 'package:flutter_application_1/controller/favourites_provider.dart';
+import 'package:flutter_application_1/controller/close_friends_provider.dart';
+import 'package:flutter_application_1/controller/favourite_rooms_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/image_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
+import 'package:flutter_application_1/controller/recovery_password_provider.dart';
 import 'package:flutter_application_1/controller/password_recovery.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/register_provider.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/update_password.dart';
 import 'package:flutter_application_1/controller/users.dart';
+import 'package:flutter_application_1/view/settings/notifications_page.dart';
 import 'package:flutter_application_1/widgets/chat_body/gallery_page.dart';
 
 import 'package:flutter_application_1/view/home/home_page.dart';
@@ -21,9 +24,9 @@ import 'package:flutter_application_1/view/password_recovery/forgot_password.dar
 import 'package:flutter_application_1/view/profile/edit_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friend_profile_page.dart';
 import 'package:flutter_application_1/view/profile/friends_list_page.dart';
-import 'package:flutter_application_1/view/profile/password_success_page.dart';
+import 'package:flutter_application_1/view/profile/update_password/password_success_page.dart';
 import 'package:flutter_application_1/view/profile/profile_page.dart';
-import 'package:flutter_application_1/view/profile/update_password_page.dart';
+import 'package:flutter_application_1/view/profile/update_password/update_password_page.dart';
 import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/registration/registration_page.dart';
 import 'package:flutter_application_1/view/registration/splash_screen.dart';
@@ -179,6 +182,9 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => Status_privacy_page(),
         ),
         GoRoute(path: '/h1', builder: (context, state) => const H1()),
+        GoRoute(
+            path: '/notifications_page',
+            builder: (context, state) => const Notifications_page()),
       ],
     );
 
@@ -221,7 +227,13 @@ class MyApp extends StatelessWidget {
           create: (context) => Rooms_provider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => Favourites_provider(),
+          create: (context) => close_friends_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => recover_password_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Favourite_rooms_provider(),
         ),
       ],
       child: MaterialApp.router(

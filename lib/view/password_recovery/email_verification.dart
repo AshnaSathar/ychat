@@ -55,10 +55,11 @@ class _Email_verification_pageState extends State<Email_verification_page> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: Container(
                     child: Center(
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: c1,
                         onChanged: (value) {
                           if (value.length == 1) {
@@ -82,16 +83,17 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                       ),
                     ),
                     height: MediaQuery.sizeOf(context).height * .08,
-                    width: MediaQuery.sizeOf(context).width * .15,
+                    width: MediaQuery.sizeOf(context).width * .14,
                     decoration: BoxDecoration(
                         color: Color_constant.secondaryColor,
                         borderRadius: BorderRadius.circular(5)),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: Container(
                     child: TextField(
+                      style: Text_style_constant.H4_purple,
                       controller: c2,
                       onChanged: (value) {
                         if (value.length == 1) {
@@ -114,19 +116,20 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                               borderRadius: BorderRadius.circular(5))),
                     ),
                     height: MediaQuery.sizeOf(context).height * .08,
-                    width: MediaQuery.sizeOf(context).width * .15,
+                    width: MediaQuery.sizeOf(context).width * .14,
                     decoration: BoxDecoration(
                         color: Color_constant.secondaryColor,
                         borderRadius: BorderRadius.circular(5)),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(6.0),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Color_constant.secondaryColor,
                         borderRadius: BorderRadius.circular(5)),
                     child: TextField(
+                      style: Text_style_constant.H4_purple,
                       controller: c3,
                       onChanged: (value) {
                         if (value.length == 1) {
@@ -149,13 +152,14 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                               borderRadius: BorderRadius.circular(5))),
                     ),
                     height: MediaQuery.sizeOf(context).height * .08,
-                    width: MediaQuery.sizeOf(context).width * .15,
+                    width: MediaQuery.sizeOf(context).width * .14,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     child: TextField(
+                      style: Text_style_constant.H4_purple,
                       controller: c4,
                       onChanged: (value) {
                         if (value.length == 1) {}
@@ -176,7 +180,7 @@ class _Email_verification_pageState extends State<Email_verification_page> {
                               borderRadius: BorderRadius.circular(5))),
                     ),
                     height: MediaQuery.sizeOf(context).height * .08,
-                    width: MediaQuery.sizeOf(context).width * .15,
+                    width: MediaQuery.sizeOf(context).width * .14,
                     decoration: BoxDecoration(
                         color: Color_constant.secondaryColor,
                         borderRadius: BorderRadius.circular(5)),

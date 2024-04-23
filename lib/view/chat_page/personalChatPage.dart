@@ -30,7 +30,7 @@ class _Chat_PageState extends State<Chat_Page> {
               builder: (BuildContext builderContext) {
                 return AppbarContainer(
                     title:
-                        "${Provider.of<Profile_provider>(context, listen: false).userName}");
+                        "${Provider.of<Profile_provider>(context, listen: false).profile_responseData?.user.userName}");
               },
             ),
           ),
@@ -43,8 +43,10 @@ class _Chat_PageState extends State<Chat_Page> {
             left: 0,
             right: 0,
             child: MessageBar(
-              friend_id:
-                  Provider.of<Profile_provider>(context, listen: false).user_id,
+              friend_id: Provider.of<Profile_provider>(context, listen: false)
+                  .profile_responseData
+                  ?.user
+                  .id,
             ),
           ),
         ],

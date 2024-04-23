@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
-import 'package:flutter_application_1/controller/favourites_provider.dart';
+import 'package:flutter_application_1/controller/close_friends_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
@@ -23,7 +23,7 @@ class _Favourites_pageState extends State<Favourites_page> {
   }
 
   getData() async {
-    await Provider.of<Favourites_provider>(context, listen: false).get_list(
+    await Provider.of<close_friends_provider>(context, listen: false).get_list(
         token: Provider.of<Login_provider>(context, listen: false).token,
         user_id: Provider.of<Login_provider>(context, listen: false).user_id);
   }
@@ -31,14 +31,14 @@ class _Favourites_pageState extends State<Favourites_page> {
   @override
   Widget build(BuildContext context) {
     // var favourite_provider =
-    //     Provider.of<Favourites_provider>(context, listen: false);
+    //     Provider.of<close_friends_provider>(context, listen: false);
     var profile_provider =
         Provider.of<Profile_provider>(context, listen: false);
     var friendship_provider =
         Provider.of<Friendship_provider>(context, listen: false);
     var login_provider = Provider.of<Login_provider>(context, listen: false);
     List<Favorite> favourites =
-        Provider.of<Favourites_provider>(context, listen: false).favourites;
+        Provider.of<close_friends_provider>(context, listen: false).favourites;
     return favourites.isEmpty
         ? FutureBuilder(
             future: Future.delayed(Duration(seconds: 10)),
@@ -63,7 +63,7 @@ class _Favourites_pageState extends State<Favourites_page> {
               }
             },
           )
-        : Consumer<Favourites_provider>(
+        : Consumer<close_friends_provider>(
             builder: (context, value, child) {
               return Column(
                 children: [

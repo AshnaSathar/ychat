@@ -74,6 +74,12 @@ class Text_style_constant {
   static TextStyle tab_style = TextStyle(
       fontSize: 12,
       color: Color(0xFF746E6E),
+      // fontWeight: FontWeight.bold,
+      fontFamily: GoogleFonts.inter().fontFamily);
+  static TextStyle tab_style_bold = TextStyle(
+      fontSize: 12,
+      color: Color(0xFF746E6E),
+      fontWeight: FontWeight.w900,
       fontFamily: GoogleFonts.inter().fontFamily);
   static TextStyle content_style_bold = TextStyle(
       fontFamily: GoogleFonts.inter().fontFamily,

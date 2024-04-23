@@ -7,7 +7,6 @@ import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/view/chat_page/personalChatPage.dart';
 import 'package:flutter_application_1/view/favourites/favourites_page.dart';
-import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,15 +24,24 @@ class _H1State extends State<H1> {
   bool is_search = false;
   bool show_fav = false;
   @override
+  void initState() {
+    getData();
+  }
+
+  getData() {
+    Provider.of<Friendship_provider>(context, listen: false).get_friends(
+        token: Provider.of<Login_provider>(context, listen: false).token,
+        user_id: Provider.of<Login_provider>(context, listen: false).user_id);
+  }
+
+  @override
   Widget build(BuildContext context) {
     var login_provider = Provider.of<Login_provider>(context, listen: false);
     var friendship_provider =
         Provider.of<Friendship_provider>(context, listen: false);
     var profile_provider =
         Provider.of<Profile_provider>(context, listen: false);
-    Provider.of<Friendship_provider>(context, listen: false).get_friends(
-        token: Provider.of<Login_provider>(context, listen: false).token,
-        user_id: Provider.of<Login_provider>(context, listen: false).user_id);
+
     return Column(children: [
       Row(
         children: [
@@ -53,13 +61,13 @@ class _H1State extends State<H1> {
                         offset: Offset(0, 3))
                   ]),
               child: TextField(
+                style: Text_style_constant.H4_purple,
                 onChanged: (value) {
                   Provider.of<All_users_provider>(context, listen: false)
                       .searchUsers(searchTerm: search_controller.text);
                   setState(() {});
                 },
                 controller: search_controller,
-                style: TextStyle(),
                 decoration: InputDecoration(
                   hintText: "Search here",
                   hintStyle: TextStyle(
@@ -182,89 +190,56 @@ class _H1State extends State<H1> {
                         child: ListView.builder(
                           itemCount: provider.usersModel!.users.length,
                           itemBuilder: (context, index) {
+                            var image;
                             final user = provider.usersModel!.users[index];
+                            if (user.profilePicture != null) {
+                              image =
+                                  "http://localhost:8000/storage/${user.profilePicture}";
+                            } else {
+                              image =
+                                  "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
+                            }
                             return ListTile(
-                              // trailing: IconButton(
-                              //   onPressed: () async {
-                              //     // print("user.id is");
-                              //     // print(user.id);
-                              //     bool success =
-                              //         await Provider.of<Friendship_provider>(
-                              //                 context,
-                              //                 listen: false)
-                              //             .add_friend(
-                              //                 user_id:
-                              //                     Provider.of<Login_provider>(
-                              //                             context,
-                              //                             listen: false)
-                              //                         .user_id,
-                              //                 token:
-                              //                     Provider.of<Login_provider>(
-                              //                             context,
-                              //                             listen: false)
-                              //                         .token,
-                              //                 friend_uid: user.id);
-                              //     if (success == true) {
-                              //       show_bottom_sheet(
-                              //           context: context,
-                              //           data_to_display:
-                              //               "Added to your friend list");
-
-                              //       setState(() {
-                              //         Provider.of<Friendship_provider>(context,
-                              //                 listen: false)
-                              //             .get_friends(
-                              //                 user_id:
-                              //                     Provider.of<Login_provider>(
-                              //                             context,
-                              //                             listen: false)
-                              //                         .user_id,
-                              //                 token:
-                              //                     Provider.of<Login_provider>(
-                              //                             context,
-                              //                             listen: false)
-                              //                         .token);
-                              //       });
-                              //     } else {
-                              //       show_bottom_sheet(
-                              //           context: context,
-                              //           data_to_display:
-                              //               "Failed to add. Try again later");
-                              //     }
-                              //   },
-                              //   icon: Icon(Icons.add),
-                              // ),
-                              title: InkWell(
-                                  onTap: () async {
-                                    bool success =
-                                        await Provider.of<Profile_provider>(
-                                                context,
-                                                listen: false)
-                                            .get_details(
-                                                id: user.id,
-                                                reference_id:
-                                                    Provider.of<Login_provider>(
-                                                            context,
-                                                            listen: false)
-                                                        .token);
-                                    if (success) {
-                                      context.push('/friend_profile_page');
-                                      // Navigator.pushNamed(
-                                      //     context, '/friend_profile_page');
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //       builder: (context) =>
-                                      //           Friend_profile_page(),
-                                      //     ));
-                                    }
-                                  },
-                                  child: Text(
-                                    user.userName,
-                                    style: Text_style_constant.normal_text,
-                                  )),
-                              // leading: CircleAvatar(child: ,),
-                            );
+                                title: InkWell(
+                                    onTap: () async {
+                                      print(
+                                          "---------------------------------");
+                                      print(user.id);
+                                      bool success = await Provider.of<
+                                                  Profile_provider>(context,
+                                              listen: false)
+                                          .get_details(
+                                              id: user.id,
+                                              reference_id:
+                                                  Provider.of<Login_provider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token);
+                                      if (success) {
+                                        context.push('/friend_profile_page');
+                                        // Navigator.pushNamed(
+                                        //     context, '/friend_profile_page');
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           Friend_profile_page(),
+                                        //     ));
+                                      } else {
+                                        print("error");
+                                      }
+                                    },
+                                    child: Text(
+                                      user.userName,
+                                      style: TextStyle(
+                                          color: Color_constant.name_color,
+                                          fontFamily:
+                                              GoogleFonts.inder().fontFamily,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(image),
+                                ));
                           },
                         ),
                       );

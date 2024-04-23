@@ -4,6 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class Login_provider extends ChangeNotifier {
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  setLoading(bool Loading) {
+    _isLoading = Loading;
+  }
+
   bool is_success = false;
   var user_id;
   var userName;
@@ -12,8 +18,10 @@ class Login_provider extends ChangeNotifier {
   var gender;
   var dob;
   late IO.Socket socket;
+
   Future post_db({required user_name, required password}) async {
     try {
+      setLoading(true);
       // print("$user_name");
       // print("$password");
       // print("invoked login provider- post_db");
@@ -24,10 +32,13 @@ class Login_provider extends ChangeNotifier {
 
       var statusCode = response.statusCode;
       if (statusCode == 200) {
+        setLoading(false);
         final parse_response = jsonDecode(response.body);
         user_id = parse_response['user_id'];
         userName = parse_response['user_name'];
         token = parse_response['token'];
+        print("----------this is login provider response");
+        print(response.body);
         print("token generated : $token");
         is_success = true;
         socket = IO.io("http://localhost:3000/", <String, dynamic>{
@@ -42,12 +53,14 @@ class Login_provider extends ChangeNotifier {
         // notifyListeners();
         return true;
       } else {
+        setLoading(false);
         is_success = false;
         // print("Failed to post data");
         // notifyListeners();
         return false;
       }
     } catch (error) {
+      setLoading(false);
       print("Error posting data");
       return false;
     }

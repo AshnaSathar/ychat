@@ -88,6 +88,7 @@ class _Delete_account_pageState extends State<Delete_account_page> {
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * .1,
                       child: TextField(
+                        style: Text_style_constant.H4_white_100,
                         decoration: InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(

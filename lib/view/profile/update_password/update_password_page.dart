@@ -3,7 +3,6 @@ import 'package:flutter_application_1/constants/color_constants/color_constant.d
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/update_password.dart';
-import 'package:flutter_application_1/view/profile/password_success_page.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
@@ -34,7 +33,7 @@ class _Update_password_pageState extends State<Update_password_page> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Set your new password so ypu can login and access ynotz.",
+                "Set your new password so you can login and access ynotz.",
                 style: Text_style_constant.H4_white,
               ),
             ),
@@ -44,7 +43,7 @@ class _Update_password_pageState extends State<Update_password_page> {
                 children: [
                   Text(
                     "Current password",
-                    style: Text_style_constant.H4_white,
+                    style: Text_style_constant.H4_white_100,
                   ),
                 ],
               ),
@@ -60,7 +59,7 @@ class _Update_password_pageState extends State<Update_password_page> {
                 children: [
                   Text(
                     "New password",
-                    style: Text_style_constant.H4_white,
+                    style: Text_style_constant.H4_white_100,
                   ),
                 ],
               ),
@@ -76,7 +75,7 @@ class _Update_password_pageState extends State<Update_password_page> {
                 children: [
                   Text(
                     "Confirm password",
-                    style: Text_style_constant.H4_white,
+                    style: Text_style_constant.H4_white_100,
                   ),
                 ],
               ),
@@ -110,15 +109,7 @@ class _Update_password_pageState extends State<Update_password_page> {
                                     new_password_confirmation:
                                         confirm_password_controller.text);
                         if (success) {
-                          // show_bottom_sheet(
-                          //     context: context,
-                          //     data_to_display: "Updated successfully");
-                          context.go('/password_success_page');
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => Password_success_page(),
-                          //     ));
+                          context.push('/password_success_page');
                         } else {
                           show_bottom_sheet(
                               context: context,

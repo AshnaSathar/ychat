@@ -6,6 +6,7 @@ import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Edit_profile_page extends StatefulWidget {
@@ -112,6 +113,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     ],
                   ),
                   TextField(
+                    style: Text_style_constant.H4_white_100,
                     controller: name_controller,
                     decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
@@ -137,6 +139,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     ],
                   ),
                   TextField(
+                    style: Text_style_constant.H4_white_100,
                     controller: bio_controller,
                     decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
@@ -161,6 +164,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     ],
                   ),
                   TextField(
+                    style: Text_style_constant.H4_white_100,
                     controller: mobile_number_controller,
                     decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
@@ -185,6 +189,7 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                     ],
                   ),
                   TextField(
+                    style: Text_style_constant.H4_white_100,
                     controller: gender_controller,
                     decoration: InputDecoration(
                         focusedBorder: UnderlineInputBorder(
@@ -215,10 +220,15 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                 name_controller.clear();
                 gender_controller.clear();
                 mobile_number_controller.clear();
+                bio_controller.clear();
                 dob_controller.clear();
                 if (success) {
                   show_bottom_sheet(
-                      context: context, data_to_display: "success");
+                          context: context, data_to_display: "success")
+                      .then((value) {
+                    context.go('/profile_page');
+                  });
+                  print("success is $success");
                 } else {
                   show_bottom_sheet(
                       context: context, data_to_display: "failed");

@@ -23,6 +23,7 @@ class Append extends ChangeNotifier {
         FavouritesModel favouritesModel = favouritesModelFromJson(responseBody);
         favourites = favouritesModel.favorites;
         notifyListeners();
+        print(responseBody);
         return true;
       } else {
         return false;
@@ -43,7 +44,9 @@ class Append extends ChangeNotifier {
       if (response.statusCode == 200) {
         RoomsModel roomsModel = roomsModelFromJson(responseBody);
         categories = roomsModel.categories;
+        print(responseBody);
         notifyListeners();
+
         return true;
       } else {
         return false;

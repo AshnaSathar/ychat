@@ -8,10 +8,16 @@ class All_users_provider extends ChangeNotifier {
   UserModel? _usersModel;
   List<User>? _originalUsers;
   List<User> filteredUsers = [];
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  setLoading(Loading) {
+    _isLoading = Loading;
+  }
 
   UserModel? get usersModel => _usersModel;
 
   Future<void> getUsers({required String token}) async {
+    setLoading(true);
     try {
       var url = Uri.parse("http://127.0.0.1:8000/api/users/get_all_users");
       var response = await http.get(url, headers: {
@@ -22,18 +28,23 @@ class All_users_provider extends ChangeNotifier {
         // print(response.body);s
         var jsonData = json.decode(response.body);
         _usersModel = UserModel.fromJson(jsonData);
-        _originalUsers = _usersModel?.users.toList(); // Store the original list
+        _originalUsers = _usersModel?.users.toList();
+        // Store the original list
+        setLoading(false);
       } else {
         print("Failed to fetch data. Status code: ${response.statusCode}");
+        setLoading(false);
       }
     } catch (error) {
       print("Error: $error");
+      setLoading(false);
     }
 
     notifyListeners();
   }
 
   void searchUsers({required searchTerm}) {
+    setLoading(true);
     print(searchTerm);
     List users = [];
     if (_originalUsers != null) {
@@ -48,6 +59,7 @@ class All_users_provider extends ChangeNotifier {
       );
       print("filtered users are ${users}");
       _usersModel = UserModel(success: true, users: filteredUsers);
+      setLoading(false);
       notifyListeners();
     }
   }

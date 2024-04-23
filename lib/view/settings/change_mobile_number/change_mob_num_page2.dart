@@ -38,6 +38,7 @@ class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              style: Text_style_constant.H4_white_100,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -66,6 +67,7 @@ class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              style: Text_style_constant.H4_white_100,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(

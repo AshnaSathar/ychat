@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/favourite_rooms_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Search_bar_rooms extends StatefulWidget {
   const Search_bar_rooms({super.key});
@@ -12,8 +14,9 @@ class Search_bar_rooms extends StatefulWidget {
 
 class _Search_bar_roomsState extends State<Search_bar_rooms> {
   @override
-  bool show_fav = false;
   Widget build(BuildContext context) {
+    bool show_fav =
+        Provider.of<Favourite_rooms_provider>(context, listen: false).show_fav;
     return Row(
       children: [
         Container(
@@ -31,28 +34,29 @@ class _Search_bar_roomsState extends State<Search_bar_rooms> {
               ]),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  suffixIconColor: Color_constant.name_color,
-                  suffixIcon: Icon(Icons.search),
-                  border: InputBorder.none,
-                  // hintText: "Type here",
-                  hintStyle: Text_style_constant.normal_text),
+            child: Center(
+              child: TextField(
+                style: Text_style_constant.H4_purple,
+                decoration: InputDecoration(
+                    suffixIconColor: Color_constant.name_color,
+                    suffixIcon: Icon(Icons.search),
+                    border: InputBorder.none,
+                    hintText: "Search here",
+                    hintStyle: Text_style_constant.normal_text),
+              ),
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-            onDoubleTap: () {
-              setState(() {
-                show_fav = false;
-              });
-            },
             onTap: () {
               setState(() {
-                show_fav = !show_fav;
+                Provider.of<Favourite_rooms_provider>(context, listen: false)
+                    .toggle_fav_button(value: show_fav);
               });
+
+              print("-----------------------------------_____$show_fav");
             },
             child: Container(
               decoration: BoxDecoration(

@@ -10,7 +10,6 @@ import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/home/h1.dart';
-import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -55,6 +54,16 @@ class _Home_pageState extends State<Home_page> {
               .friendsModel
               ?.friends
               .length;
+      Provider.of<Profile_provider>(context, listen: false).get_my_details(
+          id: Provider.of<Login_provider>(context, listen: false).user_id,
+          reference_id:
+              Provider.of<Login_provider>(context, listen: false).token);
+      Provider.of<Rooms_provider>(context, listen: false).fetch_rooms_data(
+          token: Provider.of<Login_provider>(context, listen: false).token);
+      Provider.of<Profile_provider>(context, listen: false).get_my_details(
+          id: Provider.of<Login_provider>(context, listen: false).user_id,
+          reference_id:
+              Provider.of<Login_provider>(context, listen: false).token);
     } catch (error) {
       print("error is $error");
     }
@@ -62,22 +71,14 @@ class _Home_pageState extends State<Home_page> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<Rooms_provider>(context, listen: false).fetch_rooms_data(
-        token: Provider.of<Login_provider>(context, listen: false).token);
-    // setState(() {
-    Provider.of<Profile_provider>(context, listen: false).get_details(
-        id: Provider.of<Login_provider>(context, listen: false).user_id,
-        reference_id:
-            Provider.of<Login_provider>(context, listen: false).token);
-    // });
-
     return Scaffold(
       backgroundColor: Color_constant.secondaryColor,
       body: DefaultTabController(
         length: 3,
         child: Column(
           children: [
-            Home_pageAppbar(),
+            Consumer<Profile_provider>(
+                builder: (context, value, child) => Home_pageAppbar()),
             TabBar(
               tabs: [
                 Tab(
@@ -111,13 +112,16 @@ class _Home_pageState extends State<Home_page> {
               ],
             ),
             Expanded(
-              child: Consumer(
+              child: Consumer<Friendship_provider>(
                 builder: (context, value, child) {
                   return TabBarView(
                     children: [
                       // Content of Tab 1
                       // Home_front_body(),
-                      H1(),
+                      (Provider.of<Friendship_provider>(context, listen: false)
+                              .isLoading)
+                          ? CircularProgressIndicator()
+                          : H1(),
                       // Content of Tab 2
 
                       Home_room_body(),
@@ -168,23 +172,17 @@ class Home_pageAppbar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () async {
-                bool success = await profile_provider.get_details(
-                    reference_id: login_provider.token,
-                    id: login_provider.user_id);
-                if (success == true) {
-                  context.push('/profile_page');
-                } else {
-                  show_bottom_sheet(
-                      context: context, data_to_display: "Error! Try again");
-                }
+                context.push('/profile_page');
               },
               child: CircleAvatar(
-                backgroundImage: profile_provider.profile_picture_url != null
+                backgroundImage: profile_provider
+                            .profile_my_details?.user.profilePictureUrl !=
+                        null
                     ? NetworkImage(
-                        profile_provider.profile_image!,
+                        "${profile_provider.my_profile}",
                       )
                     : NetworkImage(
-                        "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
+                        "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),
               ),
             ),
           ),
@@ -218,6 +216,7 @@ class Home_pageAppbar extends StatelessWidget {
               } else if (value == 2) {
                 context.push('/privacy_page');
               } else if (value == 3) {
+                context.push('/notifications_page');
               } else if (value == 4) {
                 context.push('/help_page_1');
               }

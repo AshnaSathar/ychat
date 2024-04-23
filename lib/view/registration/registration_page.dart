@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/register_provider.dart';
-import 'package:flutter_application_1/view/login/login_page.dart';
 import 'package:flutter_application_1/view/password_recovery/email_verification.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 import 'package:flutter_application_1/widgets/bottom_sheet.dart';
@@ -45,13 +44,13 @@ class _Registration_pageState extends State<Registration_page> {
             decoration: BoxDecoration(
               color: Color_constant.secondaryColor,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(55),
-                topRight: Radius.circular(55),
+                topLeft: Radius.circular(45),
+                topRight: Radius.circular(45),
               ),
             ),
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 40, right: 30.0, left: 30, bottom: 0),
+                  top: 10, right: 30.0, left: 30, bottom: 0),
               child: Column(
                 children: [
                   Padding(
@@ -73,6 +72,7 @@ class _Registration_pageState extends State<Registration_page> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: name_controller,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -100,6 +100,7 @@ class _Registration_pageState extends State<Registration_page> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: dob_controller,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -127,6 +128,7 @@ class _Registration_pageState extends State<Registration_page> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: user_name_controller,
                         decoration: InputDecoration(
                             hintStyle: Text_style_constant.H4_purple,
@@ -154,6 +156,7 @@ class _Registration_pageState extends State<Registration_page> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: email_controller,
                         decoration: InputDecoration(
                             hintText: "Email",
@@ -181,6 +184,7 @@ class _Registration_pageState extends State<Registration_page> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
+                        style: Text_style_constant.H4_purple,
                         controller: password_controller,
                         decoration: InputDecoration(
                             hintText: "Password",
@@ -202,6 +206,7 @@ class _Registration_pageState extends State<Registration_page> {
                       child: Center(
                         child: InkWell(
                           onTap: () async {
+                            setState(() {});
                             if (name_controller.text.isNotEmpty &&
                                 email_controller.text.isNotEmpty &&
                                 dob_controller.text.isNotEmpty &&
@@ -236,16 +241,22 @@ class _Registration_pageState extends State<Registration_page> {
                                   data_to_display: "Every fields required");
                             }
                           },
-                          child: Text(
-                            "Sign Up",
-                            style: Text_style_constant.content_style_bold,
-                          ),
+                          child: register_provider.isLoading
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                    color: Color_constant.secondaryColor,
+                                  ),
+                                )
+                              : Text(
+                                  "Sign Up",
+                                  style: Text_style_constant.content_style_bold,
+                                ),
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(3.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

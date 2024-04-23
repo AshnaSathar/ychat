@@ -5,9 +5,16 @@ import 'package:http/http.dart' as http;
 
 class Password_recovery_provider extends ChangeNotifier {
   var reference_id;
+  bool _isloading = false;
+  bool get isLoading => _isloading;
+  setLoading(bool Loading) {
+    _isloading = Loading;
+  }
+
   var message;
   Future send_otp({required email}) async {
     try {
+      setLoading(true);
       final url = Uri.parse('http://127.0.0.1:8000/api/send-otp');
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
@@ -19,6 +26,7 @@ class Password_recovery_provider extends ChangeNotifier {
         reference_id = parse_response['reference_id'];
 
         notifyListeners();
+        setLoading(false);
         return true;
       } else {
         final parsed_response = jsonDecode(response.body);
@@ -26,11 +34,14 @@ class Password_recovery_provider extends ChangeNotifier {
         print(message);
         print(response.statusCode);
         // print(response.body);
+        setLoading(false);
         notifyListeners();
         return false;
       }
     } catch (error) {
       print("errod is $error");
+      setLoading(false);
+      return false;
     }
   }
 

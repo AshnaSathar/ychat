@@ -28,6 +28,7 @@ class _Profile_pageState extends State<Profile_page> {
 
   getData() async {
     try {
+      print("=============coming here=============");
       await Provider.of<Friendship_provider>(context, listen: false)
           .get_friends(
         user_id: Provider.of<Login_provider>(context, listen: false).user_id,
@@ -77,15 +78,17 @@ class _Profile_pageState extends State<Profile_page> {
                     ),
                   ),
                 ),
-                child: profile_provider.cover_image_url != null
-                    ? Image.network(
-                        "${profile_provider.cover_image}",
-                        fit: BoxFit.fill,
-                      )
-                    : Image.network(
-                        "https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?cs=srgb&dl=pexels-codioful-%28formerly-gradienta%29-7130560.jpg&fm=jpg",
-                        fit: BoxFit.fill,
-                      ),
+                child:
+                    profile_provider.profile_my_details?.user.coverImageUrl !=
+                            null
+                        ? Image.network(
+                            "${profile_provider.cover_image}",
+                            fit: BoxFit.fill,
+                          )
+                        : Image.network(
+                            "https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?cs=srgb&dl=pexels-codioful-%28formerly-gradienta%29-7130560.jpg&fm=jpg",
+                            fit: BoxFit.fill,
+                          ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -93,7 +96,7 @@ class _Profile_pageState extends State<Profile_page> {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.pop();
+                        context.go('/home_page');
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -170,14 +173,14 @@ class _Profile_pageState extends State<Profile_page> {
                         children: [
                           CircleAvatar(
                             maxRadius: 55,
-                            backgroundImage: profile_provider
-                                        .profile_picture_url !=
+                            backgroundImage: profile_provider.profile_my_details
+                                        ?.user.profilePictureUrl !=
                                     null
                                 ? NetworkImage(
-                                    profile_provider.profile_image!,
+                                    "${profile_provider.my_profile}",
                                   )
                                 : NetworkImage(
-                                    "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"),
+                                    "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),
                           ),
                           Positioned(
                               bottom: 0,
@@ -225,7 +228,7 @@ class _Profile_pageState extends State<Profile_page> {
             ],
           ),
           Text(
-            "${profile_provider.userName}",
+            "${Provider.of<Profile_provider>(context, listen: false).profile_my_details?.user.userName}",
             style: Text_style_constant.H2_white,
           ),
           Row(

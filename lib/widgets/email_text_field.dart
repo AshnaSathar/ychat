@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 Widget Email_text_field({required context}) {
   return TextField(
+    style: Text_style_constant.H4_white_100,
     controller:
         Provider.of<Email_provider>(context, listen: false).email_controller,
     decoration: InputDecoration(

@@ -10,99 +10,114 @@ import 'package:flutter_application_1/widgets/circle_avatar.dart';
 import 'package:flutter_application_1/widgets/email_text_field.dart';
 import 'package:provider/provider.dart';
 
-class Forgot_password extends StatelessWidget {
+class Forgot_password extends StatefulWidget {
   const Forgot_password({super.key});
 
+  @override
+  State<Forgot_password> createState() => _Forgot_passwordState();
+}
+
+class _Forgot_passwordState extends State<Forgot_password> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       appBar: app_bar(title: "Forget password", context: context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-                child: circle_avatar(
-                    content: "assets/lock.png", context: context)),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 30, left: 8, right: 8, bottom: 5),
-            child: Center(
-              child: Text(
-                "Please Enter Your Email Address",
-                style: Text_style_constant.H3_white,
-              ),
-            ),
-          ),
-          Center(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+              child:
+                  circle_avatar(content: "assets/lock.png", context: context)),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30, left: 8, right: 8, bottom: 5),
+          child: Center(
             child: Text(
-              "To Receive A verification Code.",
+              "Please Enter Your Email Address",
               style: Text_style_constant.H3_white,
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsets.only(top: 30, right: 8, left: 8, bottom: 8),
-            child: Row(
-              children: [
-                Text(
-                  "Email Address",
-                  style: Text_style_constant.H4_white,
-                ),
-              ],
-            ),
+        ),
+        Center(
+          child: Text(
+            "To Receive A verification Code.",
+            style: Text_style_constant.H3_white,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-            child: Email_text_field(context: context),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30, right: 8, left: 8, bottom: 8),
+          child: Row(
+            children: [
+              Text(
+                "Email Address",
+                style: Text_style_constant.H4_white,
+              ),
+            ],
           ),
-          Padding(
-              padding: const EdgeInsets.only(top: 50),
-              child: InkWell(
-                  onTap: () async {
-                    CircularProgressIndicator();
-                    bool success =
-                        await Provider.of<Password_recovery_provider>(context,
-                                listen: false)
-                            .send_otp(
-                                email: Provider.of<Email_provider>(context,
-                                        listen: false)
-                                    .email_controller
-                                    .text);
-                    if (success) {
-                      // -----router
-
-                      Provider.of<Email_provider>(context, listen: false)
-                          .email_controller
-                          .clear();
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Email_verification_page(
-                              email_id: Provider.of<Email_provider>(context,
-                                      listen: false)
-                                  .email_controller
-                                  .text,
-                            ),
-                          ));
-                    } else {
-                      // print("something happens");
-                      show_bottom_sheet(
-                          context: context,
-                          data_to_display:
-                              "${Provider.of<Password_recovery_provider>(context, listen: false).message}");
-                      Provider.of<Email_provider>(context, listen: false)
-                          .email_controller
-                          .clear();
-                    }
-                  },
-                  child: Button(text: "Send", context: context))),
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+          child: Email_text_field(context: context),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: Consumer<Password_recovery_provider>(
+              builder: (context, value, child) => Provider.of<
+                                  Password_recovery_provider>(context,
+                              listen: false)
+                          .isLoading ==
+                      true
+                  ? Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color_constant.secondaryColor,
+                      ),
+                      height: MediaQuery.sizeOf(context).height * .07,
+                      width: MediaQuery.sizeOf(context).width * .4,
+                      child: Center(child: CircularProgressIndicator()))
+                  : InkWell(
+                      onTap: () async {
+                        setState(() {});
+                        bool success =
+                            await Provider.of<Password_recovery_provider>(
+                                    context,
+                                    listen: false)
+                                .send_otp(
+                                    email: Provider.of<Email_provider>(context,
+                                            listen: false)
+                                        .email_controller
+                                        .text);
+                        if (success) {
+                          // -----router
+                          Provider.of<Email_provider>(context, listen: false)
+                              .email_controller
+                              .clear();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Email_verification_page(
+                                  email_id: Provider.of<Email_provider>(context,
+                                          listen: false)
+                                      .email_controller
+                                      .text,
+                                ),
+                              ));
+                        } else {
+                          // print("something happens");
+                          show_bottom_sheet(
+                              context: context,
+                              data_to_display:
+                                  "${Provider.of<Password_recovery_provider>(context, listen: false).message}");
+                          Provider.of<Email_provider>(context, listen: false)
+                              .email_controller
+                              .clear();
+                        }
+                      },
+                      child: Button(text: "Send", context: context),
+                    )),
+        )
+      ]),
     );
   }
 }

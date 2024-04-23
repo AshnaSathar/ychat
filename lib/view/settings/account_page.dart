@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
-import 'package:flutter_application_1/view/profile/update_password_page.dart';
+import 'package:flutter_application_1/view/profile/update_password/update_password_page.dart';
 import 'package:flutter_application_1/view/public_rooms/room_chat_page.dart';
 import 'package:flutter_application_1/view/settings/Delete_account/delete_account_page.dart';
 import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page.dart';

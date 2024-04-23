@@ -177,10 +177,8 @@ class _AppbarContainerState extends State<AppbarContainer> {
                                             context,
                                             listen: false)
                                         .user_id,
-                                    friend_id: Provider.of<Profile_provider>(
-                                            context,
-                                            listen: false)
-                                        .user_id,
+                                    friend_id: profile_provider
+                                        .profile_responseData?.user.userName,
                                     token: Provider.of<Login_provider>(context,
                                             listen: false)
                                         .token,
@@ -251,10 +249,8 @@ class _AppbarContainerState extends State<AppbarContainer> {
                                             context,
                                             listen: false)
                                         .user_id,
-                                    friend_id: Provider.of<Profile_provider>(
-                                            context,
-                                            listen: false)
-                                        .user_id,
+                                    friend_id: profile_provider
+                                        .profile_responseData?.user.id,
                                     token: Provider.of<Login_provider>(context,
                                             listen: false)
                                         .token,
