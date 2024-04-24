@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/close_friends_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
@@ -113,12 +114,16 @@ class _AppbarContainerState extends State<AppbarContainer> {
                   value: 3,
                 ),
                 PopupMenuItem(
-                  child: Text('Report'),
+                  child: Text('Favourite'),
                   value: 4,
+                ),
+                PopupMenuItem(
+                  child: Text('Report'),
+                  value: 5,
                 ),
               ];
             },
-            onSelected: (value) {
+            onSelected: (value) async {
               if (value == 1) {
                 context.push('/profile_page');
               } else if (value == 2) {
@@ -196,6 +201,30 @@ class _AppbarContainerState extends State<AppbarContainer> {
                   },
                 );
               } else if (value == 4) {
+                bool success = await Provider.of<close_friends_provider>(
+                        context,
+                        listen: false)
+                    .add_as_close_friend(
+                        user_id:
+                            Provider.of<Login_provider>(context, listen: false)
+                                .user_id
+                                .toString(),
+                        fav_id: profile_provider.profile_responseData?.user.id
+                            .toString(),
+                        token:
+                            Provider.of<Login_provider>(context, listen: false)
+                                .token
+                                .toString());
+                if (success) {
+                  show_bottom_sheet(
+                      context: context,
+                      data_to_display: "Added to close friend list");
+                } else {
+                  show_bottom_sheet(
+                      context: context,
+                      data_to_display: "Please Try again later");
+                }
+              } else if (value == 5) {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {

@@ -7,6 +7,9 @@ import 'package:http/http.dart' as http;
 class Rooms_provider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  List<Category>? search_result;
+  List<Category>? _rooms;
+  List<Category>? filtered_rooms;
   setLoading(Loading) {
     _isLoading = Loading;
   }
@@ -41,4 +44,113 @@ class Rooms_provider extends ChangeNotifier {
       return false;
     }
   }
+
+  void searchRooms({required String searchTerm}) {
+    if (searchTerm.isEmpty) {
+      // If the search term is empty, clear the filtered rooms list
+      filtered_rooms = null;
+      notifyListeners();
+      return; // Exit the method early
+    }
+
+    print("Search term is $searchTerm");
+    if (categories.isNotEmpty) {
+      filtered_rooms = categories
+          .where((category) =>
+              category.name.toLowerCase().startsWith(searchTerm.toLowerCase()))
+          .toList();
+
+      filtered_rooms?.forEach((category) {
+        print(category.name);
+      });
+      notifyListeners();
+    }
+  }
+
+  // List<Category>? searchRooms(String query) {
+  //   // Convert the query to lowercase for case-insensitive search
+  //   String lowercaseQuery = query.toLowerCase();
+  //   search_result = [];
+
+  //   // Filter categories based on whether their names contain the search query
+  //   List<Category> filteredRooms = categories.where((category) {
+  //     // Convert the category name to lowercase for comparison
+  //     String lowercaseName = category.name.toLowerCase();
+  //     // Return true if the category name contains the search query
+
+  //     return lowercaseName.contains(lowercaseQuery);
+  //   }).toList();
+  //   filteredRooms.forEach((category) {
+  //     print(category.name);
+  //   });
+  //   search_result = filteredRooms;
+  //   print("search result is");
+  //   search_result?.forEach((category) {
+  //     print(category.name);
+  //   });
+  //   notifyListeners();
+  //   return search_result;
+  // }
 }
+
+// Consumer<Favourite_rooms_provider>(
+//                           builder: (context, value, child) => Provider.of<
+//                                           Favourite_rooms_provider>(context,
+//                                       listen: false)
+//                                   .show_fav
+//                               ? ExpansionTile(
+//                                   title: Text(
+//                                     "Favourite rooms",
+//                                     style: TextStyle(
+//                                       fontSize: 12,
+//                                       color: Colors.red,
+//                                       fontFamily:
+//                                           GoogleFonts.inter().fontFamily,
+//                                     ),
+//                                   ),
+//                                   children: [
+//                                     Container(
+//                                       color: Color_constant.secondaryColor,
+//                                       child: ListView.builder(
+//                                         shrinkWrap: true,
+//                                         itemCount: Provider.of<
+//                                                     Favourite_rooms_provider>(
+//                                                 context,
+//                                                 listen: false)
+//                                             .rooms_fav
+//                                             .length,
+//                                         itemBuilder: (context, index) {
+//                                           return ListTile(
+//                                             trailing: InkWell(
+//                                               onTap: () {
+//                                                 context.push('/room_chat_page');
+//                                               },
+//                                               child: Icon(
+//                                                 Icons.send,
+//                                                 color:
+//                                                     Color_constant.primaryColor,
+//                                               ),
+//                                             ),
+//                                             title: Text(
+//                                               "${Provider.of<Favourite_rooms_provider>(context, listen: false).rooms_fav[index].name}",
+//                                               style:
+//                                                   Text_style_constant.tab_style,
+//                                             ),
+//                                           );
+//                                         },
+//                                       ),
+//                                     )
+//                                   ],
+//                                 )
+//                               : Padding(
+//                                   padding: const EdgeInsets.all(8.0),
+//                                   child: Row(
+//                                     children: [
+//                                       Text(
+//                                         "Categories",
+//                                         style: Text_style_constant.H4_purple,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                         ),

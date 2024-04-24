@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:provider/provider.dart';
 
 class File_provider extends ChangeNotifier {
   bool _isLoading = false;
@@ -12,6 +14,7 @@ class File_provider extends ChangeNotifier {
 
   Future upload_profile_picture({
     required int userId,
+    required context,
     required String token,
     required String imagePath,
   }) async {
@@ -35,12 +38,17 @@ class File_provider extends ChangeNotifier {
       final response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
+        // Update the profile image URL in Profile_provider
+        Provider.of<Profile_provider>(context, listen: false)
+            .profile_picture_url = 'new_profile_picture_url';
+
+        // Notify listeners to update UI
+        Provider.of<Profile_provider>(context, listen: false).notifyListeners();
+
         setLoading(false);
-        // print('Profile picture uploaded successfully');
         return true;
       } else {
         setLoading(false);
-        // print('Failed to upload profile picture: ${response.statusCode}');
         return false;
       }
     } catch (e) {

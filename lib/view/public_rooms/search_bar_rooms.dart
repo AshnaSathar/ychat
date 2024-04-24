@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/favourite_rooms_provider.dart';
+import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Search_bar_rooms extends StatefulWidget {
@@ -15,6 +17,7 @@ class Search_bar_rooms extends StatefulWidget {
 class _Search_bar_roomsState extends State<Search_bar_rooms> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController search_controller = TextEditingController();
     bool show_fav =
         Provider.of<Favourite_rooms_provider>(context, listen: false).show_fav;
     return Row(
@@ -37,12 +40,40 @@ class _Search_bar_roomsState extends State<Search_bar_rooms> {
             child: Center(
               child: TextField(
                 style: Text_style_constant.H4_purple,
+                onChanged: (value) {
+                  Provider.of<Rooms_provider>(context, listen: false)
+                      .searchRooms(searchTerm: search_controller.text);
+                  setState(() {});
+                },
+                controller: search_controller,
                 decoration: InputDecoration(
-                    suffixIconColor: Color_constant.name_color,
-                    suffixIcon: Icon(Icons.search),
-                    border: InputBorder.none,
-                    hintText: "Search here",
-                    hintStyle: Text_style_constant.normal_text),
+                  hintText: "Search here",
+                  hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: Color_constant.name_color,
+                      fontFamily: GoogleFonts.inder().fontFamily),
+                  suffixIcon: search_controller.text.isEmpty
+                      ? Icon(
+                          Icons.search,
+                          color: Color_constant.name_color,
+                          size: 20,
+                        )
+                      : InkWell(
+                          onTap: () {
+                            setState(() {
+                              search_controller.clear();
+                            });
+                          },
+                          child: Icon(Icons.close)),
+                  filled: true,
+                  fillColor: Color_constant.secondaryColor,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
               ),
             ),
           ),

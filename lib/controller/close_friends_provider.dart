@@ -43,20 +43,23 @@ class close_friends_provider extends ChangeNotifier {
   Future add_as_close_friend(
       {required user_id, required fav_id, required token}) async {
     try {
+      print(user_id);
+      print(fav_id);
+      print(token);
       setLoading(true);
       final url = Uri.parse(
           "http://127.0.0.1:8000/api/users/$user_id/add-to-favourites");
-      var request = await http.MultipartRequest('POST', url);
-      request.headers['Authorization'] = "Bearer $token";
-      request.fields['user_id'] = fav_id;
-      var response = await request.send();
-      var responseBody = await utf8.decodeStream(response.stream);
+      var response = await http.post(url,
+          headers: {'Authorization': "Bearer $token"},
+          body: {'user_id': fav_id});
+
       if (response.statusCode == 200) {
-        // print(responseBody);
         setLoading(false);
+        print("response is ${response.body}");
         notifyListeners();
         return true;
       } else {
+        print("response is ${response.body}");
         setLoading(false);
         // print("failed");
         // print(responseBody);
@@ -65,7 +68,7 @@ class close_friends_provider extends ChangeNotifier {
       }
     } catch (error) {
       setLoading(false);
-      print("Erro is $error");
+      print("Error is $error");
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/close_friends_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/model/favourites_model.dart';
 import 'package:flutter_application_1/view/chat_page/personalChatPage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class Favourites_page extends StatefulWidget {
@@ -67,6 +69,18 @@ class _Favourites_pageState extends State<Favourites_page> {
             builder: (context, value, child) {
               return Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Close friends",
+                          style: Text_style_constant.H4_purple.copyWith(
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
                   // Padding(
                   //   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                   //   child: Search_bar_rooms(),
@@ -108,7 +122,13 @@ class _Favourites_pageState extends State<Favourites_page> {
                             child: ListTile(
                               leading: CircleAvatar(
                                   backgroundImage: NetworkImage(image)),
-                              title: Text("${favourites[index].userName}"),
+                              title: Text(
+                                "${favourites[index].userName}",
+                                style: TextStyle(
+                                    color: Color_constant.name_color,
+                                    fontFamily: GoogleFonts.inder().fontFamily,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         );

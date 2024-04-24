@@ -8,7 +8,7 @@ import 'package:flutter_application_1/controller/rooms_provider.dart';
 import 'package:flutter_application_1/controller/users.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:flutter_application_1/view/active_rooms/active_chats_page.dart';
-import 'package:flutter_application_1/view/home/home_room_body.dart';
+import 'package:flutter_application_1/view/home/h2.dart';
 import 'package:flutter_application_1/view/home/h1.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -124,7 +124,7 @@ class _Home_pageState extends State<Home_page> {
                           : H1(),
                       // Content of Tab 2
 
-                      Home_room_body(),
+                      H2(),
                       // Content of Tab 3
                       Active_chat_page(),
                     ],

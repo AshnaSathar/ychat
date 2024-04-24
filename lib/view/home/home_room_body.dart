@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/controller/favourite_rooms_provider.dart';
@@ -52,64 +50,76 @@ class _Home_room_bodyState extends State<Home_room_body> {
                   padding: const EdgeInsets.all(8.0),
                   child: Search_bar_rooms(),
                 ),
-                Consumer<Favourite_rooms_provider>(
-                  builder: (context, value, child) =>
-                      Provider.of<Favourite_rooms_provider>(context,
-                                  listen: false)
-                              .show_fav
-                          ? ExpansionTile(
-                              title: Text(
-                                "Favourite rooms",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.red,
-                                    fontFamily: GoogleFonts.inter().fontFamily),
-                              ),
-                              children: [
-                                Container(
-                                  color: Color_constant.secondaryColor,
-                                  // height: MediaQuery.sizeOf(context).height * .3,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        Provider.of<Favourite_rooms_provider>(
+                Consumer(
+                  builder: (context, value, child) => Provider.of<
+                              Rooms_provider>(context, listen: false)
+                          .search_result!
+                          .isNotEmpty
+                      ? Container(
+                          color: Colors.green,
+                        )
+                      : Consumer<Favourite_rooms_provider>(
+                          builder: (context, value, child) => Provider.of<
+                                          Favourite_rooms_provider>(context,
+                                      listen: false)
+                                  .show_fav
+                              ? ExpansionTile(
+                                  title: Text(
+                                    "Favourite rooms",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.red,
+                                        fontFamily:
+                                            GoogleFonts.inter().fontFamily),
+                                  ),
+                                  children: [
+                                    Container(
+                                      color: Color_constant.secondaryColor,
+                                      // height: MediaQuery.sizeOf(context).height * .3,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: Provider.of<
+                                                    Favourite_rooms_provider>(
                                                 context,
                                                 listen: false)
                                             .rooms_fav
                                             .length,
-                                    itemBuilder: (context, index) {
-                                      return ListTile(
-                                        // tileColor: Color(0xFFF3EAFF),
-                                        trailing: InkWell(
-                                          onTap: () {
-                                            context.push('/room_chat_page');
-                                          },
-                                          child: Icon(
-                                            Icons.send,
-                                            color: Color_constant.primaryColor,
-                                          ),
-                                        ),
-                                        title: Text(
-                                          "${Provider.of<Favourite_rooms_provider>(context, listen: false).rooms_fav[index].name}",
-                                          style: Text_style_constant.tab_style,
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            // tileColor: Color(0xFFF3EAFF),
+                                            trailing: InkWell(
+                                              onTap: () {
+                                                context.push('/room_chat_page');
+                                              },
+                                              child: Icon(
+                                                Icons.send,
+                                                color:
+                                                    Color_constant.primaryColor,
+                                              ),
+                                            ),
+                                            title: Text(
+                                              "${Provider.of<Favourite_rooms_provider>(context, listen: false).rooms_fav[index].name}",
+                                              style:
+                                                  Text_style_constant.tab_style,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  ],
                                 )
-                              ],
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Categories",
-                                    style: Text_style_constant.H4_purple,
+                              : Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Categories",
+                                        style: Text_style_constant.H4_purple,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                ),
+                        ),
                 ),
                 Expanded(
                   child: Container(

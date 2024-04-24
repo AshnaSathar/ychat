@@ -28,9 +28,11 @@ class _Chat_PageState extends State<Chat_Page> {
             right: 0,
             child: Builder(
               builder: (BuildContext builderContext) {
-                return AppbarContainer(
-                    title:
-                        "${Provider.of<Profile_provider>(context, listen: false).profile_responseData?.user.userName}");
+                return Consumer<Profile_provider>(
+                  builder: (context, value, child) => AppbarContainer(
+                      title:
+                          "${Provider.of<Profile_provider>(context, listen: false).profile_responseData?.user.userName}"),
+                );
               },
             ),
           ),

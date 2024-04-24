@@ -52,7 +52,7 @@ class All_users_provider extends ChangeNotifier {
           .where((user) =>
               user.userName.toLowerCase().startsWith(searchTerm.toLowerCase()))
           .toList();
-      filteredUsers?.forEach(
+      filteredUsers.forEach(
         (element) {
           users.add(element.userName);
         },
