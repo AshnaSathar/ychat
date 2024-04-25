@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 
 class Change_mob_number_page extends StatefulWidget {
   const Change_mob_number_page({Key? key}) : super(key: key);
-
   @override
   State<Change_mob_number_page> createState() => _Change_mob_number_pageState();
 }
@@ -18,7 +17,7 @@ class _Change_mob_number_pageState extends State<Change_mob_number_page> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final buttonPadding = screenHeight * 0.05;
-    final normalPadding = screenHeight * .8;
+    // final normalPadding = screenHeight * .8;
     return Scaffold(
       backgroundColor: Color_constant.primaryColor,
       appBar: app_bar(title: "Change Number", context: context),

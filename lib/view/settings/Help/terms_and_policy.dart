@@ -5,7 +5,6 @@ import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Terms_and_privacy_page extends StatefulWidget {
   const Terms_and_privacy_page({super.key});
-
   @override
   State<Terms_and_privacy_page> createState() => _Terms_and_privacy_pageState();
 }

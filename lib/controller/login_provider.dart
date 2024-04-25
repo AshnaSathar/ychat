@@ -22,14 +22,10 @@ class Login_provider extends ChangeNotifier {
   Future post_db({required user_name, required password}) async {
     try {
       setLoading(true);
-      // print("$user_name");
-      // print("$password");
-      // print("invoked login provider- post_db");
       final url = Uri.parse('http://127.0.0.1:8000/api/login');
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({'user_name': user_name, 'password': password}));
-
       var statusCode = response.statusCode;
       if (statusCode == 200) {
         setLoading(false);
@@ -37,9 +33,6 @@ class Login_provider extends ChangeNotifier {
         user_id = parse_response['user_id'];
         userName = parse_response['user_name'];
         token = parse_response['token'];
-        print("----------this is login provider response");
-        print(response.body);
-        print("token generated : $token");
         is_success = true;
         socket = IO.io("http://localhost:3000/", <String, dynamic>{
           'transports': ['websocket'],
@@ -49,19 +42,14 @@ class Login_provider extends ChangeNotifier {
           socket.emit('connection');
         });
         socket.emit('storeSocket', {'uid': user_id});
-
-        // notifyListeners();
         return true;
       } else {
         setLoading(false);
         is_success = false;
-        // print("Failed to post data");
-        // notifyListeners();
         return false;
       }
     } catch (error) {
       setLoading(false);
-      print("Error posting data");
       return false;
     }
   }

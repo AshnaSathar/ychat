@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Help_center extends StatefulWidget {
   const Help_center({super.key});
-
   @override
   State<Help_center> createState() => _Help_centerState();
 }

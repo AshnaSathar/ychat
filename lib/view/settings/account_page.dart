@@ -9,7 +9,6 @@ import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Account_page extends StatefulWidget {
   const Account_page({Key? key}) : super(key: key);
-
   @override
   State<Account_page> createState() => _Account_pageState();
 }

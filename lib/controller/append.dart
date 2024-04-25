@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/model/favourites_model.dart';
@@ -23,7 +22,6 @@ class Append extends ChangeNotifier {
         FavouritesModel favouritesModel = favouritesModelFromJson(responseBody);
         favourites = favouritesModel.favorites;
         notifyListeners();
-        print(responseBody);
         return true;
       } else {
         return false;
@@ -44,9 +42,7 @@ class Append extends ChangeNotifier {
       if (response.statusCode == 200) {
         RoomsModel roomsModel = roomsModelFromJson(responseBody);
         categories = roomsModel.categories;
-        print(responseBody);
         notifyListeners();
-
         return true;
       } else {
         return false;
@@ -63,10 +59,8 @@ class Append extends ChangeNotifier {
         user_id: Provider.of<Login_provider>(context, listen: false).user_id);
     await fetch_rooms_data(
         token: Provider.of<Login_provider>(context, listen: false).token);
-
     myList.addAll(favourites);
     myList.addAll(categories);
-    print(myList);
     notifyListeners();
   }
 }

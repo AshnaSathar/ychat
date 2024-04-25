@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,19 +30,14 @@ class Register_provider extends ChangeNotifier {
       request.fields['user_name'] = user_name;
       request.fields['gender'] = gender;
       request.fields['dob'] = dob;
-
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
-
       // print('Response status: ${response.statusCode}');
       // print('Response body: $responseBody');
-
       if (response.statusCode == 200) {
         final parsedResponse = jsonDecode(responseBody);
         referenceId = parsedResponse['reference_id'];
-        print(responseBody);
         // print("User reference id is $referenceId");
-
         // Save cookies
         // final cookies = response.headers['set-cookie'];
         // if (cookies != null) {
@@ -130,14 +123,11 @@ class Register_provider extends ChangeNotifier {
 
   Future<bool> verify_otp_register({required otp}) async {
     try {
-      print(referenceId);
-      print(otp);
       var url = Uri.parse("http://127.0.0.1:8000/api/verify-otp-and-register");
       var request = http.MultipartRequest('POST', url);
 
       request.fields['reference_id'] = referenceId;
       request.fields['otp'] = otp;
-
       // Get cookies from shared preferences or wherever you stored them after receiving from backend
       // final SharedPreferences prefs = await SharedPreferences.getInstance();
       // final String? savedCookies = prefs.getString('cookies');
@@ -146,11 +136,9 @@ class Register_provider extends ChangeNotifier {
       // if (savedCookies != null) {
       //   request.headers['cookie'] = savedCookies;
       // }
-
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
       if (response.statusCode == 200) {
-        print(responseBody);
         // print("true");
         return true;
       } else {

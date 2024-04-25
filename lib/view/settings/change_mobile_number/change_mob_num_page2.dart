@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
-import 'package:flutter_application_1/view/settings/change_mobile_number/change_mob_num_page_3.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
+import 'package:flutter_application_1/widgets/bottom_sheet.dart';
 import 'package:flutter_application_1/widgets/button.dart';
 import 'package:go_router/go_router.dart';
 
 class Change_mob_number_page_2 extends StatefulWidget {
   const Change_mob_number_page_2({super.key});
-
   @override
   State<Change_mob_number_page_2> createState() =>
       _Change_mob_number_page_2State();
@@ -17,6 +16,7 @@ class Change_mob_number_page_2 extends StatefulWidget {
 class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController new_mob_controller = TextEditingController();
     final screenHeight = MediaQuery.of(context).size.height;
     final buttonPadding = screenHeight * 0.05;
     return Scaffold(
@@ -67,6 +67,7 @@ class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              controller: new_mob_controller,
               style: Text_style_constant.H4_white_100,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
@@ -87,7 +88,13 @@ class _Change_mob_number_page_2State extends State<Change_mob_number_page_2> {
             padding: EdgeInsets.only(bottom: buttonPadding),
             child: InkWell(
                 onTap: () {
-                  context.push('/change_mob_number_page_3');
+                  new_mob_controller.text.isEmpty ||
+                          new_mob_controller.text.length < 10
+                      ? show_bottom_sheet(
+                          context: context,
+                          data_to_display: "Enter mobile number")
+                      : context.push(
+                          '/change_mob_number_page_3/${new_mob_controller.text}');
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(

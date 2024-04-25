@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 
 class Delete_account_page extends StatefulWidget {
   const Delete_account_page({super.key});
-
   @override
   State<Delete_account_page> createState() => _Delete_account_pageState();
 }

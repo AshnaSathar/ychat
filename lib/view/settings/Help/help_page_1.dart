@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 
 class Help_page_1 extends StatefulWidget {
   const Help_page_1({super.key});
-
   @override
   State<Help_page_1> createState() => _Help_page_1State();
 }

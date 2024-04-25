@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/profile_model.dart';
 import 'package:http/http.dart' as http;
@@ -27,7 +26,6 @@ class Profile_provider extends ChangeNotifier {
   }
 
   Future get_my_details({required id, required reference_id}) async {
-    print("profile_provider");
     setLoading(true);
     try {
       var url =
@@ -44,25 +42,13 @@ class Profile_provider extends ChangeNotifier {
         my_profile =
             "http://localhost:8000${profile_my_details?.user.profilePictureUrl}";
         cover_image = "http://localhost:8000/$cover_image_url";
-        print(
-            "my details are =============${profile_my_details?.user.profilePictureUrl}");
-        print("my profile picture is ${my_profile}");
-
         final parseResponse = jsonDecode(response.body);
-
         cover_image_url = parseResponse['cover_image_url'];
         profile_picture_url = parseResponse['profile_picture_url'];
-        print("-----------------------------------");
-        print(profile_responseData);
-        print(profile_responseData?.user.userName);
-        print("-----------------------------------");
-
         setLoading(false);
-        print(response.body);
         notifyListeners();
         return true;
       } else {
-        print(response.body);
         setLoading(false);
         return false;
       }
@@ -73,7 +59,6 @@ class Profile_provider extends ChangeNotifier {
   }
 
   Future get_details({required id, required reference_id}) async {
-    print("profile_provider");
     setLoading(true);
     try {
       var url =
@@ -88,8 +73,6 @@ class Profile_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         profile_responseData = ProfileModel.fromJson(jsonDecode(response.body));
         // print(response.body);
-        print(
-            "friend details===========${profile_responseData?.user.userName}");
         final parseResponse = jsonDecode(response.body);
         // var userData = parseResponse['user'];
         // user_id = userData['id'];
@@ -101,23 +84,17 @@ class Profile_provider extends ChangeNotifier {
         // bio = userData['bio'];
         cover_image_url = parseResponse['cover_image_url'];
         profile_picture_url = parseResponse['profile_picture_url'];
-        print("-----------------------------------");
-        print(profile_responseData);
-        print(profile_responseData?.user.userName);
-        print("-----------------------------------");
         // file_content = userData['file_contents'];
         // print("file contents is $file_content");
         // print("profile picture is $profile_picture_url");
         // print("Token generated is $token");
         // print("User ID is $user_id and username is $userName");
-
         // print("cover image is $cover_image_url");
         profile_image = "http://localhost:8000$profile_picture_url";
         cover_image = "http://localhost:8000$cover_image_url";
         // print("profile picture is $profile_image");
         // print("cover image is $cover_image ");
         setLoading(false);
-        print(response.body);
         notifyListeners();
         return true;
       } else {
@@ -155,13 +132,10 @@ class Profile_provider extends ChangeNotifier {
             'bio': bio
           }));
       if (response.statusCode == 200) {
-        print("Success");
         setLoading(false);
         notifyListeners();
         return true;
       } else {
-        // print(response.body);
-        print("Failed");
         setLoading(false);
         notifyListeners();
         return false;
@@ -196,16 +170,12 @@ class Profile_provider extends ChangeNotifier {
             'mobile_number': mobile_number,
             'bio': bio
           }));
-      print(response.body);
-
       if (response.statusCode == 200) {
-        print("success");
         setLoading(false);
         notifyListeners();
         return true;
       } else {
         // print(response.body);
-        print("failed");
         setLoading(false);
         notifyListeners();
         return false;

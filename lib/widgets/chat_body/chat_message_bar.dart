@@ -13,7 +13,6 @@ class ChatMessage {
   final String receiverId;
   final DateTime timestamp;
   final String status;
-
   ChatMessage({
     required this.senderId,
     required this.message,
@@ -26,7 +25,6 @@ class ChatMessage {
 class MessageBar extends StatefulWidget {
   final friend_id;
   const MessageBar({Key? key, required this.friend_id});
-
   @override
   State<MessageBar> createState() => _MessageBarState();
 }
@@ -35,21 +33,17 @@ int? maxLines = 1;
 
 class _MessageBarState extends State<MessageBar> {
   List<ChatMessage> sentMessages = [];
-
   bool _emojiShowing = false;
   TextEditingController messageController = TextEditingController();
-
   late IO.Socket socket;
   @override
   void initState() {
     super.initState();
-    // Initialize socket and set up event listener
     socket = IO.io("http://localhost:3000/", <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': true,
     });
     socket.on('message_sent', (data) {
-      // Add message to sentMessages when acknowledgment is received
       sentMessages.add(ChatMessage(
         status: "sent",
         timestamp: DateTime.now(),
@@ -57,9 +51,7 @@ class _MessageBarState extends State<MessageBar> {
         receiverId: widget.friend_id,
         senderId: Provider.of<Login_provider>(context, listen: false).user_id,
       ));
-      // Clear message input field
       messageController.clear();
-      // Update UI
       setState(() {});
     });
   }
@@ -117,12 +109,6 @@ class _MessageBarState extends State<MessageBar> {
                       minLines: 1,
                       onChanged: (text) {
                         setState(() {});
-                        // int lines = '\n'.allMatches(text).length + 1;
-                        // if (lines > 5) {
-                        //   setState(() {
-                        //     maxLines = lines > 5 ? 5 : lines;
-                        //   });
-                        // }
                       },
                       maxLines: 5,
                       decoration: InputDecoration(
@@ -169,6 +155,7 @@ class _MessageBarState extends State<MessageBar> {
   }
 
   Widget buildSendButton() {
+    var login_provider = Provider.of<Login_provider>(context, listen: false);
     return messageController.text.isEmpty
         ? InkWell(
             child: Icon(
@@ -178,8 +165,7 @@ class _MessageBarState extends State<MessageBar> {
           )
         : InkWell(
             onTap: () {
-              var sid =
-                  Provider.of<Login_provider>(context, listen: false).user_id;
+              var sid = login_provider.user_id;
               var rid = widget.friend_id;
               // print("---------------");
               // print("sid is $sid");
@@ -199,8 +185,6 @@ class _MessageBarState extends State<MessageBar> {
                   timestamp: DateTime.now(),
                   status: "sent",
                 );
-
-                //  /
                 messageController.clear();
               }
             },

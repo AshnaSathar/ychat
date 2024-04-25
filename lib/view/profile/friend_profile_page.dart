@@ -68,7 +68,7 @@ class _Friend_profile_pageState extends State<Friend_profile_page> {
                     backgroundImage: profile_provider.profile_picture_url !=
                             null
                         ? NetworkImage(
-                            "http:127.0.01:8000/${profile_provider.profile_responseData?.user.profilePictureUrl}",
+                            "${profile_provider.profile_image}",
                           )
                         : NetworkImage(
                             "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png"),

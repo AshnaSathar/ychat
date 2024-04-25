@@ -7,7 +7,6 @@ class Favourite_rooms_provider extends ChangeNotifier {
   bool show_fav = false;
   Future get_list({required user_id, required token}) async {
     try {
-      print("inside fav room to fetch fav list ");
       final url =
           Uri.parse('http://127.0.0.1:8000/api/users/$user_id/favorite-rooms');
       var response = await http.get(
@@ -20,13 +19,7 @@ class Favourite_rooms_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         RoomsFavModel room_fav_model = roomsFavModelFromJson(response.body);
         rooms_fav = room_fav_model.favorites;
-        print(response.body);
-
-        print(rooms_fav);
-        print(response.body);
-      } else {
-        print(response.body);
-      }
+      } else {}
     } catch (error) {
       print("error is $error");
     }

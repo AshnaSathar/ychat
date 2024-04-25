@@ -24,11 +24,7 @@ class _Favourites_pageState extends State<Favourites_page> {
     getData();
   }
 
-  getData() async {
-    await Provider.of<close_friends_provider>(context, listen: false).get_list(
-        token: Provider.of<Login_provider>(context, listen: false).token,
-        user_id: Provider.of<Login_provider>(context, listen: false).user_id);
-  }
+  getData() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -41,29 +37,9 @@ class _Favourites_pageState extends State<Favourites_page> {
     var login_provider = Provider.of<Login_provider>(context, listen: false);
     List<Favorite> favourites =
         Provider.of<close_friends_provider>(context, listen: false).favourites;
-    return favourites.isEmpty
-        ? FutureBuilder(
-            future: Future.delayed(Duration(seconds: 10)),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Center(
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Text(
-                          "You currently don't have any close friends",
-                          style: Text_style_constant.H4_purple,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
-            },
+    return Provider.of<close_friends_provider>(context, listen: false).isLoading
+        ? Center(
+            child: CircularProgressIndicator(),
           )
         : Consumer<close_friends_provider>(
             builder: (context, value, child) {

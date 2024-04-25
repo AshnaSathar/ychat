@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/append.dart';
+import 'package:flutter_application_1/controller/blocked_controller.dart';
 import 'package:flutter_application_1/controller/close_friends_provider.dart';
 import 'package:flutter_application_1/controller/favourite_rooms_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
@@ -10,11 +11,12 @@ import 'package:flutter_application_1/controller/password_recovery.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
 import 'package:flutter_application_1/controller/register_provider.dart';
 import 'package:flutter_application_1/controller/rooms_provider.dart';
+import 'package:flutter_application_1/controller/update_mob_num.dart';
 import 'package:flutter_application_1/controller/update_password.dart';
 import 'package:flutter_application_1/controller/users.dart';
+import 'package:flutter_application_1/view/block_page/block_page.dart';
 import 'package:flutter_application_1/view/settings/notifications_page.dart';
 import 'package:flutter_application_1/widgets/chat_body/gallery_page.dart';
-
 import 'package:flutter_application_1/view/home/home_page.dart';
 import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
@@ -59,8 +61,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final goRouter = GoRouter(
-      initialLocation: '/login_page',
+      initialLocation: '/login_page', //set initial location as login page
       routes: [
+        //listing routes
         GoRoute(
             path: '/login_page',
             builder: (context, state) => const Login_page()),
@@ -84,10 +87,9 @@ class MyApp extends StatelessWidget {
           path: '/terms_and_privacy',
           builder: (context, state) => const Terms_and_privacy_page(),
         ),
-        GoRoute(
-            path: '/home_room_body',
-            builder: (context, state) => const Home_room_body()),
-
+        // GoRoute(
+        //     path: '/home_room_body',
+        //     builder: (context, state) => const Home_room_body()),
         GoRoute(
             path: '/create_password_page/:email_id',
             builder: (context, state) {
@@ -115,12 +117,6 @@ class MyApp extends StatelessWidget {
         GoRoute(
             path: '/friend_list_page',
             builder: (context, state) => const Friends_list_page()),
-        //      builder: (BuildContext context, GoRouterState state) {
-        //   final name = state.params['name']!;
-        //   return DetailScreen(
-        //     name: name,
-        //   );
-        // },
         GoRoute(
             path: '/password_success_page',
             builder: (context, state) => const Password_success_page()),
@@ -145,13 +141,13 @@ class MyApp extends StatelessWidget {
         GoRoute(
             path: '/change_mob_num_page_2',
             builder: (context, state) => const Change_mob_number_page_2()),
+
         GoRoute(
-            path: '/change_mob_number_page_3',
-            builder: (context, state) => const Change_mob_number_page_3()),
-        // GoRoute(
-        //   path: '/chat_page',
-        //   builder: (context, state) => const Chat_Page(),
-        // )
+            path: '/change_mob_number_page_3/:new_mob',
+            builder: (context, state) {
+              final new_mob = state.pathParameters['new_mob']!;
+              return Change_mob_number_page_3(new_mob: new_mob);
+            }),
         GoRoute(
           path: '/friend_profile_page',
           builder: (context, state) {
@@ -172,7 +168,6 @@ class MyApp extends StatelessWidget {
           path: '/privacy_page',
           builder: (context, state) => const Privacy_page(),
         ),
-
         GoRoute(
           path: '/profile_privacy_page',
           builder: (context, state) => Profile_privacy_page(),
@@ -183,11 +178,15 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(path: '/h1', builder: (context, state) => const H1()),
         GoRoute(
+          path: '/block_page',
+          builder: (context, state) => const Block_page(),
+        ),
+        GoRoute(
             path: '/notifications_page',
             builder: (context, state) => const Notifications_page()),
       ],
     );
-
+//listing controllers
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -234,6 +233,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => Favourite_rooms_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Block_Provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Mob_num_provider(),
         ),
       ],
       child: MaterialApp.router(

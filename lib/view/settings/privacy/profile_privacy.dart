@@ -5,7 +5,6 @@ import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Profile_privacy_page extends StatefulWidget {
   const Profile_privacy_page({super.key});
-
   @override
   State<Profile_privacy_page> createState() => _Profile_privacy_pageState();
 }

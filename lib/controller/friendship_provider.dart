@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/model/friendship_model.dart';
 import 'package:http/http.dart' as http;
@@ -19,32 +18,23 @@ class Friendship_provider extends ChangeNotifier {
       {required user_id, required token, required friend_uid}) async {
     try {
       setLoading(true);
-      // print("user_id is $user_id");
-      // print("friend_uid is $friend_uid");
-      // print("token received is $token");
       var url = Uri.parse("http://127.0.0.1:8000/api/users/$user_id/friends");
       var request = await http.MultipartRequest('POST', url);
       request.headers['Authorization'] = "Bearer $token";
       request.fields['friend_id'] = friend_uid.toString();
       var response = await request.send();
       var responseBody = await utf8.decodeStream(response.stream);
-      // print(response.statusCode);
-      // print('Response body: ${responseBody}');
       if (response.statusCode == 200) {
-        // print(responseBody);
         setLoading(false);
         notifyListeners();
         return true;
       } else {
-        // print("failed");
-        // print(responseBody);
         setLoading(false);
         notifyListeners();
         return false;
       }
     } catch (error) {
       setLoading(false);
-      print("error is $error");
     }
   }
 
@@ -59,24 +49,19 @@ class Friendship_provider extends ChangeNotifier {
           "Authorization": "Bearer $token"
         },
       );
-
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         friendsModel = FriendListModel.fromJson(jsonData);
-        // print("---------------${response.body}");
         setLoading(false);
         notifyListeners();
         return true;
       } else {
-        // print("Request failed with status: ${response.statusCode}");
-        // print(response.body);
         setLoading(false);
         notifyListeners();
         return false;
       }
     } catch (error) {
       setLoading(false);
-      print("Error occurred: $error");
     }
   }
 
@@ -91,7 +76,6 @@ class Friendship_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'friend_id': friend_id}));
-
       var jsonResponse = json.decode(response.body);
       if (response.statusCode == 200) {
         friendsModel?.friends.removeWhere((friend) => friend.id == friend_id);
@@ -104,7 +88,6 @@ class Friendship_provider extends ChangeNotifier {
       }
     } catch (error) {
       setLoading(false);
-      // print("Error removing friend: $error");/
       return false;
     }
   }
@@ -120,10 +103,7 @@ class Friendship_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'blocked_user_id': friend_id}));
-
       if (response.statusCode == 200) {
-        print("response is=========");
-        print(response.body);
         setLoading(false);
         notifyListeners();
         return true;
@@ -134,7 +114,6 @@ class Friendship_provider extends ChangeNotifier {
       }
     } catch (error) {
       setLoading(false);
-      print("Error blocking user: $error");
       return false;
     }
   }
@@ -150,7 +129,6 @@ class Friendship_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'blocked_user_id': friend_id}));
-
       if (response.statusCode == 200) {
         setLoading(false);
         notifyListeners();
@@ -162,7 +140,6 @@ class Friendship_provider extends ChangeNotifier {
       }
     } catch (error) {
       setLoading(false);
-      print("Error blocking user: $error");
       return false;
     }
   }
@@ -178,7 +155,6 @@ class Friendship_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'blocked_user_id': friend_id}));
-
       if (response.statusCode == 200) {
         setLoading(false);
         notifyListeners();
@@ -190,7 +166,6 @@ class Friendship_provider extends ChangeNotifier {
       }
     } catch (error) {
       setLoading(false);
-      print("Error blocking user: $error");
       return false;
     }
   }

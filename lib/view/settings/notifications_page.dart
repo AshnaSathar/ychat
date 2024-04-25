@@ -3,7 +3,6 @@ import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Notifications_page extends StatefulWidget {
   const Notifications_page({super.key});
-
   @override
   State<Notifications_page> createState() => _Notifications_pageState();
 }

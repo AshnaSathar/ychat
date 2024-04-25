@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/favourites_model.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +13,6 @@ class close_friends_provider extends ChangeNotifier {
   }
 
   Future get_list({required user_id, required token}) async {
-    print("invoked");
     try {
       setLoading(true);
       final url =
@@ -26,8 +24,6 @@ class close_friends_provider extends ChangeNotifier {
       if (response.statusCode == 200) {
         FavouritesModel favouritesModel = favouritesModelFromJson(responseBody);
         favourites = favouritesModel.favorites;
-        print("favourites are :");
-        print(favourites);
         setLoading(false);
         notifyListeners();
         return true;
@@ -43,26 +39,18 @@ class close_friends_provider extends ChangeNotifier {
   Future add_as_close_friend(
       {required user_id, required fav_id, required token}) async {
     try {
-      print(user_id);
-      print(fav_id);
-      print(token);
       setLoading(true);
       final url = Uri.parse(
           "http://127.0.0.1:8000/api/users/$user_id/add-to-favourites");
       var response = await http.post(url,
           headers: {'Authorization': "Bearer $token"},
           body: {'user_id': fav_id});
-
       if (response.statusCode == 200) {
         setLoading(false);
-        print("response is ${response.body}");
         notifyListeners();
         return true;
       } else {
-        print("response is ${response.body}");
         setLoading(false);
-        // print("failed");
-        // print(responseBody);
         notifyListeners();
         return false;
       }
@@ -84,7 +72,6 @@ class close_friends_provider extends ChangeNotifier {
             "Authorization": "Bearer $token"
           },
           body: jsonEncode({'user_id': friend_id}));
-
       var jsonResponse = json.decode(response.body);
       if (response.statusCode == 200) {
         favourites.removeWhere((friend) => friend.id == friend_id);
@@ -92,7 +79,6 @@ class close_friends_provider extends ChangeNotifier {
         notifyListeners();
         return true;
       } else {
-        print("failed");
         setLoading(false);
         return false;
       }

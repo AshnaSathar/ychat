@@ -1,3 +1,4 @@
+/***********************widget- searchbar*******************/
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
@@ -18,6 +19,10 @@ class SearchbarCustom extends StatefulWidget {
 class _SearchbarCustomState extends State<SearchbarCustom> {
   @override
   Widget build(BuildContext context) {
+    var friendship_provider =
+        Provider.of<Friendship_provider>(context, listen: false);
+    var profile = Provider.of<Profile_provider>(context, listen: false);
+    var all_user = Provider.of<All_users_provider>(context, listen: false);
     TextEditingController search_controller = TextEditingController();
     return Container(
       width: MediaQuery.sizeOf(context).width * .59,
@@ -38,8 +43,7 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
           children: [
             TextField(
               onChanged: (value) {
-                Provider.of<All_users_provider>(context, listen: false)
-                    .searchUsers(searchTerm: search_controller.text);
+                all_user.searchUsers(searchTerm: search_controller.text);
               },
               controller: search_controller,
               style: TextStyle(),
@@ -77,20 +81,16 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                               // print("user.id is");
                               // print(user.id);
                               bool success =
-                                  await Provider.of<Friendship_provider>(
-                                          context,
-                                          listen: false)
-                                      .add_friend(
-                                          user_id:
-                                              Provider.of<Login_provider>(
-                                                      context,
-                                                      listen: false)
-                                                  .user_id,
-                                          token: Provider.of<Login_provider>(
-                                                  context,
-                                                  listen: false)
-                                              .token,
-                                          friend_uid: user.id);
+                                  await friendship_provider.add_friend(
+                                      user_id: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .user_id,
+                                      token: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .token,
+                                      friend_uid: user.id);
                               if (success == true) {
                                 show_bottom_sheet(
                                     context: context,
@@ -98,17 +98,15 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                                         "Added to your friend list");
 
                                 setState(() {
-                                  Provider.of<Friendship_provider>(context,
-                                          listen: false)
-                                      .get_friends(
-                                          user_id: Provider.of<Login_provider>(
-                                                  context,
-                                                  listen: false)
-                                              .user_id,
-                                          token: Provider.of<Login_provider>(
-                                                  context,
-                                                  listen: false)
-                                              .token);
+                                  friendship_provider.get_friends(
+                                      user_id: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .user_id,
+                                      token: Provider.of<Login_provider>(
+                                              context,
+                                              listen: false)
+                                          .token);
                                 });
                               } else {
                                 show_bottom_sheet(
@@ -121,16 +119,12 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                           ),
                           title: InkWell(
                               onTap: () async {
-                                bool success =
-                                    await Provider.of<Profile_provider>(context,
+                                bool success = await profile.get_details(
+                                    id: user.id,
+                                    reference_id: Provider.of<Login_provider>(
+                                            context,
                                             listen: false)
-                                        .get_details(
-                                            id: user.id,
-                                            reference_id:
-                                                Provider.of<Login_provider>(
-                                                        context,
-                                                        listen: false)
-                                                    .token);
+                                        .token);
                                 if (success) {
                                   context.push('/friend_profile_page');
                                   // Navigator.pushNamed(

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_1/model/user_model.dart';
@@ -15,7 +14,6 @@ class All_users_provider extends ChangeNotifier {
   }
 
   UserModel? get usersModel => _usersModel;
-
   Future<void> getUsers({required String token}) async {
     setLoading(true);
     try {
@@ -25,14 +23,11 @@ class All_users_provider extends ChangeNotifier {
         "Authorization": "Bearer $token"
       });
       if (response.statusCode == 200) {
-        // print(response.body);s
         var jsonData = json.decode(response.body);
         _usersModel = UserModel.fromJson(jsonData);
         _originalUsers = _usersModel?.users.toList();
-        // Store the original list
         setLoading(false);
       } else {
-        print("Failed to fetch data. Status code: ${response.statusCode}");
         setLoading(false);
       }
     } catch (error) {
@@ -45,7 +40,6 @@ class All_users_provider extends ChangeNotifier {
 
   void searchUsers({required searchTerm}) {
     setLoading(true);
-    print(searchTerm);
     List users = [];
     if (_originalUsers != null) {
       filteredUsers = _originalUsers!
@@ -57,7 +51,6 @@ class All_users_provider extends ChangeNotifier {
           users.add(element.userName);
         },
       );
-      print("filtered users are ${users}");
       _usersModel = UserModel(success: true, users: filteredUsers);
       setLoading(false);
       notifyListeners();

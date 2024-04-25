@@ -48,7 +48,6 @@ class recover_password_provider extends ChangeNotifier {
       var responseBody = await utf8.decodeStream(response.stream);
       if (response.statusCode == 200) {
         setLoading(false);
-
         notifyListeners();
         return true;
       } else {

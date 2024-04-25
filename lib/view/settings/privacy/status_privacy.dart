@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
 import 'package:flutter_application_1/widgets/app_bar.dart';
 
 class Status_privacy_page extends StatefulWidget {
   const Status_privacy_page({super.key});
-
   @override
   State<Status_privacy_page> createState() => _Status_privacy_pageState();
 }
@@ -15,7 +13,6 @@ class _Status_privacy_pageState extends State<Status_privacy_page> {
   bool online_everyone_Selected = false;
   bool online_friends_Selected = false;
   bool online_no_one_selected = false;
-
   bool last_seen_everyone_Selected = false;
   bool last_seen_friends_Selected = false;
   bool last_seen_no_one_selected = false;

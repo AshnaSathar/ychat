@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/color_constants/color_constant.dart';
 import 'package:flutter_application_1/constants/text_style_constant.dart';
+import 'package:flutter_application_1/controller/close_friends_provider.dart';
 import 'package:flutter_application_1/controller/friendship_provider.dart';
 import 'package:flutter_application_1/controller/login_provider.dart';
 import 'package:flutter_application_1/controller/profile_provider.dart';
@@ -64,6 +65,11 @@ class _Home_pageState extends State<Home_page> {
           id: Provider.of<Login_provider>(context, listen: false).user_id,
           reference_id:
               Provider.of<Login_provider>(context, listen: false).token);
+      await Provider.of<close_friends_provider>(context, listen: false)
+          .get_list(
+              token: Provider.of<Login_provider>(context, listen: false).token,
+              user_id:
+                  Provider.of<Login_provider>(context, listen: false).user_id);
     } catch (error) {
       print("error is $error");
     }

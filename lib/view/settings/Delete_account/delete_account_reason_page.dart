@@ -6,7 +6,6 @@ import 'package:flutter_application_1/widgets/button.dart';
 
 class Delete_account_reason_page extends StatelessWidget {
   const Delete_account_reason_page({super.key});
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -50,11 +49,9 @@ class Delete_account_reason_page extends StatelessWidget {
                                 color: Color_constant.secondaryColor)),
                         border: UnderlineInputBorder()),
                     enableFilter: true,
-
                     menuStyle: MenuStyle(
                         backgroundColor: MaterialStatePropertyAll(
                             Color_constant.primaryColor)),
-
                     dropdownMenuEntries: [
                       DropdownMenuEntry(
                         labelWidget: Text(
