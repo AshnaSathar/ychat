@@ -18,26 +18,18 @@ Widget iconcreation(
               case Icons.insert_drive_file:
                 break;
               case Icons.camera_alt:
-                print("camera");
                 final ImagePicker picker = ImagePicker();
                 final XFile? image =
                     await picker.pickImage(source: ImageSource.camera);
-                print(image);
                 break;
               case Icons.image_rounded:
-                print("gallery");
                 final ImagePicker picker = ImagePicker();
                 final XFile? image =
                     await picker.pickImage(source: ImageSource.gallery);
-                print(image);
                 break;
               case Icons.headphones:
-                print("audio");
-
                 break;
               case Icons.contact_page:
-                print("contact");
-
                 break;
             }
           },

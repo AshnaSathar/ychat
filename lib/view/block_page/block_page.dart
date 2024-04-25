@@ -57,7 +57,6 @@ class _Block_pageState extends State<Block_page> {
                     final blockedUser = Provider.of<Block_Provider>(context)
                         .block_responseData!
                         .blockedUsers[index];
-                    print(profile);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(

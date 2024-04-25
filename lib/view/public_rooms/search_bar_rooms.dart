@@ -86,8 +86,6 @@ class _Search_bar_roomsState extends State<Search_bar_rooms> {
                 Provider.of<Favourite_rooms_provider>(context, listen: false)
                     .toggle_fav_button(value: show_fav);
               });
-
-              print("-----------------------------------_____$show_fav");
             },
             child: Container(
               decoration: BoxDecoration(

@@ -27,11 +27,6 @@ class Mob_num_provider extends ChangeNotifier {
         },
         body: jsonEncode({'mobile_number': newMob.toString()}),
       );
-
-      var responseBody = response.body;
-      print(url);
-      print(responseBody);
-
       if (response.statusCode == 200) {
         setLoading(false);
         notifyListeners();

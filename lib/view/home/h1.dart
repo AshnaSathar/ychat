@@ -202,9 +202,6 @@ class _H1State extends State<H1> {
                               return ListTile(
                                   title: InkWell(
                                       onTap: () async {
-                                        print(
-                                            "---------------------------------");
-                                        print(user.id);
                                         bool success = await Provider.of<
                                                     Profile_provider>(context,
                                                 listen: false)

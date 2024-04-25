@@ -228,7 +228,6 @@ class _Edit_profile_pageState extends State<Edit_profile_page> {
                       .then((value) {
                     context.go('/profile_page');
                   });
-                  print("success is $success");
                 } else {
                   show_bottom_sheet(
                       context: context, data_to_display: "failed");

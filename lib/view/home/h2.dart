@@ -102,8 +102,6 @@ class _H2State extends State<H2> {
                             listen: false)
                         .toggle_fav_button(value: show_fav);
                   });
-
-                  print("-----------------------------------_____$show_fav");
                 },
                 child: Container(
                   height: MediaQuery.sizeOf(context).height * .08,

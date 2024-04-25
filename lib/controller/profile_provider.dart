@@ -98,7 +98,6 @@ class Profile_provider extends ChangeNotifier {
         notifyListeners();
         return true;
       } else {
-        print(response.body);
         setLoading(false);
         return false;
       }

@@ -37,12 +37,10 @@ class _Notifications_pageState extends State<Notifications_page> {
       setState(() {
         isSwitched = true;
       });
-      print('Switch Button is ON');
     } else {
       setState(() {
         isSwitched = false;
       });
-      print('Switch Button is OFF');
     }
   }
 }
