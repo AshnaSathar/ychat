@@ -27,10 +27,12 @@ class _H1State extends State<H1> {
     getData();
   }
 
-  getData() {
+  getData() async {
     Provider.of<Friendship_provider>(context, listen: false).get_friends(
         token: Provider.of<Login_provider>(context, listen: false).token,
         user_id: Provider.of<Login_provider>(context, listen: false).user_id);
+    await Provider.of<All_users_provider>(context, listen: false).getUsers(
+        token: Provider.of<Login_provider>(context, listen: false).token);
   }
 
   @override
@@ -192,51 +194,52 @@ class _H1State extends State<H1> {
                             itemBuilder: (context, index) {
                               var image;
                               final user = provider.usersModel!.users[index];
-                              if (user.profilePicture != null) {
-                                image =
-                                    "http://localhost:8000/storage/${user.profilePicture}";
-                              } else {
-                                image =
-                                    "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
-                              }
+                              // if (user.profilePicture != null) {
+                              //   image =
+                              //       "http://localhost:8000/storage/${user.profilePicture}";
+                              // } else {
+                              //   image =
+                              //       "https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png";
+                              // }
                               return ListTile(
-                                  title: InkWell(
-                                      onTap: () async {
-                                        bool success = await Provider.of<
-                                                    Profile_provider>(context,
-                                                listen: false)
-                                            .get_details(
-                                                id: user.id,
-                                                reference_id:
-                                                    Provider.of<Login_provider>(
-                                                            context,
-                                                            listen: false)
-                                                        .token);
-                                        if (success) {
-                                          context.push('/friend_profile_page');
-                                          // Navigator.pushNamed(
-                                          //     context, '/friend_profile_page');
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           Friend_profile_page(),
-                                          //     ));
-                                        } else {
-                                          print("error");
-                                        }
-                                      },
-                                      child: Text(
-                                        user.userName,
-                                        style: TextStyle(
-                                            color: Color_constant.name_color,
-                                            fontFamily:
-                                                GoogleFonts.inder().fontFamily,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                  leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(image),
-                                  ));
+                                title: InkWell(
+                                    onTap: () async {
+                                      bool success = await Provider.of<
+                                                  Profile_provider>(context,
+                                              listen: false)
+                                          .get_details(
+                                              id: user.id,
+                                              reference_id:
+                                                  Provider.of<Login_provider>(
+                                                          context,
+                                                          listen: false)
+                                                      .token);
+                                      if (success) {
+                                        context.push('/friend_profile_page');
+                                        // Navigator.pushNamed(
+                                        //     context, '/friend_profile_page');
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           Friend_profile_page(),
+                                        //     ));
+                                      } else {
+                                        print("error");
+                                      }
+                                    },
+                                    child: Text(
+                                      user.userName!,
+                                      style: TextStyle(
+                                          color: Color_constant.name_color,
+                                          fontFamily:
+                                              GoogleFonts.inder().fontFamily,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                // leading: CircleAvatar(
+                                //   backgroundImage: NetworkImage(image),
+                                // ),
+                              );
                             },
                           ),
                         );

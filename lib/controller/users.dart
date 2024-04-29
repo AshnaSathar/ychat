@@ -5,7 +5,7 @@ import 'package:flutter_application_1/model/user_model.dart';
 
 class All_users_provider extends ChangeNotifier {
   UserModel? _usersModel;
-  List<User>? _originalUsers;
+  List<User> _originalUsers = [];
   List<User> filteredUsers = [];
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -23,9 +23,16 @@ class All_users_provider extends ChangeNotifier {
         "Authorization": "Bearer $token"
       });
       if (response.statusCode == 200) {
+        print("allusers");
+
         var jsonData = json.decode(response.body);
+        // print("A");
         _usersModel = UserModel.fromJson(jsonData);
-        _originalUsers = _usersModel?.users.toList();
+        // print("B");
+        _originalUsers = _usersModel?.users.toList() ?? [];
+        // print("C");
+
+        // print(_originalUsers);
         setLoading(false);
       } else {
         setLoading(false);
@@ -39,10 +46,12 @@ class All_users_provider extends ChangeNotifier {
   }
 
   void searchUsers({required searchTerm}) {
+    print(searchTerm);
     setLoading(true);
     List users = [];
     if (_originalUsers != null) {
-      filteredUsers = _originalUsers!
+      // print("hey");
+      filteredUsers = _originalUsers
           .where((user) =>
               user.userName.toLowerCase().startsWith(searchTerm.toLowerCase()))
           .toList();
@@ -51,6 +60,7 @@ class All_users_provider extends ChangeNotifier {
           users.add(element.userName);
         },
       );
+      // print("filtered users are ${users}");
       _usersModel = UserModel(success: true, users: filteredUsers);
       setLoading(false);
       notifyListeners();

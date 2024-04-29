@@ -8,8 +8,8 @@ class Notifications_page extends StatefulWidget {
 }
 
 class _Notifications_pageState extends State<Notifications_page> {
-  @override
   bool isSwitched = false;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: app_bar(title: "Notifications", context: context),

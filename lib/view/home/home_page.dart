@@ -41,15 +41,18 @@ class _Home_pageState extends State<Home_page> {
               user_id:
                   Provider.of<Login_provider>(context, listen: false).user_id,
               token: Provider.of<Login_provider>(context, listen: false).token);
+      // await Provider.of<All_users_provider>(context, listen: false).getUsers(
+      //     token: Provider.of<Login_provider>(context, listen: false).token);
+
       setState(() {
         friendsList = Provider.of<Friendship_provider>(context, listen: false)
                 .friendsModel
                 ?.friends ??
             [];
       });
-      await Provider.of<All_users_provider>(context, listen: false).getUsers(
-        token: Provider.of<Login_provider>(context, listen: false).token,
-      );
+      // await Provider.of<All_users_provider>(context, listen: false).getUsers(
+      //   token: Provider.of<Login_provider>(context, listen: false).token,
+      // );
       Provider.of<Friendship_provider>(context, listen: false).length =
           Provider.of<Friendship_provider>(context, listen: false)
               .friendsModel

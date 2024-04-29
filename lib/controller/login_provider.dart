@@ -34,6 +34,7 @@ class Login_provider extends ChangeNotifier {
         userName = parse_response['user_name'];
         token = parse_response['token'];
         is_success = true;
+        print(token);
         socket = IO.io("http://localhost:3000/", <String, dynamic>{
           'transports': ['websocket'],
           'autoConnect': true

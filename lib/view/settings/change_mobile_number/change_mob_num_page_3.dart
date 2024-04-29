@@ -20,18 +20,18 @@ class Change_mob_number_page_3 extends StatefulWidget {
 
 class _Change_mob_number_page_3State extends State<Change_mob_number_page_3> {
   var mobile_number;
-  @override
-  void initState() {
+  initState() {
     getData();
   }
 
-  getData() {
+  Future getData() async {
     mobile_number = Provider.of<Profile_provider>(context, listen: false)
         .profile_my_details
         ?.user
         .mobileNumber;
   }
 
+  @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final buttonPadding = screenHeight * 0.05;

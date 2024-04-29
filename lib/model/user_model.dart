@@ -40,13 +40,15 @@ class User {
   Status status;
   DateTime lastActiveAt;
   DateTime emailVerifiedAt;
-  dynamic profilePicture;
+  String profilePicture;
   dynamic coverImage;
-  String? otp;
-  String? referenceId;
+  dynamic otp;
+  dynamic referenceId;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic currentRoomId;
+  String profilePictureUrl;
+  CoverImageUrl coverImageUrl;
 
   User({
     required this.id,
@@ -67,6 +69,8 @@ class User {
     required this.createdAt,
     required this.updatedAt,
     required this.currentRoomId,
+    required this.profilePictureUrl,
+    required this.coverImageUrl,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -88,6 +92,8 @@ class User {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         currentRoomId: json["current_room_id"],
+        profilePictureUrl: json["profile_picture_url"],
+        coverImageUrl: coverImageUrlValues.map[json["cover_image_url"]]!,
       );
 
   Map<String, dynamic> toJson() => {
@@ -110,14 +116,20 @@ class User {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "current_room_id": currentRoomId,
+        "profile_picture_url": profilePictureUrl,
+        "cover_image_url": coverImageUrlValues.reverse[coverImageUrl],
       };
 }
 
-enum Gender { FEMALE, GENDER_FEMALE, MALE, OTHER }
+enum CoverImageUrl { STORAGE }
+
+final coverImageUrlValues = EnumValues({"/storage/": CoverImageUrl.STORAGE});
+
+enum Gender { FEMALE, GENDER_MALE, MALE, OTHER }
 
 final genderValues = EnumValues({
   "female": Gender.FEMALE,
-  "Female": Gender.GENDER_FEMALE,
+  "Male": Gender.GENDER_MALE,
   "male": Gender.MALE,
   "other": Gender.OTHER
 });

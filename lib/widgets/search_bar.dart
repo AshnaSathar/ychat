@@ -137,7 +137,7 @@ class _SearchbarCustomState extends State<SearchbarCustom> {
                                   //     ));
                                 }
                               },
-                              child: Text(user.userName)),
+                              child: Text(user.userName!)),
                         );
                       },
                     ),
