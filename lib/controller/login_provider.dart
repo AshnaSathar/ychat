@@ -21,12 +21,16 @@ class Login_provider extends ChangeNotifier {
 
   Future post_db({required user_name, required password}) async {
     try {
+      print("-------------------\\\\\\\\\invoked\\\\\\\\\------------------");
       setLoading(true);
       final url = Uri.parse('http://127.0.0.1:8000/api/login');
+      print("a");
       var response = await http.post(url,
           headers: {"Content-Type": "application/json"},
           body: jsonEncode({'user_name': user_name, 'password': password}));
+      print("b");
       var statusCode = response.statusCode;
+
       if (statusCode == 200) {
         setLoading(false);
         final parse_response = jsonDecode(response.body);
@@ -45,11 +49,13 @@ class Login_provider extends ChangeNotifier {
         socket.emit('storeSocket', {'uid': user_id});
         return true;
       } else {
+        print("failed");
         setLoading(false);
         is_success = false;
         return false;
       }
     } catch (error) {
+      print(error);
       setLoading(false);
       return false;
     }

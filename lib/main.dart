@@ -18,7 +18,7 @@ import 'package:flutter_application_1/view/block_page/block_page.dart';
 import 'package:flutter_application_1/view/settings/notifications_page.dart';
 import 'package:flutter_application_1/widgets/chat_body/gallery_page.dart';
 import 'package:flutter_application_1/view/home/home_page.dart';
-import 'package:flutter_application_1/view/home/home_room_body.dart';
+// import 'package:flutter_application_1/view/home/home_room_body.dart';
 import 'package:flutter_application_1/view/login/login_page.dart';
 import 'package:flutter_application_1/view/password_recovery/create_password_page.dart';
 import 'package:flutter_application_1/view/password_recovery/email_verification.dart';
